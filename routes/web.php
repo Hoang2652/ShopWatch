@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//frontend
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
+Route::get('/login', 'HomeController@loginPage');
+Route::post('/login-execute', 'HomeController@checkLogin');
+
+//backend
+Route::get('/admin', 'AdminController@index');
