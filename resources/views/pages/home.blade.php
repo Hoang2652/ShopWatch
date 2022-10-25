@@ -4,142 +4,119 @@
         <!--==================== HOME ====================-->
             <section class="home" id="home">
                 <div class="home__container container grid">
-                    <?php 
-                        $sql0="select sanpham.*,sanphamdecu.idsanphamdecu from sanpham,sanphamdecu where sanpham.idsanpham=sanphamdecu.idsanpham AND trangthai='1' AND idsanphamdecu='1' LIMIT 0,1";
-                        $toppageproduct = mysqli_query($link,$sql0);
-                        while($rows0=mysqli_fetch_array($toppageproduct)){
-                    ?>
+                    @foreach ($headPageProduct as $row => $product)
                     <div class="home__img-bg">
-                        <img src="img/uploads/<?php echo $rows0['hinhanh'] ?>" alt="" class="home__img">
+                        <img src="{{asset('public/uploads/products/'.$product->hinhanh)}}" alt="" class="home__img">
                     </div>
     
                     <div class="home__data">
-                        <h1 class="home__title"><br> <?php echo $rows0['tensanpham'] ?></h1>
+                        <h1 class="home__title"><br>{{$product->tensanpham}}</h1>
                         <p class="home__description">
-                        <?php echo $rows0['mota'] ?>
+                            {{$product->mota}}
                         </p>
-                        <span class="home__price"><?php echo number_format($rows0['gia'],0,",",".");?> VNĐ</span>
+                        <span class="home__price">{{ number_format($product->gia) }} VNĐ</span>
 
                         <div class="home__btns">
-                            <a href="index.php?content=chitietsp&idsanpham=<?php echo $rows0['idsanpham'] ?>" class="button button--gray button--small">
+                            <a href="index.php?content=chitietsp&idsanpham={{$product->idsanpham}}" class="button button--gray button--small">
                                 Chi tiết
                             </a>
-                            <form action="index.php?content=cart&action=add&idsanpham=<?php echo $rows0['idsanpham'] ?>" class="button" method="post">
-                                <?php 
-                                if($rows0['soluong'] <=0){
-                                    ?><a href='index.php?content=hethang' class="button home__button">Thêm giỏ hàng</a> <?php
-                                } else { ?>
-                                    <button class="home__button" type="submit" name="chovaogio">Thêm giỏ hàng</button>
-                                <?php } ?>
+                            <form action="index.php?content=cart&action=add&idsanpham={{$product->idsanpham}}" class="button" method="post">
+                                <button class="home__button" type="submit" name="chovaogio">Thêm giỏ hàng</button>
                             </form>
                         </div>
-                        <?php } ?>
+                    @endforeach
                     </div>
                 </div>
             </section>
-
             <!--==================== FEATURED ====================-->
             <section class="featured section container" id="featured">
                 <h2 class="section__title" style="color: hsl(206, 93%, 55%);">
                     MẶT HÀNG BÁN CHẠY
                 </h2>
-
                 <div class="featured__container grid">
-                <?php 
-                $sql1="select * from sanpham where trangthai='1' order by daban DESC LIMIT 0,6";
-                $bestsellproduct = mysqli_query($link,$sql1);
-                while($rows=mysqli_fetch_array($bestsellproduct)){
-                    productCard($rows['idsanpham'],$rows['hinhanh'],$rows['tensanpham'],$rows['gia']);
-                } 
-                ?>
+                    @foreach ($bestSaleProuctList as $row => $product)
+                    <article class="featured__card">
+                        <a href="index.php?content=chitietsp&idsanpham={{$product->idsanpham}}">
+                            <span class="featured__tag">Sale</span>
+                
+                            <img src="{{asset('public/uploads/products/'.$product->hinhanh)}}" alt="" class="featured__img">
+                
+                            <div class="featured__data">
+                                <h3 class="featured__title">{{$product->tensanpham}}</h3>
+                                <span class="featured__price">{{ number_format($product->gia) }} VNĐ</span>
+                            </div>
+                
+                            <button class="button featured__button">Xem chi tiết</button>
+                        </a>
+                    </article>
+                    @endforeach
                 </div>
-            </section>
-
+            </section>     
             <!--==================== STORY ====================-->
             <section class="story section container">
                 <div class="story__container grid">
+                    @foreach ($middlePageProduct as $row => $product)
                     <div class="story__data">
-                        <?php 
-                        $sqlspecial="select sanpham.*,sanphamdecu.idsanphamdecu from sanpham,sanphamdecu where sanpham.idsanpham=sanphamdecu.idsanpham AND trangthai='1' AND idsanphamdecu='2' LIMIT 0,1";
-                        $midpageproduct = mysqli_query($link,$sqlspecial);
-                        while($rows5=mysqli_fetch_array($midpageproduct)){
-                        ?>
                         <h2 class="section__title story__section-title">
                             Sản phẩm đặc biệt
                         </h2>
     
                         <h1 class="story__title">
-                            <?php echo $rows5['tensanpham'] ?>
+                            {{$product->tensanpham}}
                         </h1>
     
                         <p class="story__description">
-                            <?php echo $rows5['mota'] ?>
+                            {{$product->mota}}
                         </p>
     
-                        <a href="index.php?content=chitietsp&idsanpham=<?php echo $rows5['idsanpham'] ?>" class="button button--small">Xem chi tiết</a>
+                        <a href="index.php?content=chitietsp&idsanpham={{$product->idsanpham}}" class="button button--small">Xem chi tiết</a>
                     </div>
 
                     <div class="story__images">
-                        <img src="img/uploads/<?php echo $rows5['hinhanh'] ?>" alt="" class="story__img">
+                        <img src="{{asset('public/uploads/products/'.$product->hinhanh)}}" alt="" class="story__img">
                         <div class="story__square"></div>
-                        <?php } ?>
                     </div>
+                    @endforeach
                 </div>
             </section>
-
+            
             <!--==================== PRODUCTS ====================-->
             <section class="products section container" id="products">
                 <h2 class="section__title" style="color: hsl(206, 93%, 55%);">
                     SẢN PHẨM MỚI NHẤT
                 </h2>
                 <div class="products__container grid">
-                <?php 
-                $sql2="select * from sanpham where trangthai='1' order by ngaycapnhat LIMIT 0,6";
-                $newproduct = mysqli_query($link,$sql2);
-                while($rows=mysqli_fetch_array($newproduct)){
-                ?>
+                    @foreach ($NewestProductList as $row => $product)
                     <article class="products__card">
-                        <a href="index.php?content=chitietsp&idsanpham=<?php echo $rows['idsanpham'] ?>">
-                            <img src="img/uploads/<?php echo $rows['hinhanh'];?>" alt="" class="products__img">
+                        <a href="index.php?content=chitietsp&idsanpham={{$product->idsanpham}}">
+                            <img src="{{asset('public/uploads/products/'.$product->hinhanh)}}" alt="" class="products__img">
 
-                            <h3 class="products__title"><?php echo $rows['tensanpham'];?></h3>
-                            <span class="products__price"><?php echo number_format($rows['gia'],0,",",".");?> VNĐ</span>
+                            <h3 class="products__title">{{$product->tensanpham}}</h3>
+                            <span class="products__price">{{ number_format($product->gia) }} VNĐ</span>
                         </a>
                     </article>
-                <?php } ?>
+                    @endforeach
                 </div>
             </section>
-
+            
             <!--==================== TESTIMONIAL ====================-->
             <section class="testimonial section container">
                 <div class="testimonial__container grid">
                     <div class="testimonial-swiper">
                         <div class="swiper">
                             <div class="swiper-wrapper">
-                                <?php 
-                                $sql3="select * from tintuc order by ngaydangtin DESC LIMIT 0,3";
-                                $news = mysqli_query($link,$sql3);
-                                while($rows=mysqli_fetch_array($news)){
-                                ?>
-                                <a href="index.php?content=chitiettintuc&idtintuc=<?php echo $rows['idtintuc'] ?>">
+                                @foreach ($NewsList as $row => $news)
+                                <a href="index.php?content=chitiettintuc&idtintuc={{$news->idtintuc}}">
                                     <div class="swiper-slide">
                                         <div class="testimonial__quote">
-                                            <i class='bx bxs-quote-alt-left' ></i><h5>   <?php echo $rows['tieude'] ?></h5>
+                                            <i class='bx bxs-quote-alt-left' ></i><h5>   {{$news->tieude}}</h5>
                                         </div>
-                                        <p class="testimonial__description"> <?php echo $rows['noidungngan'] ?> </p>
-                                        <h3 class="testimonial__date">Ngày đăng tin: <?php echo $rows['ngaydangtin'] ?></h3>
-                
-                                        <!-- <div class="testimonial__perfil">
-                                            <img src="img/assets/testimonial1.jpg" alt="" class="testimonial__perfil-img">
-                
-                                            <div class="testimonial__perfil-data">
-                                                <span class="testimonial__perfil-name">Lee Doe</span>
-                                                <span class="testimonial__perfil-detail"> Giám đốc </span>
-                                            </div>
-                                        </div> -->
+                                        <p class="testimonial__description"> {{$news->noidungngan}} </p>
+                                        <h3 class="testimonial__date">Ngày đăng tin: {{$news->ngaydangtin}}</h3>
+            
                                     </div>
                                 </a>
-                            <?php } ?>
+                                @endforeach
                             </div>
                         </div>
                         <div class="swiper-button-wrapper"> 
@@ -153,38 +130,48 @@
                     </div>
                     <div class="testimonial__images">
                         <div class="testimonial__square"></div>
-                        <img src="img/assets/testimonial.png" alt="" class="testimonial__img">
+                        <img src="{{asset('img/assets/testimonial.png')}}" alt="" class="testimonial__img">
                     </div>
                 </div>
             </section>
-
+            
             <!--==================== NEW ====================-->
-    <section class="new section container" id="new">
-        <h2 class="section__title" style="color: hsl(206, 93%, 55%);">
-            SẢN PHẨM ĐỀ CỬ
-        </h2>
-        <div class="new__container">
-            <div class="swiper new-swiper">
-                <div class="swiper-wrapper-1">
-                    <?php 
-                    $sql4="select sanpham.*,sanphamdecu.idsanphamdecu from sanpham,sanphamdecu where sanpham.idsanpham=sanphamdecu.idsanpham AND trangthai='1' AND idsanphamdecu='3' LIMIT 0,8";
-                    $recommendedproduct = mysqli_query($link,$sql4);
-                    while($rows=mysqli_fetch_array($recommendedproduct)){
-                        productCardRecommended($rows['idsanpham'],$rows['hinhanh'],$rows['tensanpham'],$rows['gia']);
-                    } ?>
+            <section class="new section container" id="new">
+                <h2 class="section__title" style="color: hsl(206, 93%, 55%);">
+                    SẢN PHẨM ĐỀ CỬ
+                </h2>
+                <div class="new__container">
+                    <div class="swiper new-swiper">
+                        <div class="swiper-wrapper-1">
+                            @foreach ($bestSaleProuctList as $row => $product)
+                            <article class="new__card swiper-slide">
+                                <a href="index.php?content=chitietsp&idsanpham={{$product->idsanpham}}">
+                                    <span class="new__tag">Recommended</span>
+                        
+                                    <img src="{{asset('public/uploads/products/'.$product->hinhanh)}}" alt="" class="new__img">
+                        
+                                    <div class="new__data">
+                                        <h3 class="new__title">{{$product->tensanpham}}</h3>
+                                        <span class="new__price">{{ number_format($product->gia) }} VNĐ</span>
+                                    </div>
+                        
+                                    <button class="button new__button">Xem chi tiết</button>
+                                </a>
+                            </article>
+                            @endforeach
+                        </div>
+                        <div class="new-button-wrapper"> 
+                            <div class="new-button-prev">
+                                <i class='bx bx-chevron-left'></i>
+                            </div>
+                            <div class="new-button-next">
+                                <i class='bx bx-chevron-right' ></i>
+                            </div>
+                        </div> 
+                    </div>
                 </div>
-                <div class="new-button-wrapper"> 
-                    <div class="new-button-prev">
-                        <i class='bx bx-chevron-left'></i>
-                    </div>
-                    <div class="new-button-next">
-                        <i class='bx bx-chevron-right' ></i>
-                    </div>
-                </div> 
-            </div>
-        </div>
-    </section>
-
+            </section>
+        
             <!--==================== NEWSLETTER ====================-->
             <section class="newsletter section container">
                 <div class="newsletter__bg grid">
@@ -204,6 +191,6 @@
                         </button>
                     </form>
                 </div>
-            </section>
+            </section>  
         </main>
 @endsection

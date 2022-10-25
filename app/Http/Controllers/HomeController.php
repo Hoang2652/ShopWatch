@@ -8,8 +8,31 @@ use DB;
 class HomeController extends Controller
 {
     public function index(){
-        // $product = DB::table('sanpham')->get();
-        return view('pages.home');
+        $headPageProduct = DB::table('sanpham')->join('sanphamdecu', function ($join) {
+            $join->on('sanpham.idsanpham', '=', 'sanphamdecu.idsanpham')->where('sanphamdecu.idsanphamdecu',1);
+        })->get();
+
+        $bestSaleProuctList = DB::table('sanpham')->orderBy('daban','desc')->limit(6)->get();
+
+        $middlePageProduct = DB::table('sanpham')->join('sanphamdecu', function ($join) {
+            $join->on('sanpham.idsanpham', '=', 'sanphamdecu.idsanpham')->where('sanphamdecu.idsanphamdecu',2);
+        })->get();
+
+        $NewestProductList = DB::table('sanpham')->latest('ngaycapnhat')->limit(6)->get();
+
+        $NewsList = DB::table('tintuc')->latest('ngaydangtin')->limit(3)->get();
+        
+        $recommendedProductList = DB::table('sanpham')->join('sanphamdecu', function ($join) {
+            $join->on('sanpham.idsanpham', '=', 'sanphamdecu.idsanpham')->where('sanphamdecu.idsanphamdecu',3);
+        })->limit(8)->get();
+
+        //trả về trang home cùng đống dữ liệu
+        return view('pages.home')->with('headPageProduct',$headPageProduct)
+                                 ->with('bestSaleProuctList',$bestSaleProuctList)
+                                 ->with('middlePageProduct',$middlePageProduct)
+                                 ->with('NewestProductList',$NewestProductList)
+                                 ->with('NewsList',$NewsList)
+                                 ->with('recommendedProductList',$recommendedProductList);
     }
 
     public function loginPage(){
