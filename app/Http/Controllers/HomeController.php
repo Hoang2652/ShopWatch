@@ -7,6 +7,7 @@ use DB;
 
 class HomeController extends Controller
 {
+    // index show all product by standards
     public function index(){
         $headPageProduct = DB::table('sanpham')->join('sanphamdecu', function ($join) {
             $join->on('sanpham.idsanpham', '=', 'sanphamdecu.idsanpham')->where('sanphamdecu.idsanphamdecu',1);
@@ -37,6 +38,10 @@ class HomeController extends Controller
 
     public function loginPage(){
         return view('pages.login');
+    }
+
+    public function registerPage(){
+        return view('pages.register');
     }
 
     public function checkLogin(Request $request){

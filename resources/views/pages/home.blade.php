@@ -143,7 +143,7 @@
                 <div class="new__container">
                     <div class="swiper new-swiper">
                         <div class="swiper-wrapper-1">
-                            @foreach ($bestSaleProuctList as $row => $product)
+                            @foreach ($recommendedProductList as $row => $product)
                             <article class="new__card swiper-slide">
                                 <a href="index.php?content=chitietsp&idsanpham={{$product->idsanpham}}">
                                     <span class="new__tag">Recommended</span>

@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 //frontend
+//route from controllers by class & method name
 Route::get('/', 'HomeController@index');
 Route::get('/login', 'HomeController@loginPage');
+Route::get('/register', 'HomeController@registerPage');
 Route::post('/login-execute', 'HomeController@checkLogin');
 
 //backend

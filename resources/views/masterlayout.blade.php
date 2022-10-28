@@ -121,22 +121,22 @@ e.preventDefault();
 	</div>
 	<div id="header" class="header">
 		<div class="nav container">
-			<a href="{{URL::to('/home')}}" class="nav__logo">
+			<a href="{{URL::to('/')}}" class="nav__logo">
 				<img src="{{asset('public/frontend/images/logo-header.png')}}" alt="">
 			</a>
 			<div class="nav__menu" id="nav-menu">
 					<ul class="nav__list">
 						<li class="nav__item">
-							<a href="{{asset('public/frontend/index.php?content=sanpham')}}" class="nav__link">Đồng hồ</a>
+							<a href="{{URL::to('/dongho')}}" class="nav__link">Đồng hồ</a>
 						</li>
 						<li class="nav__item">
-							<a href="{{asset('public/frontend/index.php?content=phukien')}}" class="nav__link">Phụ kiện</a>
+							<a href="{{URL::to('/phukien')}}" class="nav__link">Phụ kiện</a>
 						</li>
 						<li class="nav__item">
-							<a href="{{asset('public/frontend/index.php?content=hotro')}}" class="nav__link">Hỗ trợ</a>
+							<a href="{{URL::to('/hotro')}}" class="nav__link">Hỗ trợ</a>
 						</li>
                         <li class="nav__item">
-                            <a href="{{asset('public/frontend/index.php?content=tintuc')}}" class="nav__link">Tin tức</a>
+                            <a href="{{URL::to('/tintuc')}}" class="nav__link">Tin tức</a>
 						</li>
 					</ul>
 			</div>
@@ -150,12 +150,12 @@ e.preventDefault();
 				<?php if (isset($_SESSION['tendangnhap'])) {?>
 					<ul>
 						<?php if (isset($_SESSION['phanquyen']) && ($_SESSION['phanquyen'] == 0 || $_SESSION['phanquyen'] == 2)) {?><a href="{{asset('public/frontend/admin/admin.php')}}"><li>Quay về trang admin </li></a><?php }?>
-						<a href="{{asset('public/frontend/index.php?content=ttcn')}}"><li><i class="fas fa-user"></i> <?php echo $_SESSION['tendangnhap'] ?></li></a>
-						<a href="{{asset('public/frontend/logout.php')}}"><li> Đăng xuất</li></a>
+						<a href="{{URL::to('/thongtincanhan')}}"><li><i class="fas fa-user"></i> <?php echo $_SESSION['tendangnhap'] ?></li></a>
+						<a href="{{URL::to('/logout')}}"><li> Đăng xuất</li></a>
 					</ul>
 				<?php } else {?>
 					<ul>
-						<a href="{{asset('public/frontend/index.php?content=dangky')}}"><li>Đăng ký </li></a>
+						<a href="{{URL::to('/register')}}"><li>Đăng ký </li></a>
 						<a href="{{URL::to('/login')}}"><li> Đăng nhập</li></a>
 					</ul>
 				<?php }?>
@@ -164,9 +164,11 @@ e.preventDefault();
 	</div><!-- End .header -->
 
 	<div id="main-content">
-		<div id="center-content">
+		<div id="center-content"> 
+			{{-- yield show where the page define in bracket will take place --}}
             @yield('home')
 			@yield('login')
+			@yield('register')
 		</div><!-- End .center-content -->
 	</div><!-- End .main-content -->
 
