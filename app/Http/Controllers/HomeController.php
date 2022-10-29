@@ -48,7 +48,7 @@ class HomeController extends Controller
         $tendangnhap = $request->tendangnhap;
         $matkhau = MD5($request->matkhau);
 
-        $result = DB::table('nguoidung')->where('tendangnhap',$tendangnhap)->orWhere('email',$tendangnhap)->where('matkhau',$matkhau)->first();
+        $result = DB::table('nguoidung')->where('tendangnhap',$tendangnhap)->where('matkhau',$matkhau)->first();
 
         echo "kết quả:";
         echo '<pre>';
