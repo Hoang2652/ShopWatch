@@ -6,17 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int     $iddanhgia
- * @property int     $iddanhgia
  * @property int     $idsanpham
  * @property int     $idnguoidung
- * @property int     $idsanpham
- * @property int     $idnguoidung
- * @property boolean $sodiem
+ * @property int     $created_at
+ * @property int     $updated_at
  * @property boolean $sodiem
  * @property string  $binhluan
- * @property string  $binhluan
- * @property Date    $ngaybinhluan
- * @property Date    $ngaybinhluan
  */
 class Danhgia extends Model
 {
@@ -40,7 +35,7 @@ class Danhgia extends Model
      * @var array
      */
     protected $fillable = [
-        'idsanpham', 'idnguoidung', 'sodiem', 'binhluan', 'ngaybinhluan', 'idsanpham', 'idnguoidung', 'sodiem', 'binhluan', 'ngaybinhluan'
+        'idsanpham', 'idnguoidung', 'sodiem', 'binhluan', 'created_at', 'updated_at'
     ];
 
     /**
@@ -58,7 +53,7 @@ class Danhgia extends Model
      * @var array
      */
     protected $casts = [
-        'iddanhgia' => 'int', 'iddanhgia' => 'int', 'idsanpham' => 'int', 'idnguoidung' => 'int', 'sodiem' => 'boolean', 'binhluan' => 'string', 'ngaybinhluan' => 'date', 'idsanpham' => 'int', 'idnguoidung' => 'int', 'sodiem' => 'boolean', 'binhluan' => 'string', 'ngaybinhluan' => 'date'
+        'iddanhgia' => 'int', 'idsanpham' => 'int', 'idnguoidung' => 'int', 'sodiem' => 'boolean', 'binhluan' => 'string', 'created_at' => 'timestamp', 'updated_at' => 'timestamp'
     ];
 
     /**
@@ -67,7 +62,7 @@ class Danhgia extends Model
      * @var array
      */
     protected $dates = [
-        'ngaybinhluan', 'ngaybinhluan'
+        'created_at', 'updated_at'
     ];
 
     /**

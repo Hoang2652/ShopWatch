@@ -6,16 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int    $idauto
- * @property int    $idauto
  * @property int    $idhoadonnhapxuatkho
  * @property int    $soluong
  * @property int    $dongia
- * @property int    $idhoadonnhapxuatkho
- * @property int    $soluong
- * @property int    $dongia
- * @property string $idsanpham
- * @property string $tensanpham
- * @property string $donvi
+ * @property int    $created_at
+ * @property int    $updated_at
  * @property string $idsanpham
  * @property string $tensanpham
  * @property string $donvi
@@ -42,7 +37,7 @@ class Chitiethoadonnhapxuatkho extends Model
      * @var array
      */
     protected $fillable = [
-        'idhoadonnhapxuatkho', 'idsanpham', 'tensanpham', 'soluong', 'donvi', 'dongia', 'idhoadonnhapxuatkho', 'idsanpham', 'tensanpham', 'soluong', 'donvi', 'dongia'
+        'idhoadonnhapxuatkho', 'idsanpham', 'tensanpham', 'soluong', 'donvi', 'dongia', 'created_at', 'updated_at'
     ];
 
     /**
@@ -60,7 +55,7 @@ class Chitiethoadonnhapxuatkho extends Model
      * @var array
      */
     protected $casts = [
-        'idauto' => 'int', 'idauto' => 'int', 'idhoadonnhapxuatkho' => 'int', 'idsanpham' => 'string', 'tensanpham' => 'string', 'soluong' => 'int', 'donvi' => 'string', 'dongia' => 'int', 'idhoadonnhapxuatkho' => 'int', 'idsanpham' => 'string', 'tensanpham' => 'string', 'soluong' => 'int', 'donvi' => 'string', 'dongia' => 'int'
+        'idauto' => 'int', 'idhoadonnhapxuatkho' => 'int', 'idsanpham' => 'string', 'tensanpham' => 'string', 'soluong' => 'int', 'donvi' => 'string', 'dongia' => 'int', 'created_at' => 'timestamp', 'updated_at' => 'timestamp'
     ];
 
     /**
@@ -69,7 +64,7 @@ class Chitiethoadonnhapxuatkho extends Model
      * @var array
      */
     protected $dates = [
-        
+        'created_at', 'updated_at'
     ];
 
     /**

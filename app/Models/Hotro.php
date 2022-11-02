@@ -5,34 +5,14 @@ namespace app\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int    $idht
- * @property int    $idht
- * @property int    $idhotro
  * @property int    $idhotro
  * @property int    $dienthoai
- * @property int    $dienthoai
- * @property int    $dienthoai
- * @property int    $dienthoai
+ * @property int    $created_at
+ * @property int    $updated_at
  * @property string $chude
  * @property string $noidung
  * @property string $hoten
  * @property string $email
- * @property string $chude
- * @property string $noidung
- * @property string $hoten
- * @property string $email
- * @property string $chude
- * @property string $noidung
- * @property string $hoten
- * @property string $email
- * @property string $chude
- * @property string $noidung
- * @property string $hoten
- * @property string $email
- * @property Date   $ngaygui
- * @property Date   $ngaygui
- * @property Date   $ngaygui
- * @property Date   $ngaygui
  */
 class Hotro extends Model
 {
@@ -48,7 +28,7 @@ class Hotro extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'idht';
+    protected $primaryKey = 'idhotro';
 
     /**
      * Attributes that should be mass-assignable.
@@ -56,7 +36,7 @@ class Hotro extends Model
      * @var array
      */
     protected $fillable = [
-        'idhotro', 'idhotro', 'chude', 'noidung', 'hoten', 'dienthoai', 'email', 'ngaygui', 'chude', 'noidung', 'hoten', 'dienthoai', 'email', 'ngaygui', 'chude', 'noidung', 'hoten', 'dienthoai', 'email', 'ngaygui', 'chude', 'noidung', 'hoten', 'dienthoai', 'email', 'ngaygui'
+        'chude', 'noidung', 'hoten', 'dienthoai', 'email', 'created_at', 'updated_at'
     ];
 
     /**
@@ -74,7 +54,7 @@ class Hotro extends Model
      * @var array
      */
     protected $casts = [
-        'idht' => 'int', 'idht' => 'int', 'idhotro' => 'int', 'idhotro' => 'int', 'chude' => 'string', 'noidung' => 'string', 'hoten' => 'string', 'dienthoai' => 'int', 'email' => 'string', 'ngaygui' => 'date', 'chude' => 'string', 'noidung' => 'string', 'hoten' => 'string', 'dienthoai' => 'int', 'email' => 'string', 'ngaygui' => 'date', 'chude' => 'string', 'noidung' => 'string', 'hoten' => 'string', 'dienthoai' => 'int', 'email' => 'string', 'ngaygui' => 'date', 'chude' => 'string', 'noidung' => 'string', 'hoten' => 'string', 'dienthoai' => 'int', 'email' => 'string', 'ngaygui' => 'date'
+        'idhotro' => 'int', 'chude' => 'string', 'noidung' => 'string', 'hoten' => 'string', 'dienthoai' => 'int', 'email' => 'string', 'created_at' => 'timestamp', 'updated_at' => 'timestamp'
     ];
 
     /**
@@ -83,7 +63,7 @@ class Hotro extends Model
      * @var array
      */
     protected $dates = [
-        'ngaygui', 'ngaygui', 'ngaygui', 'ngaygui'
+        'created_at', 'updated_at'
     ];
 
     /**

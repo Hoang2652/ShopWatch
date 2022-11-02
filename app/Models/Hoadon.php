@@ -5,40 +5,16 @@ namespace app\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int    $mahd
- * @property int    $mahd
  * @property int    $idhoadon
- * @property int    $idhoadon
- * @property int    $idnd
- * @property int    $trangthai
- * @property int    $idnd
- * @property int    $dienthoai
- * @property int    $trangthai
  * @property int    $idnguoidung
+ * @property int    $created_at
  * @property int    $phuongthucthanhtoan
  * @property int    $trangthai
- * @property int    $idnguoidung
- * @property int    $phuongthucthanhtoan
- * @property int    $trangthai
+ * @property int    $updated_at
  * @property string $hoten
  * @property string $diachi
  * @property string $dienthoai
  * @property string $email
- * @property string $hoten
- * @property string $diachi
- * @property string $email
- * @property string $hoten
- * @property string $diachi
- * @property string $dienthoai
- * @property string $email
- * @property string $hoten
- * @property string $diachi
- * @property string $dienthoai
- * @property string $email
- * @property Date   $ngaydathang
- * @property Date   $ngaydathang
- * @property Date   $ngaydathang
- * @property Date   $ngaydathang
  */
 class Hoadon extends Model
 {
@@ -54,7 +30,7 @@ class Hoadon extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'mahd';
+    protected $primaryKey = 'idhoadon';
 
     /**
      * Attributes that should be mass-assignable.
@@ -62,7 +38,7 @@ class Hoadon extends Model
      * @var array
      */
     protected $fillable = [
-        'idhoadon', 'idhoadon', 'idnd', 'hoten', 'diachi', 'dienthoai', 'email', 'ngaydathang', 'trangthai', 'idnd', 'hoten', 'diachi', 'dienthoai', 'email', 'ngaydathang', 'trangthai', 'idnguoidung', 'hoten', 'diachi', 'dienthoai', 'email', 'ngaydathang', 'phuongthucthanhtoan', 'trangthai', 'idnguoidung', 'hoten', 'diachi', 'dienthoai', 'email', 'ngaydathang', 'phuongthucthanhtoan', 'trangthai'
+        'idnguoidung', 'hoten', 'diachi', 'dienthoai', 'email', 'created_at', 'phuongthucthanhtoan', 'trangthai', 'updated_at'
     ];
 
     /**
@@ -80,7 +56,7 @@ class Hoadon extends Model
      * @var array
      */
     protected $casts = [
-        'mahd' => 'int', 'mahd' => 'int', 'idhoadon' => 'int', 'idhoadon' => 'int', 'idnd' => 'int', 'hoten' => 'string', 'diachi' => 'string', 'dienthoai' => 'string', 'email' => 'string', 'ngaydathang' => 'date', 'trangthai' => 'int', 'idnd' => 'int', 'hoten' => 'string', 'diachi' => 'string', 'dienthoai' => 'int', 'email' => 'string', 'ngaydathang' => 'date', 'trangthai' => 'int', 'idnguoidung' => 'int', 'hoten' => 'string', 'diachi' => 'string', 'dienthoai' => 'string', 'email' => 'string', 'ngaydathang' => 'date', 'phuongthucthanhtoan' => 'int', 'trangthai' => 'int', 'idnguoidung' => 'int', 'hoten' => 'string', 'diachi' => 'string', 'dienthoai' => 'string', 'email' => 'string', 'ngaydathang' => 'date', 'phuongthucthanhtoan' => 'int', 'trangthai' => 'int'
+        'idhoadon' => 'int', 'idnguoidung' => 'int', 'hoten' => 'string', 'diachi' => 'string', 'dienthoai' => 'string', 'email' => 'string', 'created_at' => 'timestamp', 'phuongthucthanhtoan' => 'int', 'trangthai' => 'int', 'updated_at' => 'timestamp'
     ];
 
     /**
@@ -89,7 +65,7 @@ class Hoadon extends Model
      * @var array
      */
     protected $dates = [
-        'ngaydathang', 'ngaydathang', 'ngaydathang', 'ngaydathang'
+        'created_at', 'updated_at'
     ];
 
     /**

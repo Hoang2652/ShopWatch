@@ -5,32 +5,14 @@ namespace app\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int    $id_hdct
- * @property int    $id_hdct
  * @property int    $idchitiethoadon
- * @property int    $idchitiethoadon
- * @property int    $soluong
- * @property int    $gia
- * @property int    $phuongthucthanhtoan
- * @property int    $soluong
- * @property int    $gia
- * @property int    $phuongthucthanhtoan
  * @property int    $idhoadon
  * @property int    $idsanpham
  * @property int    $gia
  * @property int    $soluong
  * @property int    $giamgia
- * @property int    $idhoadon
- * @property int    $idsanpham
- * @property int    $gia
- * @property int    $soluong
- * @property int    $giamgia
- * @property string $mahd
- * @property string $tensp
- * @property string $mahd
- * @property string $tensp
- * @property string $tensanpham
- * @property string $quatang
+ * @property int    $created_at
+ * @property int    $updated_at
  * @property string $tensanpham
  * @property string $quatang
  */
@@ -48,7 +30,7 @@ class Chitiethoadon extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'id_hdct';
+    protected $primaryKey = 'idchitiethoadon';
 
     /**
      * Attributes that should be mass-assignable.
@@ -56,7 +38,7 @@ class Chitiethoadon extends Model
      * @var array
      */
     protected $fillable = [
-        'idchitiethoadon', 'idchitiethoadon', 'mahd', 'tensp', 'soluong', 'gia', 'phuongthucthanhtoan', 'mahd', 'tensp', 'soluong', 'gia', 'phuongthucthanhtoan', 'idhoadon', 'idsanpham', 'tensanpham', 'gia', 'soluong', 'giamgia', 'quatang', 'idhoadon', 'idsanpham', 'tensanpham', 'gia', 'soluong', 'giamgia', 'quatang'
+        'idhoadon', 'idsanpham', 'tensanpham', 'gia', 'soluong', 'giamgia', 'quatang', 'created_at', 'updated_at'
     ];
 
     /**
@@ -74,7 +56,7 @@ class Chitiethoadon extends Model
      * @var array
      */
     protected $casts = [
-        'id_hdct' => 'int', 'id_hdct' => 'int', 'idchitiethoadon' => 'int', 'idchitiethoadon' => 'int', 'mahd' => 'string', 'tensp' => 'string', 'soluong' => 'int', 'gia' => 'int', 'phuongthucthanhtoan' => 'int', 'mahd' => 'string', 'tensp' => 'string', 'soluong' => 'int', 'gia' => 'int', 'phuongthucthanhtoan' => 'int', 'idhoadon' => 'int', 'idsanpham' => 'int', 'tensanpham' => 'string', 'gia' => 'int', 'soluong' => 'int', 'giamgia' => 'int', 'quatang' => 'string', 'idhoadon' => 'int', 'idsanpham' => 'int', 'tensanpham' => 'string', 'gia' => 'int', 'soluong' => 'int', 'giamgia' => 'int', 'quatang' => 'string'
+        'idchitiethoadon' => 'int', 'idhoadon' => 'int', 'idsanpham' => 'int', 'tensanpham' => 'string', 'gia' => 'int', 'soluong' => 'int', 'giamgia' => 'int', 'quatang' => 'string', 'created_at' => 'timestamp', 'updated_at' => 'timestamp'
     ];
 
     /**
@@ -83,7 +65,7 @@ class Chitiethoadon extends Model
      * @var array
      */
     protected $dates = [
-        
+        'created_at', 'updated_at'
     ];
 
     /**

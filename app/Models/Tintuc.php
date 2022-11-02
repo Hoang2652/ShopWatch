@@ -5,30 +5,15 @@ namespace app\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int    $matt
  * @property int    $idtintuc
- * @property int    $idtintuc
+ * @property int    $created_at
  * @property int    $trangthai
- * @property int    $trangthai
- * @property int    $trangthai
- * @property string $tieude
- * @property string $ndngan
- * @property string $noidung
- * @property string $hinhanh
- * @property string $tacgia
+ * @property int    $updated_at
  * @property string $tieude
  * @property string $noidungngan
  * @property string $noidungchitiet
  * @property string $hinhanh
  * @property string $tacgia
- * @property string $tieude
- * @property string $noidungngan
- * @property string $noidungchitiet
- * @property string $hinhanh
- * @property string $tacgia
- * @property Date   $ngaydangtin
- * @property Date   $ngaydangtin
- * @property Date   $ngaydangtin
  */
 class Tintuc extends Model
 {
@@ -44,7 +29,7 @@ class Tintuc extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'matt';
+    protected $primaryKey = 'idtintuc';
 
     /**
      * Attributes that should be mass-assignable.
@@ -52,7 +37,7 @@ class Tintuc extends Model
      * @var array
      */
     protected $fillable = [
-        'idtintuc', 'idtintuc', 'tieude', 'ndngan', 'noidung', 'hinhanh', 'ngaydangtin', 'tacgia', 'trangthai', 'tieude', 'noidungngan', 'noidungchitiet', 'hinhanh', 'ngaydangtin', 'tacgia', 'trangthai', 'tieude', 'noidungngan', 'noidungchitiet', 'hinhanh', 'ngaydangtin', 'tacgia', 'trangthai'
+        'tieude', 'noidungngan', 'noidungchitiet', 'hinhanh', 'created_at', 'tacgia', 'trangthai', 'updated_at'
     ];
 
     /**
@@ -70,7 +55,7 @@ class Tintuc extends Model
      * @var array
      */
     protected $casts = [
-        'matt' => 'int', 'idtintuc' => 'int', 'idtintuc' => 'int', 'tieude' => 'string', 'ndngan' => 'string', 'noidung' => 'string', 'hinhanh' => 'string', 'ngaydangtin' => 'date', 'tacgia' => 'string', 'trangthai' => 'int', 'tieude' => 'string', 'noidungngan' => 'string', 'noidungchitiet' => 'string', 'hinhanh' => 'string', 'ngaydangtin' => 'date', 'tacgia' => 'string', 'trangthai' => 'int', 'tieude' => 'string', 'noidungngan' => 'string', 'noidungchitiet' => 'string', 'hinhanh' => 'string', 'ngaydangtin' => 'date', 'tacgia' => 'string', 'trangthai' => 'int'
+        'idtintuc' => 'int', 'tieude' => 'string', 'noidungngan' => 'string', 'noidungchitiet' => 'string', 'hinhanh' => 'string', 'created_at' => 'timestamp', 'tacgia' => 'string', 'trangthai' => 'int', 'updated_at' => 'timestamp'
     ];
 
     /**
@@ -79,7 +64,7 @@ class Tintuc extends Model
      * @var array
      */
     protected $dates = [
-        'ngaydangtin', 'ngaydangtin', 'ngaydangtin'
+        'created_at', 'updated_at'
     ];
 
     /**

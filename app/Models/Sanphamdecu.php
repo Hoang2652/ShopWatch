@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int    $idsanphamdecu
  * @property int    $idsanpham
- * @property int    $idsanphamdecu
- * @property int    $idsanpham
- * @property string $tensanphamdecu
+ * @property int    $created_at
+ * @property int    $updated_at
  * @property string $tensanphamdecu
  */
 class Sanphamdecu extends Model
@@ -34,7 +33,7 @@ class Sanphamdecu extends Model
      * @var array
      */
     protected $fillable = [
-        'idsanpham', 'idsanpham', 'tensanphamdecu', 'tensanphamdecu'
+        'idsanpham', 'tensanphamdecu', 'created_at', 'updated_at'
     ];
 
     /**
@@ -52,7 +51,7 @@ class Sanphamdecu extends Model
      * @var array
      */
     protected $casts = [
-        'idsanphamdecu' => 'int', 'idsanpham' => 'int', 'idsanphamdecu' => 'int', 'idsanpham' => 'int', 'tensanphamdecu' => 'string', 'tensanphamdecu' => 'string'
+        'idsanphamdecu' => 'int', 'idsanpham' => 'int', 'tensanphamdecu' => 'string', 'created_at' => 'timestamp', 'updated_at' => 'timestamp'
     ];
 
     /**
@@ -61,7 +60,7 @@ class Sanphamdecu extends Model
      * @var array
      */
     protected $dates = [
-        
+        'created_at', 'updated_at'
     ];
 
     /**

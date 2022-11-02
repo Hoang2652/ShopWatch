@@ -5,22 +5,7 @@ namespace app\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int     $idsp
- * @property int     $idsp
  * @property int     $idsanpham
- * @property int     $idsanpham
- * @property int     $soluong
- * @property int     $daban
- * @property int     $gia
- * @property int     $khuyenmai1
- * @property int     $madm
- * @property int     $trangthai
- * @property int     $soluong
- * @property int     $daban
- * @property int     $gia
- * @property int     $khuyenmai1
- * @property int     $madm
- * @property int     $trangthai
  * @property int     $baohanh
  * @property int     $soluong
  * @property int     $daban
@@ -29,45 +14,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property int     $giamgia
  * @property int     $quatang
  * @property int     $soluongkhuyenmai
+ * @property int     $created_at
  * @property int     $idhoadonnhapxuatkho
  * @property int     $idkhohang
- * @property int     $baohanh
- * @property int     $soluong
- * @property int     $daban
- * @property int     $gia
- * @property int     $iddanhmuc
- * @property int     $giamgia
- * @property int     $quatang
- * @property int     $soluongkhuyenmai
- * @property int     $idhoadonnhapxuatkho
- * @property int     $idkhohang
- * @property string  $tensp
- * @property string  $hinhanh
- * @property string  $mau
- * @property string  $chitiet
- * @property string  $khuyenmai2
- * @property string  $tensp
- * @property string  $hinhanh
- * @property string  $mau
- * @property string  $chitiet
- * @property string  $khuyenmai2
+ * @property int     $updated_at
  * @property string  $tensanpham
  * @property string  $loaisanpham
  * @property string  $hinhanh
  * @property string  $mota
  * @property string  $xuatxu
  * @property string  $chitiet
- * @property string  $tensanpham
- * @property string  $loaisanpham
- * @property string  $hinhanh
- * @property string  $mota
- * @property string  $xuatxu
- * @property string  $chitiet
- * @property Date    $ngaycapnhat
- * @property Date    $ngaycapnhat
- * @property Date    $ngaycapnhat
- * @property Date    $ngaycapnhat
- * @property boolean $trangthai
  * @property boolean $trangthai
  */
 class Sanpham extends Model
@@ -84,7 +40,7 @@ class Sanpham extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'idsp';
+    protected $primaryKey = 'idsanpham';
 
     /**
      * Attributes that should be mass-assignable.
@@ -92,7 +48,7 @@ class Sanpham extends Model
      * @var array
      */
     protected $fillable = [
-        'idsanpham', 'idsanpham', 'tensp', 'hinhanh', 'mau', 'chitiet', 'soluong', 'daban', 'gia', 'khuyenmai1', 'khuyenmai2', 'madm', 'ngaycapnhat', 'trangthai', 'tensp', 'hinhanh', 'mau', 'chitiet', 'soluong', 'daban', 'gia', 'khuyenmai1', 'khuyenmai2', 'madm', 'ngaycapnhat', 'trangthai', 'tensanpham', 'loaisanpham', 'hinhanh', 'mota', 'xuatxu', 'baohanh', 'chitiet', 'soluong', 'daban', 'gia', 'iddanhmuc', 'giamgia', 'quatang', 'soluongkhuyenmai', 'ngaycapnhat', 'trangthai', 'idhoadonnhapxuatkho', 'idkhohang', 'tensanpham', 'loaisanpham', 'hinhanh', 'mota', 'xuatxu', 'baohanh', 'chitiet', 'soluong', 'daban', 'gia', 'iddanhmuc', 'giamgia', 'quatang', 'soluongkhuyenmai', 'ngaycapnhat', 'trangthai', 'idhoadonnhapxuatkho', 'idkhohang'
+        'tensanpham', 'loaisanpham', 'hinhanh', 'mota', 'xuatxu', 'baohanh', 'chitiet', 'soluong', 'daban', 'gia', 'iddanhmuc', 'giamgia', 'quatang', 'soluongkhuyenmai', 'created_at', 'trangthai', 'idhoadonnhapxuatkho', 'idkhohang', 'updated_at'
     ];
 
     /**
@@ -110,7 +66,7 @@ class Sanpham extends Model
      * @var array
      */
     protected $casts = [
-        'idsp' => 'int', 'idsp' => 'int', 'idsanpham' => 'int', 'idsanpham' => 'int', 'tensp' => 'string', 'hinhanh' => 'string', 'mau' => 'string', 'chitiet' => 'string', 'soluong' => 'int', 'daban' => 'int', 'gia' => 'int', 'khuyenmai1' => 'int', 'khuyenmai2' => 'string', 'madm' => 'int', 'ngaycapnhat' => 'date', 'trangthai' => 'int', 'tensp' => 'string', 'hinhanh' => 'string', 'mau' => 'string', 'chitiet' => 'string', 'soluong' => 'int', 'daban' => 'int', 'gia' => 'int', 'khuyenmai1' => 'int', 'khuyenmai2' => 'string', 'madm' => 'int', 'ngaycapnhat' => 'date', 'trangthai' => 'int', 'tensanpham' => 'string', 'loaisanpham' => 'string', 'hinhanh' => 'string', 'mota' => 'string', 'xuatxu' => 'string', 'baohanh' => 'int', 'chitiet' => 'string', 'soluong' => 'int', 'daban' => 'int', 'gia' => 'int', 'iddanhmuc' => 'int', 'giamgia' => 'int', 'quatang' => 'int', 'soluongkhuyenmai' => 'int', 'ngaycapnhat' => 'date', 'trangthai' => 'boolean', 'idhoadonnhapxuatkho' => 'int', 'idkhohang' => 'int', 'tensanpham' => 'string', 'loaisanpham' => 'string', 'hinhanh' => 'string', 'mota' => 'string', 'xuatxu' => 'string', 'baohanh' => 'int', 'chitiet' => 'string', 'soluong' => 'int', 'daban' => 'int', 'gia' => 'int', 'iddanhmuc' => 'int', 'giamgia' => 'int', 'quatang' => 'int', 'soluongkhuyenmai' => 'int', 'ngaycapnhat' => 'date', 'trangthai' => 'boolean', 'idhoadonnhapxuatkho' => 'int', 'idkhohang' => 'int'
+        'idsanpham' => 'int', 'tensanpham' => 'string', 'loaisanpham' => 'string', 'hinhanh' => 'string', 'mota' => 'string', 'xuatxu' => 'string', 'baohanh' => 'int', 'chitiet' => 'string', 'soluong' => 'int', 'daban' => 'int', 'gia' => 'int', 'iddanhmuc' => 'int', 'giamgia' => 'int', 'quatang' => 'int', 'soluongkhuyenmai' => 'int', 'created_at' => 'timestamp', 'trangthai' => 'boolean', 'idhoadonnhapxuatkho' => 'int', 'idkhohang' => 'int', 'updated_at' => 'timestamp'
     ];
 
     /**
@@ -119,7 +75,7 @@ class Sanpham extends Model
      * @var array
      */
     protected $dates = [
-        'ngaycapnhat', 'ngaycapnhat', 'ngaycapnhat', 'ngaycapnhat'
+        'created_at', 'updated_at'
     ];
 
     /**

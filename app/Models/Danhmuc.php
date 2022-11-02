@@ -5,17 +5,9 @@ namespace app\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int    $madm
- * @property int    $madm
  * @property int    $iddanhmuc
- * @property int    $iddanhmuc
- * @property int    $dequi
- * @property int    $dequi
- * @property string $tendm
- * @property string $tendm
- * @property string $tendanhmuc
- * @property string $loaidanhmuc
- * @property string $mota
+ * @property int    $updated_at
+ * @property int    $created_at
  * @property string $tendanhmuc
  * @property string $loaidanhmuc
  * @property string $mota
@@ -34,7 +26,7 @@ class Danhmuc extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'madm';
+    protected $primaryKey = 'iddanhmuc';
 
     /**
      * Attributes that should be mass-assignable.
@@ -42,7 +34,7 @@ class Danhmuc extends Model
      * @var array
      */
     protected $fillable = [
-        'iddanhmuc', 'iddanhmuc', 'tendm', 'dequi', 'tendm', 'dequi', 'tendanhmuc', 'loaidanhmuc', 'mota', 'tendanhmuc', 'loaidanhmuc', 'mota'
+        'tendanhmuc', 'loaidanhmuc', 'mota', 'updated_at', 'created_at'
     ];
 
     /**
@@ -60,7 +52,7 @@ class Danhmuc extends Model
      * @var array
      */
     protected $casts = [
-        'madm' => 'int', 'madm' => 'int', 'iddanhmuc' => 'int', 'iddanhmuc' => 'int', 'tendm' => 'string', 'dequi' => 'int', 'tendm' => 'string', 'dequi' => 'int', 'tendanhmuc' => 'string', 'loaidanhmuc' => 'string', 'mota' => 'string', 'tendanhmuc' => 'string', 'loaidanhmuc' => 'string', 'mota' => 'string'
+        'iddanhmuc' => 'int', 'tendanhmuc' => 'string', 'loaidanhmuc' => 'string', 'mota' => 'string', 'updated_at' => 'timestamp', 'created_at' => 'timestamp'
     ];
 
     /**
@@ -69,7 +61,7 @@ class Danhmuc extends Model
      * @var array
      */
     protected $dates = [
-        
+        'updated_at', 'created_at'
     ];
 
     /**

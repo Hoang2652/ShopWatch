@@ -6,13 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int    $idcauhoi
- * @property int    $idcauhoi
+ * @property int    $created_at
+ * @property int    $updated_at
  * @property string $noidungcauhoi
  * @property string $cautraloi
- * @property string $noidungcauhoi
- * @property string $cautraloi
- * @property Date   $ngaytraloi
- * @property Date   $ngaytraloi
  */
 class Traloicauhoi extends Model
 {
@@ -36,7 +33,7 @@ class Traloicauhoi extends Model
      * @var array
      */
     protected $fillable = [
-        'noidungcauhoi', 'cautraloi', 'ngaytraloi', 'noidungcauhoi', 'cautraloi', 'ngaytraloi'
+        'noidungcauhoi', 'cautraloi', 'created_at', 'updated_at'
     ];
 
     /**
@@ -54,7 +51,7 @@ class Traloicauhoi extends Model
      * @var array
      */
     protected $casts = [
-        'idcauhoi' => 'int', 'idcauhoi' => 'int', 'noidungcauhoi' => 'string', 'cautraloi' => 'string', 'ngaytraloi' => 'date', 'noidungcauhoi' => 'string', 'cautraloi' => 'string', 'ngaytraloi' => 'date'
+        'idcauhoi' => 'int', 'noidungcauhoi' => 'string', 'cautraloi' => 'string', 'created_at' => 'timestamp', 'updated_at' => 'timestamp'
     ];
 
     /**
@@ -63,7 +60,7 @@ class Traloicauhoi extends Model
      * @var array
      */
     protected $dates = [
-        'ngaytraloi', 'ngaytraloi'
+        'created_at', 'updated_at'
     ];
 
     /**
