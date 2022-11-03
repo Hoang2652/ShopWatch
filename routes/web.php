@@ -25,7 +25,22 @@ Route::get('/login', 'HomeController@loginPage');
 Route::get('/register', 'HomeController@registerPage');
 Route::get('/watch', 'ProductController@index');
 Route::post('/login-execute', 'HomeController@checkLogin');
+Route::get('/logout', 'HomeController@logout');
+Route::get('/tintuc', 'NewsController@showHomeNews');
+Route::get('/tintuc/id={id}', 'NewsController@getNewsDetail');
+Route::get('/hotro', 'SupportController@getViewSupport');
+Route::get('/hotro/id={id}', 'SupportController@getViewSupportDetail');
+Route::get('/sanpham', 'ProductController@getViewProduct');
+Route::get('/sanpham/dongho/', 'ProductController@getProductByProductType');
+Route::get('/sanpham/phukien/', 'ProductController@getViewAccessory');
+Route::get('/sanpham/idsanpham={id}', 'ProductController@getViewProductDetail');
+Route::get('/thongtincanhan', 'ProfileController@getViewProfile');
+Route::get('/thongtincanhan/lichsumuahang', 'ProfileController@getViewHistory');
+Route::get('/thongtincanhan/thaydoithongtincanhan', 'ProfileController@getViewChangeProfile');
 
+
+//backend
+Route::get('/admin', 'AdminController@index');
 
 /*
 |--------------------------------------------------------------------------
