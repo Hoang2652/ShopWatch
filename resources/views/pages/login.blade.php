@@ -24,7 +24,7 @@
 					<p class="login__save"><input type="checkbox" name="saveinfo" id="checkluudangnhap">  Lưu đăng nhập</p>
 					<a><button name="login" class="btn btn-primary">Đăng nhập</button></a>
 					<div class="login__dash"></div>
-					<p id="dangkycss">Bạn chưa có tài khoản? => <a href="index.php?content=dangky">Đăng ký</a></p>
+					<p id="dangkycss">Bạn chưa có tài khoản? => <a>Đăng ký</a></p>
                 </div>
 				</form>
 			</div>
