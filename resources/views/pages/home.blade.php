@@ -112,7 +112,7 @@
                                             <i class='bx bxs-quote-alt-left' ></i><h5>   {{$news->tieude}}</h5>
                                         </div>
                                         <p class="testimonial__description"> {{$news->noidungngan}} </p>
-                                        <h3 class="testimonial__date">Ngày đăng tin: {{$news->ngaydangtin}}</h3>
+                                        <h3 class="testimonial__date">Ngày đăng tin: {{$news->updated_at}}</h3>
             
                                     </div>
                                 </a>

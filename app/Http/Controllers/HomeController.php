@@ -19,9 +19,9 @@ class HomeController extends Controller
             $join->on('sanpham.idsanpham', '=', 'sanphamdecu.idsanpham')->where('sanphamdecu.idsanphamdecu',2);
         })->get();
 
-        $NewestProductList = DB::table('sanpham')->latest('ngaycapnhat')->limit(6)->get();
+        $NewestProductList = DB::table('sanpham')->latest('updated_at')->limit(6)->get();
 
-        $NewsList = DB::table('tintuc')->latest('ngaydangtin')->limit(3)->get();
+        $NewsList = DB::table('tintuc')->latest('updated_at')->limit(3)->get();
         
         $recommendedProductList = DB::table('sanpham')->join('sanphamdecu', function ($join) {
             $join->on('sanpham.idsanpham', '=', 'sanphamdecu.idsanpham')->where('sanphamdecu.idsanphamdecu',3);
@@ -48,11 +48,15 @@ class HomeController extends Controller
         $tendangnhap = $request->tendangnhap;
         $matkhau = MD5($request->matkhau);
 
-        $result = DB::table('nguoidung')->where('tendangnhap',$tendangnhap)->where('matkhau',$matkhau)->first();
+        $result = DB::table('nguoidung')->where('tendangnhap',$tendangnhap)->orWhere('email',$tendangnhap)->where('matkhau',$matkhau)->first();
 
         echo "kết quả:";
         echo '<pre>';
         print_r($result);
         echo '</pre>';
+    }
+
+    public function logout(){
+        
     }
 }
