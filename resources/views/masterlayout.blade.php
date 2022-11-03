@@ -169,6 +169,7 @@ e.preventDefault();
             @yield('home')
 			@yield('login')
 			@yield('register')
+			@yield('sanpham')
 		</div><!-- End .center-content -->
 	</div><!-- End .main-content -->
 

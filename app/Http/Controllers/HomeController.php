@@ -19,9 +19,9 @@ class HomeController extends Controller
             $join->on('sanpham.idsanpham', '=', 'sanphamdecu.idsanpham')->where('sanphamdecu.idsanphamdecu',2);
         })->get();
 
-        $NewestProductList = DB::table('sanpham')->latest('ngaycapnhat')->limit(6)->get();
+        $NewestProductList = DB::table('sanpham')->latest('updated_at')->limit(6)->get();
 
-        $NewsList = DB::table('tintuc')->latest('ngaydangtin')->limit(3)->get();
+        $NewsList = DB::table('tintuc')->latest('updated_at')->limit(3)->get();
         
         $recommendedProductList = DB::table('sanpham')->join('sanphamdecu', function ($join) {
             $join->on('sanpham.idsanpham', '=', 'sanphamdecu.idsanpham')->where('sanphamdecu.idsanphamdecu',3);

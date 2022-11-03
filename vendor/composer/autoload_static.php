@@ -26,6 +26,7 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
+        '4b8231d448d03dccd251adffc9d04a08' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/flasher.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
@@ -36,12 +37,17 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
+        '101b35f72e0ccb1b5ef72aa86bba3ef9' => __DIR__ . '/..' . '/yoeunes/toastr/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'v' => 
         array (
             'voku\\' => 5,
+        ),
+        'Y' => 
+        array (
+            'Yoeunes\\Toastr\\' => 15,
         ),
         'W' => 
         array (
@@ -110,6 +116,8 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
         'M' => 
         array (
             'Monolog\\' => 8,
+            'MJS\\TopSort\\Tests\\' => 18,
+            'MJS\\TopSort\\' => 12,
         ),
         'L' => 
         array (
@@ -121,6 +129,8 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
             'Laravel\\SerializableClosure\\' => 28,
             'Laravel\\Sanctum\\' => 16,
             'Laravel\\Sail\\' => 13,
+            'LaravelMigrationGenerator\\' => 26,
+            'Laracademy\\Generators\\' => 22,
         ),
         'I' => 
         array (
@@ -137,6 +147,9 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
         'F' => 
         array (
             'Fruitcake\\Cors\\' => 15,
+            'Flasher\\Toastr\\Prime\\' => 21,
+            'Flasher\\Prime\\' => 14,
+            'Flasher\\Laravel\\' => 16,
             'Faker\\' => 6,
             'Facade\\Ignition\\' => 16,
             'Facade\\IgnitionContracts\\' => 25,
@@ -177,6 +190,10 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
         'voku\\' => 
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
+        ),
+        'Yoeunes\\Toastr\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yoeunes/toastr/src',
         ),
         'Whoops\\' => 
         array (
@@ -355,6 +372,14 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'MJS\\TopSort\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/marcj/topsort/tests/Tests',
+        ),
+        'MJS\\TopSort\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/marcj/topsort/src',
+        ),
         'League\\MimeTypeDetection\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/mime-type-detection/src',
@@ -387,6 +412,14 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
         array (
             0 => __DIR__ . '/..' . '/laravel/sail/src',
         ),
+        'LaravelMigrationGenerator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src',
+        ),
+        'Laracademy\\Generators\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laracademy/generators/src',
+        ),
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
@@ -415,6 +448,18 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
         'Fruitcake\\Cors\\' => 
         array (
             0 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
+        ),
+        'Flasher\\Toastr\\Prime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-flasher/flasher-toastr',
+        ),
+        'Flasher\\Prime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-flasher/flasher',
+        ),
+        'Flasher\\Laravel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-flasher/flasher-laravel',
         ),
         'Faker\\' => 
         array (
@@ -504,8 +549,14 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
+        'App\\Http\\Controllers\\BillController' => __DIR__ . '/../..' . '/app/Http/Controllers/BillController.php',
+        'App\\Http\\Controllers\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoryController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\NewsController' => __DIR__ . '/../..' . '/app/Http/Controllers/NewsController.php',
+        'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
+        'App\\Http\\Controllers\\SupportController' => __DIR__ . '/../..' . '/app/Http/Controllers/SupportController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -1461,6 +1512,108 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
         'Faker\\Provider\\zh_TW\\Text' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/zh_TW/Text.php',
         'Faker\\UniqueGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/UniqueGenerator.php',
         'Faker\\ValidGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/ValidGenerator.php',
+        'Flasher\\Laravel\\Component\\FlasherComponent' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Component/FlasherComponent.php',
+        'Flasher\\Laravel\\Facade\\Flasher' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Facade/Flasher.php',
+        'Flasher\\Laravel\\FlasherServiceProvider' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/FlasherServiceProvider.php',
+        'Flasher\\Laravel\\Http\\Request' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Http/Request.php',
+        'Flasher\\Laravel\\Http\\Response' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Http/Response.php',
+        'Flasher\\Laravel\\Middleware\\FlasherMiddleware' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Middleware/FlasherMiddleware.php',
+        'Flasher\\Laravel\\Middleware\\HttpKernelFlasherMiddleware' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Middleware/HttpKernelFlasherMiddleware.php',
+        'Flasher\\Laravel\\Middleware\\HttpKernelSessionMiddleware' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Middleware/HttpKernelSessionMiddleware.php',
+        'Flasher\\Laravel\\Middleware\\SessionMiddleware' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Middleware/SessionMiddleware.php',
+        'Flasher\\Laravel\\Storage\\SessionBag' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Storage/SessionBag.php',
+        'Flasher\\Laravel\\Support\\Laravel' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Support/Laravel.php',
+        'Flasher\\Laravel\\Support\\ServiceProvider' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Support/ServiceProvider.php',
+        'Flasher\\Laravel\\Template\\BladeTemplateEngine' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Template/BladeTemplateEngine.php',
+        'Flasher\\Laravel\\Translation\\Translator' => __DIR__ . '/..' . '/php-flasher/flasher-laravel/Translation/Translator.php',
+        'Flasher\\Prime\\Config\\Config' => __DIR__ . '/..' . '/php-flasher/flasher/Config/Config.php',
+        'Flasher\\Prime\\Config\\ConfigInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Config/ConfigInterface.php',
+        'Flasher\\Prime\\EventDispatcher\\EventDispatcher' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/EventDispatcher.php',
+        'Flasher\\Prime\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/EventDispatcherInterface.php',
+        'Flasher\\Prime\\EventDispatcher\\EventListener\\AddToStorageListener' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/EventListener/AddToStorageListener.php',
+        'Flasher\\Prime\\EventDispatcher\\EventListener\\EventSubscriberInterface' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/EventListener/EventSubscriberInterface.php',
+        'Flasher\\Prime\\EventDispatcher\\EventListener\\PresetListener' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/EventListener/PresetListener.php',
+        'Flasher\\Prime\\EventDispatcher\\EventListener\\RemoveListener' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/EventListener/RemoveListener.php',
+        'Flasher\\Prime\\EventDispatcher\\EventListener\\StampsListener' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/EventListener/StampsListener.php',
+        'Flasher\\Prime\\EventDispatcher\\EventListener\\TranslationListener' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/EventListener/TranslationListener.php',
+        'Flasher\\Prime\\EventDispatcher\\Event\\FilterEvent' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/Event/FilterEvent.php',
+        'Flasher\\Prime\\EventDispatcher\\Event\\PersistEvent' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/Event/PersistEvent.php',
+        'Flasher\\Prime\\EventDispatcher\\Event\\PostPersistEvent' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/Event/PostPersistEvent.php',
+        'Flasher\\Prime\\EventDispatcher\\Event\\PostRemoveEvent' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/Event/PostRemoveEvent.php',
+        'Flasher\\Prime\\EventDispatcher\\Event\\PostUpdateEvent' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/Event/PostUpdateEvent.php',
+        'Flasher\\Prime\\EventDispatcher\\Event\\PresentationEvent' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/Event/PresentationEvent.php',
+        'Flasher\\Prime\\EventDispatcher\\Event\\RemoveEvent' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/Event/RemoveEvent.php',
+        'Flasher\\Prime\\EventDispatcher\\Event\\ResponseEvent' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/Event/ResponseEvent.php',
+        'Flasher\\Prime\\EventDispatcher\\Event\\StoppableEventInterface' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/Event/StoppableEventInterface.php',
+        'Flasher\\Prime\\EventDispatcher\\Event\\UpdateEvent' => __DIR__ . '/..' . '/php-flasher/flasher/EventDispatcher/Event/UpdateEvent.php',
+        'Flasher\\Prime\\Exception\\PresetNotFoundException' => __DIR__ . '/..' . '/php-flasher/flasher/Exception/PresetNotFoundException.php',
+        'Flasher\\Prime\\Factory\\NotificationFactory' => __DIR__ . '/..' . '/php-flasher/flasher/Factory/NotificationFactory.php',
+        'Flasher\\Prime\\Factory\\NotificationFactoryInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Factory/NotificationFactoryInterface.php',
+        'Flasher\\Prime\\Filter\\CriteriaBuilder' => __DIR__ . '/..' . '/php-flasher/flasher/Filter/CriteriaBuilder.php',
+        'Flasher\\Prime\\Filter\\Filter' => __DIR__ . '/..' . '/php-flasher/flasher/Filter/Filter.php',
+        'Flasher\\Prime\\Filter\\Specification\\AndSpecification' => __DIR__ . '/..' . '/php-flasher/flasher/Filter/Specification/AndSpecification.php',
+        'Flasher\\Prime\\Filter\\Specification\\CallbackSpecification' => __DIR__ . '/..' . '/php-flasher/flasher/Filter/Specification/CallbackSpecification.php',
+        'Flasher\\Prime\\Filter\\Specification\\DelaySpecification' => __DIR__ . '/..' . '/php-flasher/flasher/Filter/Specification/DelaySpecification.php',
+        'Flasher\\Prime\\Filter\\Specification\\HopsSpecification' => __DIR__ . '/..' . '/php-flasher/flasher/Filter/Specification/HopsSpecification.php',
+        'Flasher\\Prime\\Filter\\Specification\\PrioritySpecification' => __DIR__ . '/..' . '/php-flasher/flasher/Filter/Specification/PrioritySpecification.php',
+        'Flasher\\Prime\\Filter\\Specification\\SpecificationInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Filter/Specification/SpecificationInterface.php',
+        'Flasher\\Prime\\Filter\\Specification\\StampsSpecification' => __DIR__ . '/..' . '/php-flasher/flasher/Filter/Specification/StampsSpecification.php',
+        'Flasher\\Prime\\Flasher' => __DIR__ . '/..' . '/php-flasher/flasher/Flasher.php',
+        'Flasher\\Prime\\FlasherInterface' => __DIR__ . '/..' . '/php-flasher/flasher/FlasherInterface.php',
+        'Flasher\\Prime\\Http\\RequestExtension' => __DIR__ . '/..' . '/php-flasher/flasher/Http/RequestExtension.php',
+        'Flasher\\Prime\\Http\\RequestInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Http/RequestInterface.php',
+        'Flasher\\Prime\\Http\\ResponseExtension' => __DIR__ . '/..' . '/php-flasher/flasher/Http/ResponseExtension.php',
+        'Flasher\\Prime\\Http\\ResponseInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Http/ResponseInterface.php',
+        'Flasher\\Prime\\Notification\\Envelope' => __DIR__ . '/..' . '/php-flasher/flasher/Notification/Envelope.php',
+        'Flasher\\Prime\\Notification\\Notification' => __DIR__ . '/..' . '/php-flasher/flasher/Notification/Notification.php',
+        'Flasher\\Prime\\Notification\\NotificationBuilder' => __DIR__ . '/..' . '/php-flasher/flasher/Notification/NotificationBuilder.php',
+        'Flasher\\Prime\\Notification\\NotificationBuilderInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Notification/NotificationBuilderInterface.php',
+        'Flasher\\Prime\\Notification\\NotificationInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Notification/NotificationInterface.php',
+        'Flasher\\Prime\\Plugin\\FlasherPlugin' => __DIR__ . '/..' . '/php-flasher/flasher/Plugin/FlasherPlugin.php',
+        'Flasher\\Prime\\Plugin\\Plugin' => __DIR__ . '/..' . '/php-flasher/flasher/Plugin/Plugin.php',
+        'Flasher\\Prime\\Plugin\\PluginInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Plugin/PluginInterface.php',
+        'Flasher\\Prime\\Response\\Presenter\\ArrayPresenter' => __DIR__ . '/..' . '/php-flasher/flasher/Response/Presenter/ArrayPresenter.php',
+        'Flasher\\Prime\\Response\\Presenter\\HtmlPresenter' => __DIR__ . '/..' . '/php-flasher/flasher/Response/Presenter/HtmlPresenter.php',
+        'Flasher\\Prime\\Response\\Presenter\\PresenterInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Response/Presenter/PresenterInterface.php',
+        'Flasher\\Prime\\Response\\Resource\\ResourceManager' => __DIR__ . '/..' . '/php-flasher/flasher/Response/Resource/ResourceManager.php',
+        'Flasher\\Prime\\Response\\Resource\\ResourceManagerInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Response/Resource/ResourceManagerInterface.php',
+        'Flasher\\Prime\\Response\\Response' => __DIR__ . '/..' . '/php-flasher/flasher/Response/Response.php',
+        'Flasher\\Prime\\Response\\ResponseManager' => __DIR__ . '/..' . '/php-flasher/flasher/Response/ResponseManager.php',
+        'Flasher\\Prime\\Response\\ResponseManagerInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Response/ResponseManagerInterface.php',
+        'Flasher\\Prime\\Stamp\\ContextStamp' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/ContextStamp.php',
+        'Flasher\\Prime\\Stamp\\CreatedAtStamp' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/CreatedAtStamp.php',
+        'Flasher\\Prime\\Stamp\\DelayStamp' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/DelayStamp.php',
+        'Flasher\\Prime\\Stamp\\HandlerStamp' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/HandlerStamp.php',
+        'Flasher\\Prime\\Stamp\\HopsStamp' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/HopsStamp.php',
+        'Flasher\\Prime\\Stamp\\OrderableStampInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/OrderableStampInterface.php',
+        'Flasher\\Prime\\Stamp\\PresentableStampInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/PresentableStampInterface.php',
+        'Flasher\\Prime\\Stamp\\PresetStamp' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/PresetStamp.php',
+        'Flasher\\Prime\\Stamp\\PriorityStamp' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/PriorityStamp.php',
+        'Flasher\\Prime\\Stamp\\StampInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/StampInterface.php',
+        'Flasher\\Prime\\Stamp\\TranslationStamp' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/TranslationStamp.php',
+        'Flasher\\Prime\\Stamp\\UnlessStamp' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/UnlessStamp.php',
+        'Flasher\\Prime\\Stamp\\UuidStamp' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/UuidStamp.php',
+        'Flasher\\Prime\\Stamp\\ViewStamp' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/ViewStamp.php',
+        'Flasher\\Prime\\Stamp\\WhenStamp' => __DIR__ . '/..' . '/php-flasher/flasher/Stamp/WhenStamp.php',
+        'Flasher\\Prime\\Storage\\Bag\\ArrayBag' => __DIR__ . '/..' . '/php-flasher/flasher/Storage/Bag/ArrayBag.php',
+        'Flasher\\Prime\\Storage\\Bag\\BagInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Storage/Bag/BagInterface.php',
+        'Flasher\\Prime\\Storage\\Bag\\StaticBag' => __DIR__ . '/..' . '/php-flasher/flasher/Storage/Bag/StaticBag.php',
+        'Flasher\\Prime\\Storage\\StorageBag' => __DIR__ . '/..' . '/php-flasher/flasher/Storage/StorageBag.php',
+        'Flasher\\Prime\\Storage\\StorageInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Storage/StorageInterface.php',
+        'Flasher\\Prime\\Storage\\StorageManager' => __DIR__ . '/..' . '/php-flasher/flasher/Storage/StorageManager.php',
+        'Flasher\\Prime\\Storage\\StorageManagerInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Storage/StorageManagerInterface.php',
+        'Flasher\\Prime\\Template\\Engine' => __DIR__ . '/..' . '/php-flasher/flasher/Template/Engine.php',
+        'Flasher\\Prime\\Template\\EngineInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Template/EngineInterface.php',
+        'Flasher\\Prime\\Template\\PHPTemplateEngine' => __DIR__ . '/..' . '/php-flasher/flasher/Template/PHPTemplateEngine.php',
+        'Flasher\\Prime\\Template\\TemplateEngineInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Template/TemplateEngineInterface.php',
+        'Flasher\\Prime\\Translation\\EchoTranslator' => __DIR__ . '/..' . '/php-flasher/flasher/Translation/EchoTranslator.php',
+        'Flasher\\Prime\\Translation\\Language' => __DIR__ . '/..' . '/php-flasher/flasher/Translation/Language.php',
+        'Flasher\\Prime\\Translation\\Messages' => __DIR__ . '/..' . '/php-flasher/flasher/Translation/Messages.php',
+        'Flasher\\Prime\\Translation\\ResourceInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Translation/ResourceInterface.php',
+        'Flasher\\Prime\\Translation\\TranslatorInterface' => __DIR__ . '/..' . '/php-flasher/flasher/Translation/TranslatorInterface.php',
+        'Flasher\\Toastr\\Prime\\ToastrBuilder' => __DIR__ . '/..' . '/php-flasher/flasher-toastr/ToastrBuilder.php',
+        'Flasher\\Toastr\\Prime\\ToastrFactory' => __DIR__ . '/..' . '/php-flasher/flasher-toastr/ToastrFactory.php',
+        'Flasher\\Toastr\\Prime\\ToastrPlugin' => __DIR__ . '/..' . '/php-flasher/flasher-toastr/ToastrPlugin.php',
         'Fruitcake\\Cors\\CorsServiceProvider' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/CorsServiceProvider.php',
         'Fruitcake\\Cors\\HandleCors' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/HandleCors.php',
         'GrahamCampbell\\ResultType\\Error' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Error.php',
@@ -2667,6 +2820,43 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+        'Laracademy\\Generators\\Commands\\ModelFromTableCommand' => __DIR__ . '/..' . '/laracademy/generators/src/Commands/ModelFromTableCommand.php',
+        'Laracademy\\Generators\\GeneratorsServiceProvider' => __DIR__ . '/..' . '/laracademy/generators/src/GeneratorsServiceProvider.php',
+        'LaravelMigrationGenerator\\Commands\\GenerateMigrationsCommand' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Commands/GenerateMigrationsCommand.php',
+        'LaravelMigrationGenerator\\Definitions\\ColumnDefinition' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Definitions/ColumnDefinition.php',
+        'LaravelMigrationGenerator\\Definitions\\IndexDefinition' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Definitions/IndexDefinition.php',
+        'LaravelMigrationGenerator\\Definitions\\TableDefinition' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Definitions/TableDefinition.php',
+        'LaravelMigrationGenerator\\Definitions\\ViewDefinition' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Definitions/ViewDefinition.php',
+        'LaravelMigrationGenerator\\Formatters\\TableFormatter' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Formatters/TableFormatter.php',
+        'LaravelMigrationGenerator\\Formatters\\ViewFormatter' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Formatters/ViewFormatter.php',
+        'LaravelMigrationGenerator\\GeneratorManagers\\BaseGeneratorManager' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/GeneratorManagers/BaseGeneratorManager.php',
+        'LaravelMigrationGenerator\\GeneratorManagers\\Interfaces\\GeneratorManagerInterface' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/GeneratorManagers/Interfaces/GeneratorManagerInterface.php',
+        'LaravelMigrationGenerator\\GeneratorManagers\\MySQLGeneratorManager' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/GeneratorManagers/MySQLGeneratorManager.php',
+        'LaravelMigrationGenerator\\Generators\\BaseTableGenerator' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Generators/BaseTableGenerator.php',
+        'LaravelMigrationGenerator\\Generators\\BaseViewGenerator' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Generators/BaseViewGenerator.php',
+        'LaravelMigrationGenerator\\Generators\\Concerns\\CleansUpColumnIndices' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Generators/Concerns/CleansUpColumnIndices.php',
+        'LaravelMigrationGenerator\\Generators\\Concerns\\CleansUpForeignKeyIndices' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Generators/Concerns/CleansUpForeignKeyIndices.php',
+        'LaravelMigrationGenerator\\Generators\\Concerns\\CleansUpMorphColumns' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Generators/Concerns/CleansUpMorphColumns.php',
+        'LaravelMigrationGenerator\\Generators\\Concerns\\CleansUpTimestampsColumn' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Generators/Concerns/CleansUpTimestampsColumn.php',
+        'LaravelMigrationGenerator\\Generators\\Concerns\\WritesToFile' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Generators/Concerns/WritesToFile.php',
+        'LaravelMigrationGenerator\\Generators\\Concerns\\WritesViewsToFile' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Generators/Concerns/WritesViewsToFile.php',
+        'LaravelMigrationGenerator\\Generators\\Interfaces\\TableGeneratorInterface' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Generators/Interfaces/TableGeneratorInterface.php',
+        'LaravelMigrationGenerator\\Generators\\Interfaces\\ViewGeneratorInterface' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Generators/Interfaces/ViewGeneratorInterface.php',
+        'LaravelMigrationGenerator\\Generators\\MySQL\\TableGenerator' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Generators/MySQL/TableGenerator.php',
+        'LaravelMigrationGenerator\\Generators\\MySQL\\ViewGenerator' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Generators/MySQL/ViewGenerator.php',
+        'LaravelMigrationGenerator\\Helpers\\ConfigResolver' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Helpers/ConfigResolver.php',
+        'LaravelMigrationGenerator\\Helpers\\DependencyResolver' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Helpers/DependencyResolver.php',
+        'LaravelMigrationGenerator\\Helpers\\Formatter' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Helpers/Formatter.php',
+        'LaravelMigrationGenerator\\Helpers\\ValueToString' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Helpers/ValueToString.php',
+        'LaravelMigrationGenerator\\Helpers\\WritableTrait' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Helpers/WritableTrait.php',
+        'LaravelMigrationGenerator\\LaravelMigrationGeneratorProvider' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/LaravelMigrationGeneratorProvider.php',
+        'LaravelMigrationGenerator\\Tokenizers\\BaseColumnTokenizer' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Tokenizers/BaseColumnTokenizer.php',
+        'LaravelMigrationGenerator\\Tokenizers\\BaseIndexTokenizer' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Tokenizers/BaseIndexTokenizer.php',
+        'LaravelMigrationGenerator\\Tokenizers\\BaseTokenizer' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Tokenizers/BaseTokenizer.php',
+        'LaravelMigrationGenerator\\Tokenizers\\Interfaces\\ColumnTokenizerInterface' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Tokenizers/Interfaces/ColumnTokenizerInterface.php',
+        'LaravelMigrationGenerator\\Tokenizers\\Interfaces\\IndexTokenizerInterface' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Tokenizers/Interfaces/IndexTokenizerInterface.php',
+        'LaravelMigrationGenerator\\Tokenizers\\MySQL\\ColumnTokenizer' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Tokenizers/MySQL/ColumnTokenizer.php',
+        'LaravelMigrationGenerator\\Tokenizers\\MySQL\\IndexTokenizer' => __DIR__ . '/..' . '/bennett-treptow/laravel-migration-generator/src/Tokenizers/MySQL/IndexTokenizer.php',
         'Laravel\\Sail\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/InstallCommand.php',
         'Laravel\\Sail\\Console\\PublishCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/PublishCommand.php',
         'Laravel\\Sail\\SailServiceProvider' => __DIR__ . '/..' . '/laravel/sail/src/SailServiceProvider.php',
@@ -3058,6 +3248,19 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
         'League\\MimeTypeDetection\\GeneratedExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/GeneratedExtensionToMimeTypeMap.php',
         'League\\MimeTypeDetection\\MimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/MimeTypeDetector.php',
         'League\\MimeTypeDetection\\OverridingExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/OverridingExtensionToMimeTypeMap.php',
+        'MJS\\TopSort\\CircularDependencyException' => __DIR__ . '/..' . '/marcj/topsort/src/CircularDependencyException.php',
+        'MJS\\TopSort\\Command\\BenchmarkCommand' => __DIR__ . '/..' . '/marcj/topsort/src/Command/BenchmarkCommand.php',
+        'MJS\\TopSort\\ElementNotFoundException' => __DIR__ . '/..' . '/marcj/topsort/src/ElementNotFoundException.php',
+        'MJS\\TopSort\\GroupedTopSortInterface' => __DIR__ . '/..' . '/marcj/topsort/src/GroupedTopSortInterface.php',
+        'MJS\\TopSort\\Implementations\\ArraySort' => __DIR__ . '/..' . '/marcj/topsort/src/Implementations/ArraySort.php',
+        'MJS\\TopSort\\Implementations\\BaseImplementation' => __DIR__ . '/..' . '/marcj/topsort/src/Implementations/BaseImplementation.php',
+        'MJS\\TopSort\\Implementations\\FixedArraySort' => __DIR__ . '/..' . '/marcj/topsort/src/Implementations/FixedArraySort.php',
+        'MJS\\TopSort\\Implementations\\GroupedArraySort' => __DIR__ . '/..' . '/marcj/topsort/src/Implementations/GroupedArraySort.php',
+        'MJS\\TopSort\\Implementations\\GroupedStringSort' => __DIR__ . '/..' . '/marcj/topsort/src/Implementations/GroupedStringSort.php',
+        'MJS\\TopSort\\Implementations\\StringSort' => __DIR__ . '/..' . '/marcj/topsort/src/Implementations/StringSort.php',
+        'MJS\\TopSort\\Tests\\GroupedSortTest' => __DIR__ . '/..' . '/marcj/topsort/tests/Tests/GroupedSortTest.php',
+        'MJS\\TopSort\\Tests\\SimpleSortTest' => __DIR__ . '/..' . '/marcj/topsort/tests/Tests/SimpleSortTest.php',
+        'MJS\\TopSort\\TopSortInterface' => __DIR__ . '/..' . '/marcj/topsort/src/TopSortInterface.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',
@@ -5425,6 +5628,9 @@ class ComposerStaticInit6c86c27c3c3a8c6838e9de1a09318b34
         'Whoops\\Util\\Misc' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/Misc.php',
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+        'Yoeunes\\Toastr\\Facades\\Toastr' => __DIR__ . '/..' . '/yoeunes/toastr/src/Facades/Toastr.php',
+        'Yoeunes\\Toastr\\Toastr' => __DIR__ . '/..' . '/yoeunes/toastr/src/Toastr.php',
+        'Yoeunes\\Toastr\\ToastrServiceProvider' => __DIR__ . '/..' . '/yoeunes/toastr/src/ToastrServiceProvider.php',
         'voku\\helper\\ASCII' => __DIR__ . '/..' . '/voku/portable-ascii/src/voku/helper/ASCII.php',
     );
 
