@@ -127,10 +127,10 @@ e.preventDefault();
 			<div class="nav__menu" id="nav-menu">
 					<ul class="nav__list">
 						<li class="nav__item">
-							<a href="{{URL::to('/dongho')}}" class="nav__link">Đồng hồ</a>
+							<a href="{{URL::to('/sanpham/dongho')}}" class="nav__link">Đồng hồ</a>
 						</li>
 						<li class="nav__item">
-							<a href="{{URL::to('/phukien')}}" class="nav__link">Phụ kiện</a>
+							<a href="{{URL::to('/sanpham/phukien')}}" class="nav__link">Phụ kiện</a>
 						</li>
 						<li class="nav__item">
 							<a href="{{URL::to('/hotro')}}" class="nav__link">Hỗ trợ</a>
@@ -147,10 +147,13 @@ e.preventDefault();
 						<i class="fas fa-shopping-cart nav__cart" style="transform: scale(1.3);"></i>
 					</a>
 				</div>
-				<?php if (isset($_SESSION['tendangnhap'])) {?>
+				<?php 
+				$tendangnhap = Session::get('tendangnhap');
+				$phanquyen = Session::get('phanquyen');
+				if (isset($tendangnhap)) {?>
 					<ul>
-						<?php if (isset($_SESSION['phanquyen']) && ($_SESSION['phanquyen'] == 0 || $_SESSION['phanquyen'] == 2)) {?><a href="{{asset('public/frontend/admin/admin.php')}}"><li>Quay về trang admin </li></a><?php }?>
-						<a href="{{URL::to('/thongtincanhan')}}"><li><i class="fas fa-user"></i> <?php echo $_SESSION['tendangnhap'] ?></li></a>
+						<?php if (isset($phanquyen) && ($phanquyen == 0 || $phanquyen == 2)) {?><a href="{{asset('public/frontend/admin/admin.php')}}"><li>Quay về trang admin </li></a><?php }?>
+						<a href="{{URL::to('/thongtincanhan')}}"><li><i class="fas fa-user"></i> <?php echo $tendangnhap ?></li></a>
 						<a href="{{URL::to('/logout')}}"><li> Đăng xuất</li></a>
 					</ul>
 				<?php } else {?>
@@ -169,6 +172,15 @@ e.preventDefault();
             @yield('home')
 			@yield('login')
 			@yield('register')
+			@yield('news')
+			@yield('newsDetail')
+			@yield('support')
+			@yield('spDetail')
+			@yield('product')
+			@yield('productDetail')
+			@yield('profile')
+			@yield('transactionHistory')
+			@yield('changeProfile')
 		</div><!-- End .center-content -->
 	</div><!-- End .main-content -->
 
