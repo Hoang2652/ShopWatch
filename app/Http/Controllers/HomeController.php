@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
+use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
 use DB;
+session_start();
 
 class HomeController extends Controller
 {
@@ -48,15 +52,32 @@ class HomeController extends Controller
         $tendangnhap = $request->tendangnhap;
         $matkhau = MD5($request->matkhau);
 
-        $result = DB::table('nguoidung')->where('tendangnhap',$tendangnhap)->orWhere('email',$tendangnhap)->where('matkhau',$matkhau)->first();
-
-        echo "kết quả:";
-        echo '<pre>';
-        print_r($result);
-        echo '</pre>';
+        $result = DB::table('nguoidung')
+                        ->where('tendangnhap',$tendangnhap)
+                        ->orWhere('email',$tendangnhap)
+                        ->where('matkhau',$matkhau)
+                        ->first();
+        if($result && ($result->phanquyen == 0 || $result->phanquyen == 2)){
+            Session::put('phanquyen', $result->phanquyen);
+            Session::put('admin_name', $result->tennguoidung);
+            Session::put('admin_id', $result->idnguoidung);
+            return Redirect::to('/admin');
+        }
+        else if($result && $result->phanquyen == 1){
+            Session::put('phanquyen', $result->phanquyen);
+            Session::put('idnguoidung', $result->idnguoidung);
+            Session::put('tennguoidung', $result->tennguoidung);
+            return Redirect::to('/');
+        }
+        else
+            return Redirect::to('/login');
     }
 
     public function logout(){
-        
+        Session::put('admin_name', null);  
+        Session::put('admin_id', null);  
+        Session::put('idnguoidung', null);  
+        Session::put('tennguoidung', null);  
+        return Redirect::to('/');
     }
 }
