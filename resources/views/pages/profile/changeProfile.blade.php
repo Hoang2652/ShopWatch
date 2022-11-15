@@ -3,42 +3,61 @@
 
 
 @foreach ($changeProfile as $row => $change)
-<form action="index.php?content=doithongtincanhan" method="post" name="frm" style="width: fit-content; margin: auto; margin-top: 4rem">
+<form action="{{ URL::to('/thongtincanhan/change-profile') }}" method="post" name="frm" style="width: fit-content; margin: auto; margin-top: 4rem">
+	{{ csrf_field() }}
 	<div class="dangky">
 		<h3 style="text-align: center; padding-bottom: 15px;">Cập nhật thông tin tài khoản</h3>
 		<div class="center-align">
 			<div class="form-row">
                 <div class="col-md-6 mb-3">
 					<label for="tennguoidung">Họ và tên</label>
-					<input class="form-control" type="text" name="tennguoidung" size="40" value="{{ $change->tennguoidung }}" onclick="document.getElementById('canhbaotennguoidung').innerHTML=''"><div class='canhbao' id='canhbaotennguoidung'></div>
+					<input class="form-control @error('tennguoidung') is-invalid @enderror" type="text" name="tennguoidung" size="40" value="{{ $change->tennguoidung }}">
+					@error('tennguoidung')
+						<span class='invalid-feedback'>{{ $message }}</span>
+					@enderror
 				</div>
                 <div class="col-md-6 mb-3">
 					<label for="exampleInputEmail1">Điện thoại</label>
-					<input class="form-control" type="text" name="dienthoai" size="40" value="{{ $change->dienthoai }}" onclick="document.getElementById('canhbaodienthoai').innerHTML=''"><div class='canhbao' id='canhbaodienthoai'></div>
+					<input class="form-control @error('dienthoai') is-invalid @enderror" type="text" name="dienthoai" size="40" value="{{ $change->dienthoai }}">
+					@error('dienthoai')
+						<span class='invalid-feedback'>{{ $message }}</span>
+					@enderror
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="col-md-6 mb-2">
 					<label for="exampleInputEmail1">Email</label>
-					<input class="form-control" type="text" name="email" size="40" value="{{ $change->email }}" onclick="document.getElementById('canhbaoemail').innerHTML=''"><div class='canhbao' id='canhbaoemail'></div>
+					<input class="form-control @error('email') is-invalid @enderror" type="text" name="email" size="40" value="{{ $change->email }}">
+					@error('email')
+						<span class='invalid-feedback'>{{ $message }}</span>
+					@enderror
 				</div>
 				<div class="col-md-6 mb-2">
 					<label for="exampleInputEmail1">Địa chỉ</label>
-					<input class="form-control" value="{{ $change->diachi }}" type="text" name="diachi" size="40">
+					<input class="form-control @error('diachi') is-invalid @enderror" value="{{ $change->diachi }}" type="text" name="diachi" size="40">
+					@error('diachi')
+						<span class='invalid-feedback'>{{ $message }}</span>
+					@enderror
 				</div>
 			</div>
             <div class="form-row">
 				<div class="col-md-6 mb-3">
 					<label for="ngaysinh">Ngày sinh</label>
-					<input class="form-control" value="{{ $change->ngaysinh }}" type="date" name="ngaysinh">
+					<input class="form-control @error('date') is-invalid @enderror" value="{{ $change->ngaysinh }}" type="date" name="ngaysinh">
+					@error('date')
+						<span class='invalid-feedback'>{{ $message }}</span>
+					@enderror
 				</div>
 				<div class="col-md-6 mb-3" style="display: grid">
 					<label for="gioitinh">Giới tính</label>
-							<select value="{{ $change->gioitinh }}" class="custom-select mr-sm-2" style="width: 190px;" name="gioitinh">
-								<option value="">-Chọn giới tính-</option>
-								<option value="nam">Nam</option>
-								<option value="nu">Nữ</option>
-							</select>
+					<select value="{{ $change->gioitinh }}" class="custom-select mr-sm-2 @error('gioitinh') is-invalid @enderror" style="width: 190px;" name="gioitinh">
+						<option value="">-Chọn giới tính-</option>
+						<option value="nam">Nam</option>
+						<option value="nu">Nữ</option>
+					</select>
+					@error('gioitinh')
+						<span class='invalid-feedback'>{{ $message }}</span>
+					@enderror
 				</div>
 			</div>
 			<div style="margin: auto; width: fit-content; margin-top: 20px;">

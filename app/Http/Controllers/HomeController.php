@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Session;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\RegisterRequest;
 use DB;
+use App\Models\Nguoidung;
 session_start();
 
 class HomeController extends Controller
@@ -79,5 +81,27 @@ class HomeController extends Controller
         Session::put('idnguoidung', null);  
         Session::put('tennguoidung', null);  
         return Redirect::to('/');
+    }
+
+    public function registerAccount(RegisterRequest $request){
+        $data = new Nguoidung;
+        $data->tennguoidung = $request->tennguoidung;
+        $data->tendangnhap = $request->tendangnhap;
+        $data->matkhau = MD5($request->matkhau);
+        $data->ngaysinh = $request->ngaysinh;
+        $data->email = $request->email;
+        $data->dienthoai = $request->dienthoai;
+        $data->diachi = $request->diachi;
+        $data->gioitinh = $request->gioitinh;
+        $data->phanquyen = 1;
+        $data->trangthai = 1;
+
+        if($data->save()){
+            toastr()->success("Đăng kí thành công, bây giờ bạn có thể mua hàng.");
+            return Redirect::to('/login');
+        }
+        else{
+            toastr()->error("đăng kí thất bại");
+        }
     }
 }

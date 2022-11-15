@@ -143,7 +143,7 @@ e.preventDefault();
 
 			<div class="nav__acc">
 				<div >
-					<a href="{{asset('public/frontend/index.php?content=cart')}}">
+					<a href="{{URL::to('/giohang')}}">
 						<i class="fas fa-shopping-cart nav__cart" style="transform: scale(1.3);"></i>
 					</a>
 				</div>
@@ -187,6 +187,9 @@ e.preventDefault();
 			@yield('profile')
 			@yield('transactionHistory')
 			@yield('changeProfile')
+			@yield('cart')
+			@yield('checkout')
+			@yield('changePassword')
 		</div><!-- End .center-content -->
 	</div><!-- End .main-content -->
 
