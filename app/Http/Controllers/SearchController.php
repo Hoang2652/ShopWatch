@@ -104,9 +104,17 @@ class SearchController extends Controller
     public function search(Request $request){
         $filterBrand = $this->getFilterWatch();
         $filterAccessory = $this->getFilterAccessory();
-        $newsByPage = Sanpham::where('gia', '>=', $request->minprice)
-                        ->where('gia', '<', $request->maxprice)
-                        ->paginate($this->ProductPerPage);   
+        if(isset($request->minprice)){
+            $newsByPage = Sanpham::where('gia', '>=', $request->minprice)
+                                    ->where('gia', '<', $request->maxprice)
+                                    ->paginate($this->ProductPerPage); 
+        }
+        else{
+            $newsByPage = Sanpham::where('idsanpham','like','%'.$request->search.'%')
+                                    ->orwhere('tensanpham','like','%'.$request->search.'%')
+                                    ->where('trangthai', 1)
+                                    ->paginate($this->ProductPerPage); 
+        } 
         $danhgia = DB::table('danhgia') 
                         ->get();    
         return view('pages.product.productSearch')

@@ -34,7 +34,7 @@ class HomeController extends Controller
         })->limit(8)->get();
 
         //trả về trang home cùng đống dữ liệu
-        return view('pages.home')->with('headPageProduct',$headPageProduct)
+        return view('pages.home.home')->with('headPageProduct',$headPageProduct)
                                  ->with('bestSaleProuctList',$bestSaleProuctList)
                                  ->with('middlePageProduct',$middlePageProduct)
                                  ->with('NewestProductList',$NewestProductList)
@@ -43,11 +43,11 @@ class HomeController extends Controller
     }
 
     public function loginPage(){
-        return view('pages.login');
+        return view('pages.login.login');
     }
 
     public function registerPage(){
-        return view('pages.register');
+        return view('pages.login.register');
     }
 
     public function checkLogin(Request $request){

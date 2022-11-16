@@ -17,11 +17,14 @@
                         <span class="home__price">{{ number_format($product->gia) }} VNĐ</span>
 
                         <div class="home__btns">
-                            <a href="index.php?content=chitietsp&idsanpham={{$product->idsanpham}}" class="button button--gray button--small">
+                            <a href='/phonghap/sanpham/idsanpham={{ $product->idsanpham }}' class="button button--gray button--small">
                                 Chi tiết
                             </a>
-                            <form action="index.php?content=cart&action=add&idsanpham={{$product->idsanpham}}" class="button" method="post">
+                            <form action="{{ URL::to('/save-cart') }}" class="button" method="post">
+                                {{ csrf_field() }} 	
                                 <button class="home__button" type="submit" name="chovaogio">Thêm giỏ hàng</button>
+                                <input name="productID_hidden" value="{{ $product->idsanpham }}" type="hidden">
+							    <input name="qty" value="1" min="1" type="hidden">
                             </form>
                         </div>
                     @endforeach
@@ -36,7 +39,7 @@
                 <div class="featured__container grid">
                     @foreach ($bestSaleProuctList as $row => $product)
                     <article class="featured__card">
-                        <a href="index.php?content=chitietsp&idsanpham={{$product->idsanpham}}">
+                        <a href="/phonghap/sanpham/idsanpham={{ $product->idsanpham }}">
                             <span class="featured__tag">Sale</span>
                 
                             <img src="{{asset('public/uploads/products/'.$product->hinhanh)}}" alt="" class="featured__img">
@@ -69,7 +72,7 @@
                             {{$product->mota}}
                         </p>
     
-                        <a href="index.php?content=chitietsp&idsanpham={{$product->idsanpham}}" class="button button--small">Xem chi tiết</a>
+                        <a href="/phonghap/sanpham/idsanpham={{ $product->idsanpham }}" class="button button--small">Xem chi tiết</a>
                     </div>
 
                     <div class="story__images">
@@ -88,7 +91,7 @@
                 <div class="products__container grid">
                     @foreach ($NewestProductList as $row => $product)
                     <article class="products__card">
-                        <a href="index.php?content=chitietsp&idsanpham={{$product->idsanpham}}">
+                        <a href="/phonghap/sanpham/idsanpham={{ $product->idsanpham }}">
                             <img src="{{asset('public/uploads/products/'.$product->hinhanh)}}" alt="" class="products__img">
 
                             <h3 class="products__title">{{$product->tensanpham}}</h3>
@@ -106,7 +109,7 @@
                         <div class="swiper">
                             <div class="swiper-wrapper">
                                 @foreach ($NewsList as $row => $news)
-                                <a href="index.php?content=chitiettintuc&idtintuc={{$news->idtintuc}}">
+                                <a href="/phonghap/tintuc/id={{$news->idtintuc}}">
                                     <div class="swiper-slide">
                                         <div class="testimonial__quote">
                                             <i class='bx bxs-quote-alt-left' ></i><h5>   {{$news->tieude}}</h5>
@@ -130,7 +133,7 @@
                     </div>
                     <div class="testimonial__images">
                         <div class="testimonial__square"></div>
-                        <img src="{{asset('img/assets/testimonial.png')}}" alt="" class="testimonial__img">
+                        <img src="{{asset('public/uploads/assets/testimonial.png')}}" alt="" class="testimonial__img">
                     </div>
                 </div>
             </section>
@@ -145,7 +148,7 @@
                         <div class="swiper-wrapper-1">
                             @foreach ($recommendedProductList as $row => $product)
                             <article class="new__card swiper-slide">
-                                <a href="index.php?content=chitietsp&idsanpham={{$product->idsanpham}}">
+                                <a href="/phonghap/sanpham/idsanpham={{ $product->idsanpham }}">
                                     <span class="new__tag">Recommended</span>
                         
                                     <img src="{{asset('public/uploads/products/'.$product->hinhanh)}}" alt="" class="new__img">
