@@ -12,6 +12,19 @@ class NewsController extends Controller
 {
     protected $NewsPerPage = 15;
 
+    public function showHomeNews(){
+        $newsByPage = $this->getNewsByPage();
+        return view('pages.news.news')->with('newsByPage',$newsByPage);
+    }
+
+    
+    public function getNewsDetail($id){
+        $newsDetail = DB::table('tintuc')->where('idtintuc',$id)->get();
+        return view('pages.news.newsDetail')->with('newsDetail',$newsDetail);
+    }
+
+    // Admin functions
+
     public function index(){
         return view('admin.news.index')->with('NewsNums',$this->getNewsNums())->with('News',$this->getNewsByPage());
     }
@@ -19,6 +32,7 @@ class NewsController extends Controller
     public function addNewsPage(){
         return view('admin.news.add');
     }
+
 
     public function addNews(NewsRequest $request){
         $tintuc = new tintuc;

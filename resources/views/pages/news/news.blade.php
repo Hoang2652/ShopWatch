@@ -8,7 +8,7 @@
 
 <div id="tintuc">
 <div class="img__tintuc">
-	<img src="{{asset('public/uploads/tintuc/Biatintuc.png')}}" alt="">
+	<img src="{{asset('public/uploads/news/Biatintuc.png')}}" alt="">
 </div>
 	<div class="container__tintuc">
 		
@@ -16,7 +16,7 @@
 		<div class="tintuccon">
 			<div class="imgtintuc">
 				<a href="{{ URL::to('/tintuc/id='.$news->idtintuc) }}">
-					<img src="{{asset('public/uploads/tintuc/'.$news->hinhanh)}}" width="450px" height="300px;">
+					<img src="{{asset('public/uploads/news/'.$news->hinhanh)}}" width="450px" height="300px;">
 				</a>
 			</div>
 			<div class="tieudetintuc">

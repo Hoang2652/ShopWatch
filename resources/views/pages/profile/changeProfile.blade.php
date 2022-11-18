@@ -50,10 +50,11 @@
 				</div>
 				<div class="col-md-6 mb-3" style="display: grid">
 					<label for="gioitinh">Giới tính</label>
-					<select value="{{ $change->gioitinh }}" class="custom-select mr-sm-2 @error('gioitinh') is-invalid @enderror" style="width: 190px;" name="gioitinh">
+					<select class="custom-select mr-sm-2 @error('gioitinh') is-invalid @enderror" style="width: 190px;" name="gioitinh">
 						<option value="">-Chọn giới tính-</option>
-						<option value="nam">Nam</option>
-						<option value="nu">Nữ</option>
+						<option value="nam" @if($change->gioitinh == "nam") selected @endif>Nam</option>
+						<option value="nu" @if($change->gioitinh == "nu") selected @endif>Nữ</option>
+						<option value="bede" @if($change->gioitinh == "bede") selected @endif>khác...</option>
 					</select>
 					@error('gioitinh')
 						<span class='invalid-feedback'>{{ $message }}</span>

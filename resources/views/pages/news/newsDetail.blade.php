@@ -5,7 +5,7 @@
 <div class="chitiettintuc">
 	<h3>{{$newsDetail->tieude}}</h3>
 	<div class="noidungchitiettintuc">
-		<img src="{{asset('public/uploads/tintuc/'.$newsDetail->hinhanh)}}" width="200" height="200">
+		<img src="{{asset('public/uploads/news/'.$newsDetail->hinhanh)}}" width="200" height="200">
 		<p>{{$newsDetail->noidungngan}}</p>
 	</div>
 	<div class="noidungfull">
