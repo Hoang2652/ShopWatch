@@ -59,13 +59,13 @@ class HomeController extends Controller
                         ->orWhere('email',$tendangnhap)
                         ->where('matkhau',$matkhau)
                         ->first();
-        if($result && ($result->phanquyen == 0 || $result->phanquyen == 2)){
+        if($result && ($result->phanquyen == 'Quản trị viên' || $result->phanquyen == 'Nhân viên')){
             Session::put('phanquyen', $result->phanquyen);
             Session::put('admin_name', $result->tennguoidung);
             Session::put('admin_id', $result->idnguoidung);
             return Redirect::to('/admin');
         }
-        else if($result && $result->phanquyen == 1){
+        else if($result && $result->phanquyen == 'Khách hàng'){
             Session::put('phanquyen', $result->phanquyen);
             Session::put('idnguoidung', $result->idnguoidung);
             Session::put('tennguoidung', $result->tennguoidung);
@@ -78,8 +78,9 @@ class HomeController extends Controller
     public function logout(){
         Session::put('admin_name', null);  
         Session::put('admin_id', null);  
+        Session::put('phanquyen', null);  
         Session::put('idnguoidung', null);  
-        Session::put('tennguoidung', null);  
+        Session::put('tennguoidung', null);
         return Redirect::to('/');
     }
 
