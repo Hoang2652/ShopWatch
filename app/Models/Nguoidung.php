@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string  $remember_token
  * @property Date    $ngaysinh
  * @property int     $created_at
- * @property int     $phanquyen
+ * @property string     $phanquyen
  * @property int     $updated_at
  * @property boolean $trangthai
  */
@@ -59,7 +59,7 @@ class Nguoidung extends Model
      * @var array
      */
     protected $casts = [
-        'tennguoidung' => 'string', 'tendangnhap' => 'string', 'matkhau' => 'string', 'ngaysinh' => 'date', 'gioitinh' => 'string', 'email' => 'string', 'dienthoai' => 'string', 'diachi' => 'string', 'created_at' => 'timestamp', 'phanquyen' => 'int', 'trangthai' => 'boolean', 'remember_token' => 'string', 'updated_at' => 'timestamp'
+        'tennguoidung' => 'string', 'tendangnhap' => 'string', 'matkhau' => 'string', 'ngaysinh' => 'date', 'gioitinh' => 'string', 'email' => 'string', 'dienthoai' => 'string', 'diachi' => 'string', 'created_at' => 'timestamp', 'phanquyen' => 'string', 'trangthai' => 'boolean', 'remember_token' => 'string', 'updated_at' => 'timestamp'
     ];
 
     /**

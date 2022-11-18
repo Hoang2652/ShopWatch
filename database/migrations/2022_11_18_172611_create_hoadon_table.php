@@ -21,8 +21,8 @@ class CreateHoadonTable extends Migration
             $table->string('dienthoai', 11);
             $table->string('email');
             $table->timestamps();
-            $table->integer('phuongthucthanhtoan');
-            $table->integer('trangthai');
+            $table->string('phuongthucthanhtoan', 45);
+            $table->string('trangthai', 45);
         });
     }
 

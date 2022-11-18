@@ -36,24 +36,18 @@
 		<tbody id="row-sanpham">
 			@foreach($Category as $row)
 			<tr>
-				<td class="masp_hienthi_sp">
-					 {{ $row->iddanhmuc }}
-				</td>
-				<td class="tensp_hienthi_sp">
-					 {{ $row->tendanhmuc }}
-				 </td>
+				<td class="masp_hienthi_sp"> {{ $row->iddanhmuc }} </td>
+				<td class="tensp_hienthi_sp"> {{ $row->tendanhmuc }} </td>
 				 <td class="masp_hienthi_sp">
 					@if($row->loaidanhmuc == "LSP")
-					<p>Loại sản phẩm</p>
+						<p>Loại sản phẩm</p>
 					@elseif($row->loaidanhmuc == "TH")
-					<p>thương hiệu</p>
+						<p>thương hiệu</p>
 					@else
-					<p>chưa rõ</p>
+						<p>chưa rõ</p>
 					@endif
 				 </td>
-				 <td class="masp_hienthi_sp">
-					 {{ Str::limit($row->mota,100) }}
-				 </td>
+				 <td class="masp_hienthi_sp"> {{ Str::limit($row->mota,100) }} </td>
 				 <td class="active_hienthi_sp">
 					 <a href="{{URL::to('admin/category/update/id='.$row->iddanhmuc)}}"><i class="fas fa-tools" style="transform: scale(1.5); color: #007bff;"></i></a>
 					 <a href="{{URL::to('admin/category/delete/id='.$row->iddanhmuc.'/execute')}}"><button><i class="fas fa-trash-alt" style="transform: scale(1.5); color: red;"></i></button></a>

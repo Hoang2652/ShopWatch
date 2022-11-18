@@ -28,7 +28,7 @@ class CheckoutRequest extends FormRequest
             'diachi' => 'required|min:6',
             'dienthoai' => 'min:10|max:11',
             'email' => 'required|email',
-            'phuongthuc' => 'in:2,3'
+            'phuongthuc' => 'in:Thanh toán khi giao hàng,Thanh toán online'
         ];
     }
 

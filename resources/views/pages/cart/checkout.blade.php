@@ -1,6 +1,5 @@
 @extends('masterlayout')
 @section('checkout')
-
 <div class="thongtinkhachhang-wrap">
     <div class="thongtinkhachhang">
         @foreach ($person_info as $ps)
@@ -41,8 +40,8 @@
                     <label for="exampleInputEmail1">Phương thức</label>
                         <select class="custom-select @error('phuongthuc') is-invalid @enderror" name="phuongthuc" style="height: 35px;">
                             <option value="">Chọn phương thức thanh toán</option>
-                            <option value="2">Chuyển khoản</option>
-                            <option value="3">Tiền mặt</option>
+                            <option value="Thanh toán online">Thanh toán online</option>
+                            <option value="Thanh toán khi giao hàng">Thanh toán khi giao hàng</option>
                         </select>
                         @error('phuongthuc')
 					        <span class='invalid-feedback'>{{ $message }}</span>

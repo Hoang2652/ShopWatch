@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/admin/product/live-search', 'ProductController@productLiveSreach')->name('live-sreach');
+Route::get('/admin/bill/live-search', 'BillController@getBillbyFilters')->name('bill-live-sreach');
+// Route::get('/admin/product/live-search?query={query}', 'ProductController@productLiveSreach')->name('live-sreach');

@@ -1,3 +1,5 @@
+@extends('admin_masterlayout')
+@section('iebill')
 <link rel="stylesheet" href="{{ asset('public/backend/css/hienthi_sp.css') }}" /> 
 <script type="text/javascript" src="{{ asset('public/backend/js/checkbox.js')}}"></script>
 <?php
@@ -75,3 +77,4 @@
         </div>
     </form>
 </div>
+@endsection

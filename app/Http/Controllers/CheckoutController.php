@@ -9,6 +9,9 @@ use DB;
 use App\Http\Requests;
 use App\Http\Requests\CheckoutRequest;
 use App\Models\Hoadon;
+use App\Models\Chitiethoadon;
+use App\Models\Sanpham;
+use Cart;
 
 use Session;
 session_start();
@@ -25,20 +28,63 @@ class CheckoutController extends Controller
     }
     
     public function check_out(CheckoutRequest $request){
-        $hoadon = new Hoadon;
-        $hoadon->idnguoidung = Session::get('idnguoidung');
-        $hoadon->hoten = $request->hoten;
-        $hoadon->diachi = $request->diachi;
-        $hoadon->dienthoai = $request->dienthoai;
-        $hoadon->email = $request->email;
-        $hoadon->phuongthucthanhtoan = $request->phuongthuc;
-        $hoadon->trangthai = 1;
-        if($hoadon->save()){
+        $content = Cart::content();
+        DB::beginTransaction();
+        try {
+            $hoadon = new Hoadon;
+            $hoadon->idnguoidung = Session::get('idnguoidung');
+            $hoadon->hoten = $request->hoten;
+            $hoadon->diachi = $request->diachi;
+            $hoadon->dienthoai = $request->dienthoai;
+            $hoadon->email = $request->email;
+            $hoadon->phuongthucthanhtoan = $request->phuongthuc;
+            $hoadon->trangthai = 1;
+            $hoadon->save();
+
+            foreach($content as $row){
+
+                // Thao tác thêm chi tiêt hóa đơn
+                $chitiethoadon = new Chitiethoadon;
+                $chitiethoadon->idhoadon = $hoadon->idhoadon;
+                $chitiethoadon->idsanpham = $row->id;
+                $chitiethoadon->tensanpham = $row->name;
+                $chitiethoadon->soluong = $row->qty;
+
+                if($row->options->sale != 0){
+                    $chitiethoadon->giamgia = $row->options->sale;
+                    $chitiethoadon->gia = $row->price * (100 - $row->giamgia) / 100;
+                }
+                else {
+                    $chitiethoadon->giamgia = null;
+                    $chitiethoadon->gia = $row->price;
+                }
+
+                if($row->options->gift != 0)
+                    $chitiethoadon->quatang = $row->options->gift;
+                else
+                    $chitiethoadon->quatang = null;
+                $chitiethoadon->save();
+
+                // Thao tác cập nhật số lượng sản phẩm / khuyến mãi
+                $sanpham = Sanpham::find($row->id);
+                $sanpham->soluong -= $row->qty;
+
+                if($row->options->sale != 0 || $row->options->sale != 0){
+                    $sanpham->soluongkhuyenmai -= $row->qty;
+                } 
+
+                $sanpham->save();
+            }
+
+            DB::commit();
+            Cart::destroy();
             toastr()->success("Thanh toán thành công, vui lòng chờ đơn hàng xử lí.");
             return Redirect::to('/sanpham/dongho');
-        }
-        else{
-            toastr()->error("thanh toán thất bại");
+        } catch (\Exception $e) {
+            DB::rollback();
+            toastr()->error('Ôi không có sự cố khi thanh toán, vui lòng thử lại sau !');
+            return redirect('/sanpham/dongho');
+            // something went wrong
         }
     }
 }

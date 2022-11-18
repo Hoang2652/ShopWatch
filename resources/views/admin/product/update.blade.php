@@ -1,7 +1,9 @@
 ﻿@extends('admin_masterlayout')
 @section('updateproduct')
 <link rel="stylesheet" href="{{ asset('public/backend/css/hienthi_sp.css') }}" /> 
-<form class="formthemsanpham" action="update_sanpham.php?idsanpham={{ $productDetail->idsanpham }}" method="post" name="frm" onsubmit="" enctype="multipart/form-data">
+<link rel="stylesheet" href="{{ asset('public/backend/css/them_sanpham.css') }}" />
+<form class="formthemsanpham" action="{{ URL::to('/admin/product/update/id='.$productDetail->idsanpham).'/execute' }}" method="post" name="frm" onsubmit="" enctype="multipart/form-data">
+	{{ csrf_field() }}
 	<div class="add__sp">
 		<div class="tieude_themsp">
 			<div colspan=2>Cập nhật thông tin Sản Phẩm </div>
@@ -9,22 +11,31 @@
 
 		<div class="form-row mb-3">
 			<div class="col-md-6">
-				<label for="tensanpham">Tên SP</label>
+				<label for="tensanpham">Tên sản phẩm:</label>
 				<input class="form-control" type="text" name="tensanpham" value="{{ $productDetail->tensanpham }}"/>
+				@error('tensanpham')
+					<span class='text-danger'>{{ $message }}</span>
+				@enderror
 			</div>
 			<div class="col-md-6">
 				<label for="iddanhmuc" style="display: grid">Thương Hiệu</label>
 				<select class="custom-select mr-sm-2" style="width: 190px;" name="iddanhmuc">
-					@foreach (collect($categories)->where('loaisanpham', 'TH')->all() as $categories)
-						<option value="{{ $categories->iddanhmuc }}" @if( $categories->iddanhmuc == $productDetail->iddanhmuc) selected @endif>{{ $categories->tendanhmuc }}</option>
+					@foreach ($productBrand as $cate2)
+						<option value="{{ $cate2->iddanhmuc }}" @if( $cate2->iddanhmuc == $productDetail->iddanhmuc) selected @endif>{{ $cate2->tendanhmuc }}</option>
 					@endforeach
 				</select>
+				@error('iddanhmuc')
+					<span class='text-danger'>{{ $message }}</span>
+				@enderror
 			</div>
 		</div>
 		<div class="form-row mb-3">
 			<div class="col-md-6">
 				<label for="soluong">Số lượng mở bán</label>
 				<input class="form-control col-sm-5" type="text" name="soluong" value="{{ $productDetail->soluong }}" />
+				@error('soluong')
+					<span class='text-danger'>{{ $message }}</span>
+				@enderror
 			</div>
 			<div class="col-md-6">
 				<label for="soluong">Đã bán</label>
@@ -33,6 +44,9 @@
 			<div class="col-md-6">
 				<label for="gia" >Giá</label>
 				<input class="form-control col-sm-5" type="text" name="gia" value="{{ $productDetail->gia }}"/>
+				@error('gia')
+				<span class='text-danger'>{{ $message }}</span>
+			@enderror
 			</div>
 			
 		</div>
@@ -44,31 +58,40 @@
 				<br />
 				<br />	
 				<input class="form-control-file" type="file" name="hinhanh" value="{{ $productDetail->hinhanh }}"/>
+				@error('hinhanh')
+				<span class='text-danger'>{{ $message }}</span>
+				@enderror
 			</div>
 		</div>
 		<div class='form-row mb-3'>
             <div class='col-md-6'>
                 <label for='loaisanpham'>Loại sản phẩm</label>	
-				<br />		
-                <select class='custom-select mr-sm-2' style='width: 190px;' name='loaisanpham' required>
-					@foreach (collect($categories)->where('loaisanpham', 'LSP')->all() as $categories)
-					<option value="{{ $categories->iddanhmuc }}" @if( $categories->iddanhmuc == $productDetail->iddanhmuc) selected @endif>{{ $categories->tendanhmuc }}</option>
+				<br />
+                <select class='custom-select mr-sm-2' style='width: 190px;' name='loaisanpham' >
+					@foreach ($productType as $cate)
+					<option value="{{ $cate->iddanhmuc }}" @if( $cate->iddanhmuc == $productDetail->loaisanpham) selected @endif>{{ $cate->tendanhmuc }}</option>
 					@endforeach
          	 	</select>
+				  @error('loaisanpham')
+				  <span class='text-danger'>{{ $message }}</span>
+				  @enderror
             </div>
             <div class='col-md-6'>
                 <label for='xuatxu'>Xuất xứ</label>			
-                <input class='form-control' type='text' name='xuatxu' value="{{ $productDetail->xuatxu }}" required/>
+                <input class='form-control' type='text' name='xuatxu' value="{{ $productDetail->xuatxu }}" />
             </div>
         </div>
         <div class='form-row mb-3'>
             <div class='col-md-6'>
                 <label for='mota'>Mô tả</label>			
-                <input class='form-control' type='text' name='mota' value="{{ $productDetail->mota }}" required>
+                <input class='form-control' type='text' name='mota' value="{!! $productDetail->mota !!}" >
+				@error('mota')
+					<span class='text-danger'>{{ $message }}</span>
+				@enderror
             </div>
             <div class='col-md-6'>
                 <label for='baohanh'>Bảo hành (tháng)</label>			
-                <input class='form-control' type='text' name='baohanh' value="{{ $productDetail->baohanh }}" required/>
+                <input class='form-control' type='text' name='baohanh' value="{{ $productDetail->baohanh }}" />
             </div>
         </div>
 		<div class="mb-3">
@@ -109,16 +132,15 @@
 			<h4>Đánh giá tiêu biểu</h4>	
 			@foreach ($ratings as $row)
 			<div id="danhsachdanhgia" class="danhsachdanhgia">
-				@for($i = 1; $i <= 5; $i++)
-					@if($i <= $row->sodiem)
-						<i class='fa-solid fa-star' style='color:hsl(47, 98%, 67%)'></i>
-					@else
-						<i class='fa-solid fa-star' style='color: hsl(47, 2%, 71%);'></i>
-					@endif
+				@for($i = 1; $i <= $row->sodiem; $i++)
+					<i class='fa-solid fa-star' style='color:hsl(47, 98%, 67%)'></i>
+				@endfor
+				@for($i = 1; $i <= 5-$row->sodiem; $i++)
+					<i class='fa-solid fa-star' style='color: hsl(47, 2%, 71%);'></i>
 				@endfor
 					<div class='binhluan'>
 						<div class='fas fa-trash-alt binhluan-xoadanhgia cl_red' onclick='checkdeldanhgia({{ $row->sodiem }})'></div>
-						<div class='binhluan-tengnuoidung'>{{ $row->tennguoidung}} - {{ date_format(date_create($row -> created_at),"d-m-Y") }}</div>
+						<div class='binhluan-tengnuoidung'>{{ $row->tennguoidung}} - {{ date("d-m-Y",$row -> updated_at)  }}</div>
 						<div class='binhluan-sodiem'>{{ $row->sodiem }}</div>
 						<div class='binhluan-chitiet'>{{ $row->binhluan }}</div>
 					</div>
@@ -132,4 +154,8 @@
 	uiColor: '#d1d1d1'
 });
 </script>
+{{-- @php
+dd($ratings->all());
+@endphp --}}
 @endsection
+{{-- {{ date_format(date_create_from_format($row -> updated_at),"d-m-Y") }} --}}

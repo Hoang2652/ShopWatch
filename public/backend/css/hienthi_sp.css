@@ -1,3 +1,10 @@
+/*--------------- bootstrap css hater ----------*/
+
+.margin-bottom-disabled {
+    margin-bottom: 0;
+}
+
+
 /*--------------- css live sreach ----------*/
 
 #livesreach-themsanphamtonkho {
@@ -242,3 +249,51 @@ a button.so {
     color: white;
     text-decoration: none;
 }
+
+
+/* - CSS bill detail -  */
+
+.bill-info {
+    float: left;
+    width: 400px;
+}
+
+.bill-detail {
+    float: left;
+    width: 720px;
+    height: 500px;
+    overflow: auto;
+}
+
+.bill-detail-layout {
+    margin: auto;
+    overflow: auto;
+    width: 1210px;
+    border-radius: 10px;
+    height: 675px;
+    border: 1px solid hsl(0, 0%, 80%);
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgb(35 0 77 / 20%);
+}
+
+.bill-detail-layout>* {
+    margin: 10px;
+}
+
+.bill-detail-summary {
+    float: right;
+}
+
+
+/* CSS for support manage */
+
+.custom-layout {
+    width: 1240px;
+}
+
+.custom-list-scroll {
+    overflow: auto;
+    max-height: 400px;
+}
+
+.custom-table-grid {}

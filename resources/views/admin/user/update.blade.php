@@ -1,55 +1,93 @@
-﻿<link rel="stylesheet" href="css/them_sanpham.css">
-<?php
-		$idnguoidung=$_GET['idnguoidung'];
-        $sql="select * from nguoidung where idnguoidung='".$_GET['idnguoidung']."'";
-         $rows=mysqli_query($link,$sql);
-         $row=mysqli_fetch_array($rows);
-?>
-<form action="update_nguoidung.php?idnguoidung=<?php echo $idnguoidung;?>" method="post" name="frm" onsubmit="return kiemtra()" enctype="multipart/form-data" style="width: fit-content; margin: auto;">
+﻿@extends('admin_masterlayout')
+@section('updateuser')
+<link rel="stylesheet" href="{{ asset('public/backend/css/them_sanpham.css') }}" />
+<form action="{{ URL::to('/admin/user/update/id='.$userDetail->idnguoidung).'/execute' }}" method="post" name="frm" enctype="multipart/form-data" style="width: fit-content; margin: auto;">
+	{{ csrf_field() }}
 	<div class="dangky">
 		<div class="tabs">
 			<div style="text-align: center; font-weight: bold;">SỬA NGƯỜI DÙNG</div>
 		</div>
 		
-		<div class="form-group row">	
-			<label class="col-sm-2 col-form-label">Tên đăng nhập  </label>
-			<div class="col-sm-9"> 
-				<input class="form-control" type="text" name="tendangnhap" size="40" value="<?php echo $row['tendangnhap'] ?>"/>
+		<div class="form-row">			
+			<div class="col-md-6"> 
+				<label for="tendangnhap">Tên đăng nhập  </label>
+				<input class="form-control @error('tendangnhap') is-invalid @enderror" type="text" name="tendangnhap" size="40" value="{{ $userDetail->tendangnhap }}">
+				<div class='canhbao' id='canhbaotendangnhap'></div>
+				@error('tendangnhap')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
 			</div>
-			
-		</div>
-		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Tên người dùng</label>
-			<div class="col-sm-9">
-				<input class="form-control" type="text" name="tennguoidung" size="40" value="<?php echo $row['tennguoidung'] ?>" />
-			</div>
-		</div>
-		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Mật khẩu</label>
-			<div class="col-sm-9">
-				<input type="password" class="form-control" name="matkhau" size="40" value="<?php echo $row['matkhau'] ?>"/>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Email </label>
-			<div class="col-sm-9">
-				<input class="form-control" type="text" name="email" size="40" value="<?php echo $row['email'] ?>"/>
+			<div class="col-md-6">
+				<label for="tennguoidung">Tên người dùng</label>
+				<input class="form-control @error('tennguoidung') is-invalid @enderror" type="text" name="tennguoidung" size="40" value="{{ $userDetail->tennguoidung }}">
+				<div class='canhbao' id='canhbaotennguoidung'></div>
+				@error('tennguoidung')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
 			</div>
 		</div>
-		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Điện thoại </label>
-			<div class="col-sm-9">
-				<input class="form-control" type="text" name="dienthoai" size="40" value="<?php echo $row['dienthoai'] ?>"/>
+	
+		<div class="form-row">
+			<div class="col-md-6">
+				<label for="matkhau">Reset mật khẩu</label>
+				<input type="checkbox" class="form-control" name="resetmatkhau" size="40">
 			</div>
 		</div>
-		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Phân quyền  </label>
-			<div class="col-sm-9">
-            <select class="custom-select mr-sm-2" style="width: 190px;" name="phanquyen">
-					<option value="">-Chọn phân quyền-</option>
-				    <option value="2" <?php if($row['phanquyen']==2) echo 'selected="selected"';?>>Quản lý</option>
-			    	<option value="1" <?php if($row['phanquyen']==1) echo 'selected="selected"';?>>Người dùng</option>
-            </select>
+		<div class="form-row">
+			<div class="col-md-6">
+				<label for="ngaysinh">Ngày sinh </label>
+				<input class="form-control @error('ngaysinh') is-invalid @enderror" type="date" name="ngaysinh" value="{{ $userDetail->ngaysinh }}">
+				@error('ngaysinh')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
+			</div>
+			<div class="col-md-6">
+				<label for="diachi">Địa chỉ  </label>
+				<input class="form-control" type="text" name="diachi" value="{{ $userDetail->diachi }}">
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="col-md-6">
+				<label for="email">Email </label>
+				<input class="form-control @error('email') is-invalid @enderror" type="text" name="email" size="40" value="{{ $userDetail->email }}">
+				@error('email')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
+			</div>
+			<div class="col-md-6">
+				<label for="dienthoai">Điện thoại </label>
+				<input class="form-control @error('dienthoai') is-invalid @enderror" type="text" name="dienthoai" size="40" value="{{ $userDetail->dienthoai }}">
+				<div class='canhbao' id='canhbaodienthoai'></div>
+				@error('dienthoai')
+				<span class='invalid-feedback'>{{ $message }}</span>
+			@enderror
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="col-md-6">
+				<label for="gioitinh" style="display: grid">Giới tính </label>
+				<select class="custom-select mr-sm-2 @error('gioitinh') is-invalid @enderror" style="width: 190px;" name="gioitinh">
+					<option value="">-Chọn giới tính-</option>
+					<option value="nam" @if($userDetail->gioitinh == "nam") selected @endif>Nam</option>
+					<option value="nu" @if($userDetail->gioitinh == "nu") selected @endif>Nữ</option>
+					<option value="bede" @if($userDetail->gioitinh == "bede") selected @endif>khác...</option>
+				</select>
+				<div class='canhbao' id='canhbaogioitinh'></div>
+				@error('gioitinh')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
+			</div>
+			<div class="col-md-6">
+				<label for="phanquyen" style="display: grid">Phân quyền  </label>
+                <select class="custom-select mr-sm-2 @error('phanquyen') is-invalid @enderror" style="width: 190px;" name="phanquyen">
+						<option value="">-Chọn phân quyền-</option>
+					    <option value="2" @if($userDetail->phanquyen == 2) selected @endif>Quản lý</option>
+				    	<option value="1" @if($userDetail->phanquyen == 1) selected @endif>Người dùng</option>
+                </select>
+				@error('phanquyen')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
+				<div class='canhbao' id='canhbaophanquyen'></div>
             </div>
 		</div>
 		<div style="margin: auto; width: fit-content; margin-top: 2rem;">
@@ -58,89 +96,4 @@
 		</div>
 	</div>
 </form>
-
-<script language="javascript">
- 	function  kiemtra()
-	{
-	    if(frm.tennguoidung.value=="")
-		{
-			alert("Bạn chưa nhập tên. Vui lòng kiểm tra lại");
-			frm.tennguoidung.focus();
-			return false;	
-		}
-		if(frm.tennguoidung.value.length<6)
-		{
-			alert("Tên quá ngắn. Vui lòng điền đầy đủ tên");
-			frm.tennguoidung.focus();
-			return false;	
-		}
-		if(frm.tendangnhap.value=="")
-	 	{
-			alert("Bạn chưa nhập tên đăng nhập . Vui lòng kiểm tra lại");
-			frm.user.focus();
-			return false;	
-		}
-		if(frm.tendangnhap.value.length<5)
-	 	{
-			alert("Tên đăng nhập phải lớn hơn 5 ký tự");
-			frm.user.focus();
-			return false;	
-		}
-		if(frm.matkhau.value=="")
-		{
-			alert("Bạn chưa nhập password");	
-			frm.pass.focus();
-			return false;
-		}
-		if(frm.matkhau.value.length<6)
-		{
-			alert("Mật khẩu phải lớn hơn 6 ký tự");	
-			frm.pass.focus();
-			return false;
-		}
-	   dt=/^[0-9]+$/;
-	   dienthoai=frm.dienthoai.value;
-	   if(!dt.test(dienthoai))
-	   {
-		    alert("Bạn chưa nhập điện thoại. Vui lòng kiểm tra lại.");
-		    frm.dienthoai.focus();
-		    return false;
-	   }
-	   	dd=frm.dienthoai.value;
-		if(10>dd.length || dd.length>11)
-		{
-			alert("Số điện thoại không đủ độ dài. Vui lòng nhập lại");
-			frm.dienthoai.focus();
-			return false;	
-		}
-		if(frm.email.value=="")
-		{
-			alert("Bạn chưa nhập email");	
-			frm.email.focus();
-			return false;
-		}
-		mail=frm.email.value;
-		m=/^([A-z0-9])+[@][a-z]+[.][a-z]+[.]*([a-z]+)*$/;
-		if(!m.test(mail))
-		{
-			alert("Bạn nhập sai email");	
-			frm.email.focus();
-			return false;
-		}
-		
-		if(frm.matkhau1.value=="")
-		{
-			alert("Bạn chưa nhập lại password");	
-			frm.pass1.focus();
-			return false;
-		}
-		mk=frm.matkhau.value;
-		mk1=frm.matkhau1.value;
-		if(pass!=pass1)
-		{
-			alert("Password chưa đúng");	
-			frm.pass1.focus();
-			return false;
-		}
-	}
- </script>
+ @endsection

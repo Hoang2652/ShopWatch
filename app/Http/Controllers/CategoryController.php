@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\danhmuc;
+use App\Models\Danhmuc;
 use DB;
 
 class CategoryController extends Controller
@@ -68,6 +68,14 @@ class CategoryController extends Controller
 
     public function getCategory(){
         return DB::table('danhmuc')->get();
+    }
+
+    public function getCategoryByBrand(){
+        return DB::table('danhmuc')->where('loaidanhmuc','TH')->get();
+    }
+    
+    public function getCategoryByType(){
+        return DB::table('danhmuc')->where('loaidanhmuc','LSP')->get();
     }
 
     public function getCategoryById($CategoryID){

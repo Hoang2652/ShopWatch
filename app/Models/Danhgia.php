@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int     $idnguoidung
  * @property int     $created_at
  * @property int     $updated_at
- * @property boolean $sodiem
+ * @property int $sodiem
  * @property string  $binhluan
  */
 class Danhgia extends Model
@@ -53,7 +53,7 @@ class Danhgia extends Model
      * @var array
      */
     protected $casts = [
-        'iddanhgia' => 'int', 'idsanpham' => 'int', 'idnguoidung' => 'int', 'sodiem' => 'boolean', 'binhluan' => 'string', 'created_at' => 'timestamp', 'updated_at' => 'timestamp'
+        'iddanhgia' => 'int', 'idsanpham' => 'int', 'idnguoidung' => 'int', 'sodiem' => 'int', 'binhluan' => 'string', 'created_at' => 'timestamp', 'updated_at' => 'timestamp'
     ];
 
     /**

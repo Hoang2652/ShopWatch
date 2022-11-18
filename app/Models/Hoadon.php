@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int    $idnguoidung
  * @property int    $created_at
  * @property int    $phuongthucthanhtoan
- * @property int    $trangthai
+ * @property string    $trangthai
  * @property int    $updated_at
  * @property string $hoten
  * @property string $diachi
@@ -56,7 +56,7 @@ class Hoadon extends Model
      * @var array
      */
     protected $casts = [
-        'idhoadon' => 'int', 'idnguoidung' => 'int', 'hoten' => 'string', 'diachi' => 'string', 'dienthoai' => 'string', 'email' => 'string', 'created_at' => 'timestamp', 'phuongthucthanhtoan' => 'int', 'trangthai' => 'int', 'updated_at' => 'timestamp'
+        'idhoadon' => 'int', 'idnguoidung' => 'int', 'hoten' => 'string', 'diachi' => 'string', 'dienthoai' => 'string', 'email' => 'string', 'created_at' => 'timestamp', 'phuongthucthanhtoan' => 'string', 'trangthai' => 'string', 'updated_at' => 'timestamp'
     ];
 
     /**

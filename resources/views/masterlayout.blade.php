@@ -153,7 +153,7 @@ e.preventDefault();
 				@endphp
 				@if(isset($tennguoidung))
 					<ul>
-						@if (isset($phanquyen) && ($phanquyen == 0 || $phanquyen == 2)) 
+						@if ($phanquyen == 'Quản trị viên' || $phanquyen == 'Nhân viên')
 							<a href="{{asset('public/frontend/admin/admin.php')}}">
 								<li>Quay về trang admin </li>
 							</a>
