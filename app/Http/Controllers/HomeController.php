@@ -63,7 +63,7 @@ class HomeController extends Controller
             Session::put('phanquyen', $result->phanquyen);
             Session::put('admin_name', $result->tennguoidung);
             Session::put('admin_id', $result->idnguoidung);
-            return Redirect::to('/admin');
+            return Redirect::to('/admin/home');
         }
         else if($result && $result->phanquyen == 'Khách hàng'){
             Session::put('phanquyen', $result->phanquyen);
@@ -78,8 +78,9 @@ class HomeController extends Controller
     public function logout(){
         Session::put('admin_name', null);  
         Session::put('admin_id', null);  
+        Session::put('phanquyen', null);  
         Session::put('idnguoidung', null);  
-        Session::put('tennguoidung', null);  
+        Session::put('tennguoidung', null);
         return Redirect::to('/');
     }
 

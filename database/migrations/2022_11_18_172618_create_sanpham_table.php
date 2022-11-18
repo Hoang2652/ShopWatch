@@ -30,7 +30,7 @@ class CreateSanphamTable extends Migration
             $table->integer('quatang')->nullable()->comment("chứa idsanpham sẽ tặng");
             $table->integer('soluongkhuyenmai')->nullable()->comment("số lượng sản phẩm sẽ khuyến mãi");
             $table->timestamps()->default('current_timestamp()');
-            $table->integer('trangthai');
+            $table->boolean('trangthai')->default(0);
             $table->integer('idhoadonnhapxuatkho')->nullable();
             $table->integer('idkhohang')->nullable();
         });

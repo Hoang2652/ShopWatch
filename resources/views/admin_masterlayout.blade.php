@@ -31,9 +31,13 @@
 			<div class="lg-header">
 				<h1><a href="admin.php"><img src="{{ asset('public/backend/images/logo-header.png') }}" alt="logo" class="lg-header-img"></a></h1>
 			</div>	
-			<p>Chào bạn <a href="../index.php?content=ttcn"><font color="white"><b><i class="fas fa-user"></i> <u>Admin</u></b></font></a><a href="logout.php" class="bt-logout">  Đăng xuất</a></p>
+			<p>Chào bạn <a href="../index.php?content=ttcn"><font color="white"><b><i class="fas fa-user"></i> <u>Admin</u></b></font></a><a href="{{ URL::to('/logout') }}" class="bt-logout">  Đăng xuất</a></p>
 		</div>
 		<div id="main-content">
+			@php
+				$admin = Session::get('admin_name');
+			@endphp
+			@if(isset($admin))
 			<div id="left-content">
 				<div class="danhmucsp">
 					<div class="center" id="change-Class">
@@ -50,6 +54,7 @@
 					</div><!-- End .center -->
 				</div>	<!-- End .menu-left -->
 			</div><!-- End .left-content -->
+			@endif
 			{{------------- Hiển trị content-admin--------------}}
 			
 			
