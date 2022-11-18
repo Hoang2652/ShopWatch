@@ -9,7 +9,7 @@
    
     <div id="xemthem" style="height: 15px;">
         <p>
-            <a href="index.php?iddanhmuc={{$view->iddanhmuc}}">
+            <a href="iddanhmuc={{$view->iddanhmuc}}">
                 Xem thêm >>
             </a> 
         </p>

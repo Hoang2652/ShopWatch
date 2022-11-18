@@ -44,5 +44,5 @@
 </div>
 <div id="phantrang_sp">
     {{  $newsByPage -> appends(request()->all())->links() }}
-	</div>
+</div>
  @endsection
