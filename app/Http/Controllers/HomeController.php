@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
+use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\RegisterRequest;
 use DB;
+use App\Models\Nguoidung;
+session_start();
 
 class HomeController extends Controller
 {
@@ -28,7 +34,7 @@ class HomeController extends Controller
         })->limit(8)->get();
 
         //trả về trang home cùng đống dữ liệu
-        return view('pages.home')->with('headPageProduct',$headPageProduct)
+        return view('pages.home.home')->with('headPageProduct',$headPageProduct)
                                  ->with('bestSaleProuctList',$bestSaleProuctList)
                                  ->with('middlePageProduct',$middlePageProduct)
                                  ->with('NewestProductList',$NewestProductList)
@@ -37,22 +43,65 @@ class HomeController extends Controller
     }
 
     public function loginPage(){
-        return view('pages.login');
+        return view('pages.login.login');
     }
 
     public function registerPage(){
-        return view('pages.register');
+        return view('pages.login.register');
     }
 
     public function checkLogin(Request $request){
         $tendangnhap = $request->tendangnhap;
         $matkhau = MD5($request->matkhau);
 
-        $result = DB::table('nguoidung')->where('tendangnhap',$tendangnhap)->where('matkhau',$matkhau)->first();
+        $result = DB::table('nguoidung')
+                        ->where('tendangnhap',$tendangnhap)
+                        ->orWhere('email',$tendangnhap)
+                        ->where('matkhau',$matkhau)
+                        ->first();
+        if($result && ($result->phanquyen == 0 || $result->phanquyen == 2)){
+            Session::put('phanquyen', $result->phanquyen);
+            Session::put('admin_name', $result->tennguoidung);
+            Session::put('admin_id', $result->idnguoidung);
+            return Redirect::to('/admin');
+        }
+        else if($result && $result->phanquyen == 1){
+            Session::put('phanquyen', $result->phanquyen);
+            Session::put('idnguoidung', $result->idnguoidung);
+            Session::put('tennguoidung', $result->tennguoidung);
+            return Redirect::to('/');
+        }
+        else
+            return Redirect::to('/login');
+    }
 
-        echo "kết quả:";
-        echo '<pre>';
-        print_r($result);
-        echo '</pre>';
+    public function logout(){
+        Session::put('admin_name', null);  
+        Session::put('admin_id', null);  
+        Session::put('idnguoidung', null);  
+        Session::put('tennguoidung', null);  
+        return Redirect::to('/');
+    }
+
+    public function registerAccount(RegisterRequest $request){
+        $data = new Nguoidung;
+        $data->tennguoidung = $request->tennguoidung;
+        $data->tendangnhap = $request->tendangnhap;
+        $data->matkhau = MD5($request->matkhau);
+        $data->ngaysinh = $request->ngaysinh;
+        $data->email = $request->email;
+        $data->dienthoai = $request->dienthoai;
+        $data->diachi = $request->diachi;
+        $data->gioitinh = $request->gioitinh;
+        $data->phanquyen = 1;
+        $data->trangthai = 1;
+
+        if($data->save()){
+            toastr()->success("Đăng kí thành công, bây giờ bạn có thể mua hàng.");
+            return Redirect::to('/login');
+        }
+        else{
+            toastr()->error("đăng kí thất bại");
+        }
     }
 }

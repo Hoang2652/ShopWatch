@@ -18,27 +18,49 @@ use Illuminate\Support\Facades\Route;
 | CUSTOMER PAGES
 |--------------------------------------------------------------------------
 */
-
+// home
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
+// login and register
 Route::get('/login', 'HomeController@loginPage');
 Route::get('/register', 'HomeController@registerPage');
-Route::get('/watch', 'ProductController@index');
 Route::post('/login-execute', 'HomeController@checkLogin');
 Route::get('/logout', 'HomeController@logout');
-Route::get('/tintuc', 'NewsController@showHomeNews');
-Route::get('/tintuc/id={id}', 'NewsController@getNewsDetail');
-Route::get('/hotro', 'SupportController@getViewSupport');
-Route::get('/hotro/id={id}', 'SupportController@getViewSupportDetail');
+Route::post('/register-Account', 'HomeController@registerAccount');
+// product
+Route::get('/watch', 'ProductController@index');
 Route::get('/sanpham', 'ProductController@getViewProduct');
 Route::get('/sanpham/dongho/', 'ProductController@getProductByProductType');
 Route::get('/sanpham/phukien/', 'ProductController@getViewAccessory');
 Route::get('/sanpham/idsanpham={id}', 'ProductController@getViewProductDetail');
+Route::get('/sanpham/iddanhmuc={id}', 'ProductController@getViewCategory');
+Route::post('/rating', 'ProductController@rating');
+// search
+Route::get("/search",'SearchController@live_search')->name("search_product");
+Route::get("/search-support",'SearchController@live_search_sp')->name("search_support");
+Route::get('/timkiem', 'SearchController@search');
+// news
+Route::get('/tintuc', 'NewsController@showHomeNews');
+Route::get('/tintuc/id={id}', 'NewsController@getNewsDetail');
+// support
+Route::get('/hotro', 'SupportController@getViewSupport');
+Route::get('/hotro/id={id}', 'SupportController@getViewSupportDetail');
+Route::post('/sent-support', 'SupportController@sent_support');
+// profile
 Route::get('/thongtincanhan', 'ProfileController@getViewProfile');
 Route::get('/thongtincanhan/lichsumuahang', 'ProfileController@getViewHistory');
 Route::get('/thongtincanhan/thaydoithongtincanhan', 'ProfileController@getViewChangeProfile');
-
-
+Route::get('/thongtincanhan/doimatkhau', 'ProfileController@changePassword');
+Route::post('/thongtincanhan/change-password', 'ProfileController@change_password');
+Route::post('/thongtincanhan/change-profile', 'ProfileController@change_profile');
+// cart
+Route::get('/giohang', 'CartController@getViewCart');
+Route::post('/save-cart', 'CartController@save_cart');
+Route::get('/delete-to-cart/{rowId}', 'CartController@delete_to_cart');
+Route::get('/clear-cart', 'CartController@clear_cart');
+// checkout
+Route::get('/thanhtoan', 'CheckoutController@getViewCheckout');
+Route::post('/check-out', 'CheckoutController@check_out');
 //backend
 Route::get('/admin', 'AdminController@index');
 

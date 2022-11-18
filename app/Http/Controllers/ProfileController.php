@@ -7,6 +7,9 @@ use Session;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use DB;
+use App\Models\Nguoidung;
+use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\ChangeProfileRequest;
 session_start();
 
 class ProfileController extends Controller
@@ -49,5 +52,47 @@ class ProfileController extends Controller
                             ->get();
         return view('pages.profile.changeProfile')->with('changeProfile', $changeProfile);
         
+    }
+
+    public function changePassword(){
+        return view('pages.profile.changePassword');
+    }
+
+    public function change_password(ChangePasswordRequest $request){
+        $data = new Nguoidung;
+        $idnguoidung = Session::get('idnguoidung');
+        $data = Nguoidung::find($idnguoidung);
+        if(MD5($request->oldpassword == $data->matkhau)){
+            $data->matkhau = $request->newpassword;
+            if($data->save()){
+                toastr()->success("Đổi mật khẩu thành công.");
+                return Redirect::to('/thongtincanhan');
+            }
+            else{
+                toastr()->error("Đổi mật khẩu thất bại");
+            }
+        }
+        else{
+            toastr()->error("Bạn nhập sai mật khẩu cũ, vui lòng kiểm tra lại mật khẩu");
+        }
+    }
+
+    public function change_profile(ChangeProfileRequest $request){
+        $data = new Nguoidung;
+        $idnguoidung = Session::get('idnguoidung');
+        $data = Nguoidung::find($idnguoidung);
+        $data->tennguoidung = $request->tennguoidung;
+        $data->dienthoai = $request->dienthoai;
+        $data->email = $request->email;
+        $data->diachi = $request->diachi;
+        $data->ngaysinh = $request->ngaysinh;
+        $data->gioitinh = $request->gioitinh;
+        if($data->save()){
+            toastr()->success("Thay đổi thông tin cá nhân thành công.");
+            return Redirect::to('/thongtincanhan');
+        }
+        else{
+            toastr()->error("Thay đổi thông tin cá nhân thất bại!");
+        }
     }
 }

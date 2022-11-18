@@ -9,7 +9,7 @@
    
     <div id="xemthem" style="height: 15px;">
         <p>
-            <a href="index.php?iddanhmuc={{$view->iddanhmuc}}">
+            <a href="iddanhmuc={{$view->iddanhmuc}}">
                 Xem thêm >>
             </a> 
         </p>
@@ -68,6 +68,9 @@
             <div class="sanpham card">
                 @if(isset($khuyenmai))
                     <div class="card-tag">{{ $khuyenmai }}</div>
+                    @php
+                        $khuyenmai = null;
+                    @endphp
                 @endif
                 <a href="/phonghap/sanpham/idsanpham={{ $pch->idsanpham }}">
                     <img class="card-img-top" src="{{asset('public/uploads/products/'.$pch->hinhanh)}}">				
@@ -75,7 +78,7 @@
                     @php
                         echo "<div class='avg__sp-star'>".$star."</div>";
                     @endphp
-                    @if($pch->giamgia != null)
+                    @if($pch->giamgia != null && $pch->soluongkhuyenmai > 0)
                         <h4 style="text-decoration: line-through; color: grey">{{ number_format($pch->gia,0,",",".") }} VNĐ</h4> 
                         <h4>
                             <i class="fa-solid fa-hand-point-right"></i>

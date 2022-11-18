@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Danhgia;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RatingController;
 use Illuminate\Support\Facades\URL;
@@ -9,6 +10,9 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Sanpham;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Session;
+Session_start();
 
 class ProductController extends Controller
 {
@@ -33,6 +37,7 @@ class ProductController extends Controller
                                    ->orderBy('idsanpham', 'asc')->limit(25)->get();
     }
 
+    protected $newsPerPage = 12;
 
     public function productLiveSreach(Request $request)
     {
@@ -173,4 +178,132 @@ class ProductController extends Controller
     {
         return DB::table('sanpham')->where('idsanpham', $ProductID)->first();
     }
+
+    public function getFilterWatch(){
+        return DB::table('danhmuc')
+                    ->where('loaidanhmuc', 'TH')
+                    ->get();
+    }
+
+    public function getFilterAccessory(){
+        return DB::table('danhmuc')
+                    ->where('loaidanhmuc', 'LSP')
+                    ->where('iddanhmuc', '<>', 8)
+                    ->get();
+    }
+
+    public function getViewProduct(){
+        $filterBrand = $this->getFilterWatch();
+        $filterAccessory = $this->getFilterAccessory();
+        return view('pages.product.product')->with('filterBrand', $filterBrand)
+                                            ->with('filterAccessory', $filterAccessory);
+    }
+
+    public function getProductByProductType(){
+        $filterBrand = $this->getFilterWatch();
+        $filterAccessory = $this->getFilterAccessory();
+
+        $viewProduct = DB::table('danhmuc')
+                            ->where('loaidanhmuc', 'TH')
+                            ->orderBy('iddanhmuc', 'asc')
+                            ->get();
+        $id = DB::table('sanpham')
+                    ->where('trangthai', 1)
+                    ->orderBy('idsanpham', 'asc')
+                    ->get();
+        $danhgia = DB::table('danhgia') 
+                    ->get();
+        
+        return view('pages.product.watch')
+                    ->with('viewProduct', $viewProduct)
+                    ->with('id', $id)
+                    ->with('danhgia', $danhgia)
+                    ->with('filterBrand', $filterBrand)
+                    ->with('filterAccessory', $filterAccessory);
+    }
+
+    public function getViewAccessory(){
+        $filterBrand = $this->getFilterWatch();
+        $filterAccessory = $this->getFilterAccessory();
+
+        $viewAccessory = DB::table('danhmuc')
+                            ->where('loaidanhmuc', 'LSP')
+                            ->where('iddanhmuc', '<>', 8)
+                            ->orderBy('iddanhmuc', 'asc')
+                            ->get();
+        $id = DB::table('sanpham')
+                    ->where('trangthai', 1)
+                    ->orderBy('idsanpham', 'asc')
+                    ->get();
+        $danhgia = DB::table('danhgia') 
+                    ->get();
+        
+        return view('pages.product.accessory')
+                    ->with('viewAccessory', $viewAccessory)                     
+                    ->with('id', $id)   
+                    ->with('danhgia', $danhgia)
+                    ->with('filterBrand', $filterBrand)       
+                    ->with('filterAccessory', $filterAccessory);
+    }
+
+    public function getViewProductDetail($id){
+        $viewsanpham = DB::table('sanpham')
+                            ->where('idsanpham', $id)
+                            ->limit(1)
+                            ->get();
+        $sanpham = $viewsanpham->first();
+        if($sanpham->quatang != null && $sanpham->soluongkhuyenmai > 0){
+            $spkm = DB::table('sanpham')
+                            ->where('idsanpham', $sanpham->quatang)
+                            ->limit(1)
+                            ->get();
+        }
+        else
+            $spkm = null;
+        $danhgia = DB::table('danhgia')
+                    ->select('danhgia.*', 'nguoidung.idnguoidung', 'nguoidung.tennguoidung')
+                    ->join('nguoidung', 'danhgia.idnguoidung', '=', 'nguoidung.idnguoidung') 
+                    ->get();
+        return view('pages.product.productDetail')
+                    ->with('viewsanpham', $viewsanpham)
+                    ->with('danhgia', $danhgia)
+                    ->with('spkm', $spkm);
+        
+    }
+
+    public function getViewCategory($id){
+        $filterBrand = $this->getFilterWatch();
+        $filterAccessory = $this->getFilterAccessory();
+
+        $viewCategory = DB::table('danhmuc')
+                            ->where('iddanhmuc', $id)
+                            ->get();
+        $newsByPage = DB::table('sanpham')
+                            ->where('iddanhmuc', $id)
+                            ->paginate($this->newsPerPage);
+        $danhgia = DB::table('danhgia') 
+                    ->get();
+        return view('pages.product.category')
+                    ->with('filterBrand', $filterBrand)
+                    ->with('filterAccessory', $filterAccessory)
+                    ->with('viewCategory', $viewCategory)
+                    ->with('newsByPage', $newsByPage)
+                    ->with('danhgia', $danhgia);
+    }
+
+    public function rating(Request $request){
+        $data = new Danhgia;
+        $data->idnguoidung = Session::get('idnguoidung');
+        $data->idsanpham = $request->idsanpham;
+        $data->sodiem = $request->sodiem;
+        $data->binhluan = $request->binhluan;
+        if($data->save()){
+            toastr()->success("Bình luận thành công");
+            return Redirect::to('/sanpham/idsanpham='.$request->idsanpham);
+        }
+        else{
+            toastr()->error("bình luận thất bại");
+        }
+    }
+    
 }

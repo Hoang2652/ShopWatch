@@ -8,6 +8,9 @@ use App\Models\Traloicauhoi;
 use Illuminate\Http\Request;
 use App\Http\Requests\SupportRequest;
 use DB;
+use App\Models\Hotro;
+use App\Http\Requests\SupportRequest;
+use Illuminate\Support\Facades\Redirect;
 
 class SupportController extends Controller
 {
@@ -118,5 +121,22 @@ class SupportController extends Controller
 
     public function getSupportById($SupportID){
         return DB::table('hotro')->where('idhotro', $SupportID)->first();
+    }
+
+    public function sent_support(SupportRequest $request){
+        $data = new Hotro;
+        $data->chude = $request->chude;
+        $data->noidung = $request->noidung;
+        $data->hoten = $request->hoten;
+        $data->dienthoai = $request->dienthoai;
+        $data->email = $request->email;
+
+        if($data->save()){
+            toastr()->success("Gửi thư hỗ trợ thành công, chúng tôi sẽ hỗ trợ bạn qua email hoặc số điện thoại.");
+            return Redirect::to('/hotro');
+        }
+        else{
+            toastr()->error("Gửi thử hỗ trợ thất bại");
+        }
     }
 }

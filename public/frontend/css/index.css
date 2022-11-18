@@ -392,6 +392,16 @@ h1 {
     margin: 10px auto;
 }
 
+.motadanhmuc{
+    max-width: 900px;
+    width: fit-content;
+    height: fit-content;
+    margin: 25px auto;
+    font-style: italic;
+    color: grey;
+    font-size: 14px;
+}
+
 .danhsachsanphamcon p.xemthem1 a {
     float: right;
     font-size: 13px;
@@ -1659,7 +1669,7 @@ h1 {
     background-color: hsl(0, 0%, 20%);
 }
 
-.cart tr td p.xoa input {
+.cart tr td a.xoa{
     cursor: pointer;
     height: 25px;
     width: fit-content;
@@ -2000,6 +2010,16 @@ h1 {
     flex-grow: 3;
 }
 
+.link-muted { 
+    color: #aaa; 
+}
+ .link-muted:hover { 
+    color: #1266f1; 
+}
+.badge{
+    color: white;
+}
+
 
 /*-----------------------GIỚI THIỆU-------------------------------------*/
 
@@ -2033,7 +2053,7 @@ h1 {
 /*-----------------------PHÂN TRANG-------------------------------------*/
 
 #phantrang_sp {
-    float: left;
+    float: right;
     padding-top: 10px;
 }
 

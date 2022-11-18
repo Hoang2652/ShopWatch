@@ -3,7 +3,7 @@
 namespace app\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * @property int     $idsanpham
  * @property int     $baohanh
@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Sanpham extends Model
 {
+    use HasFactory;
     /**
      * The database table used by the model.
      *

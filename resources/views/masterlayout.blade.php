@@ -143,25 +143,31 @@ e.preventDefault();
 
 			<div class="nav__acc">
 				<div >
-					<a href="{{asset('public/frontend/index.php?content=cart')}}">
+					<a href="{{URL::to('/giohang')}}">
 						<i class="fas fa-shopping-cart nav__cart" style="transform: scale(1.3);"></i>
 					</a>
 				</div>
-				<?php 
-				$tendangnhap = Session::get('tendangnhap');
-				$phanquyen = Session::get('phanquyen');
-				if (isset($tendangnhap)) {?>
+				@php 
+					$tennguoidung = Session::get('tennguoidung');
+					$phanquyen = Session::get('phanquyen');
+				@endphp
+				@if(isset($tennguoidung))
 					<ul>
-						<?php if (isset($phanquyen) && ($phanquyen == 0 || $phanquyen == 2)) {?><a href="{{asset('public/frontend/admin/admin.php')}}"><li>Quay về trang admin </li></a><?php }?>
-						<a href="{{URL::to('/thongtincanhan')}}"><li><i class="fas fa-user"></i> <?php echo $tendangnhap ?></li></a>
+						@if (isset($phanquyen) && ($phanquyen == 0 || $phanquyen == 2)) 
+							<a href="{{asset('public/frontend/admin/admin.php')}}">
+								<li>Quay về trang admin </li>
+							</a>
+						@else
+						<a href="{{URL::to('/thongtincanhan')}}"><li><i class="fas fa-user"></i>  {{ $tennguoidung }} </li></a>
 						<a href="{{URL::to('/logout')}}"><li> Đăng xuất</li></a>
+						@endif
 					</ul>
-				<?php } else {?>
+				@else
 					<ul>
 						<a href="{{URL::to('/register')}}"><li>Đăng ký </li></a>
 						<a href="{{URL::to('/login')}}"><li> Đăng nhập</li></a>
 					</ul>
-				<?php }?>
+				@endif
 			</div>
 		</div>
 	</div><!-- End .header -->
@@ -181,6 +187,9 @@ e.preventDefault();
 			@yield('profile')
 			@yield('transactionHistory')
 			@yield('changeProfile')
+			@yield('cart')
+			@yield('checkout')
+			@yield('changePassword')
 		</div><!-- End .center-content -->
 	</div><!-- End .main-content -->
 

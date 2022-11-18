@@ -37,6 +37,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'bumbummen99/shoppingcart' => array(
+            'pretty_version' => '4.2.0',
+            'version' => '4.2.0.0',
+            'reference' => '1c50fb564826b6ee748d2d9afad7447b6884166e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../bumbummen99/shoppingcart',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'components/jquery' => array(
             'pretty_version' => '3.6.0',
             'version' => '3.6.0.0',
