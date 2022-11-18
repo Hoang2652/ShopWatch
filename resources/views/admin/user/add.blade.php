@@ -1,6 +1,8 @@
-<link rel="stylesheet" href="css/them_sanpham.css">
-
-<form action="add_nguoidung.php" method="post" name="frm" onsubmit="return checkthemnguoidung()" style="width: fit-content; margin: auto;">
+@extends('admin_masterlayout')
+@section('adduser')
+<link rel="stylesheet" href="{{ asset('public/backend/css/them_sanpham.css') }}" />
+<form action="{{ URL::to('/admin/user/add/execute') }}" method="post" enctype="multipart/form-data" name="frm" style="width: fit-content; margin: auto;">
+	{{ csrf_field() }}
 	<div class="dangky">
 		<div class="tabs">
 			<div style="text-align: center; font-weight: bold;">THÊM NGƯỜI DÙNG</div>
@@ -9,71 +11,92 @@
 		<div class="form-row">			
 			<div class="col-md-6"> 
 				<label for="tendangnhap">Tên đăng nhập  </label>
-				<input class="form-control" type="text" name="tendangnhap" size="40" onclick="document.getElementById('canhbaotendangnhap').innerHTML=''">
-				<div class='canhbao' id='canhbaotendangnhap'></div>
+				<input class="form-control @error('tendangnhap') is-invalid @enderror" type="text" name="tendangnhap" size="40" >
+				@error('tendangnhap')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
 			</div>
 			<div class="col-md-6">
 				<label for="tennguoidung">Tên người dùng</label>
-				<input class="form-control" type="text" name="tennguoidung" size="40" onclick="document.getElementById('canhbaotennguoidung').innerHTML=''">
-				<div class='canhbao' id='canhbaotennguoidung'></div>
+				<input class="form-control @error('tennguoidung') is-invalid @enderror" type="text" name="tennguoidung" size="40">
+				@error('tennguoidung')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
 			</div>
 		</div>
 	
 		<div class="form-row">
 			<div class="col-md-6">
 				<label for="matkhau">Mật khẩu</label>
-				<input type="password" class="form-control" name="matkhau" size="40" onclick="document.getElementById('canhbaomatkhau').innerHTML=''">
-				<div class='canhbao' id='canhbaomatkhau'></div>
+				<input type="password" class="form-control @error('matkhau') is-invalid @enderror" name="matkhau" size="40" onclick="document.getElementById('canhbaomatkhau').innerHTML=''">
+				@error('matkhau')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
 			</div>
 			
 			<div class="col-md-6">
-				<label for="matkhau1">Nhập lại mật khẩu </label>
-				<input type="password" class="form-control" name="matkhau1" size="40" onclick="document.getElementById('canhbaonhaplaimatkhau').innerHTML=''">
-				<div class='canhbao' id='canhbaonhaplaimatkhau'></div>
+				<label for="nhaplaimatkhau">Nhập lại mật khẩu </label>
+				<input type="password" class="form-control @error('nhaplaimatkhau') is-invalid @enderror" name="nhaplaimatkhau" size="40" onclick="document.getElementById('canhbaonhaplaimatkhau').innerHTML=''">
+				@error('nhaplaimatkhau')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
 			</div>
 			
 		</div>
 		<div class="form-row">
 			<div class="col-md-6">
 				<label for="ngaysinh">Ngày sinh </label>
-				<input class="form-control" type="date" name="ngaysinh">
-				<div class='canhbao' id='canhbaongaysinh'></div>
+				<input class="form-control @error('ngaysinh') is-invalid @enderror" type="date" name="ngaysinh">
+				@error('ngaysinh')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
 			</div>
 			<div class="col-md-6">
 				<label for="diachi">Địa chỉ  </label>
 				<input class="form-control" type="text" name="diachi">
-				<div class='canhbao' id='canhbaodiachi'></div>
 			</div>
 		</div>
 		<div class="form-row">
 			<div class="col-md-6">
-			<label for="email">Email </label>
-				<input class="form-control" type="text" name="email" size="40" onclick="document.getElementById('canhbaoemail').innerHTML=''">
-				<div class='canhbao' id='canhbaoemail'></div>
+				<label for="email">Email </label>
+				<input class="form-control @error('email') is-invalid @enderror" type="text" name="email" size="40" onclick="document.getElementById('canhbaoemail').innerHTML=''">
+				@error('email')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
 			</div>
 			<div class="col-md-6">
 				<label for="dienthoai">Điện thoại </label>
-				<input class="form-control" type="text" name="dienthoai" size="40" onclick="document.getElementById('canhbaodienthoai').innerHTML=''">
+				<input class="form-control @error('dienthoai') is-invalid @enderror" type="text" name="dienthoai" size="40" onclick="document.getElementById('canhbaodienthoai').innerHTML=''">
 				<div class='canhbao' id='canhbaodienthoai'></div>
+				@error('dienthoai')
+				<span class='invalid-feedback'>{{ $message }}</span>
+			@enderror
 			</div>
 		</div>
 		<div class="form-row">
 			<div class="col-md-6">
 				<label for="gioitinh" style="display: grid">Giới tính </label>
-				<select class="custom-select mr-sm-2" style="width: 190px;" name="gioitinh">
+				<select class="custom-select mr-sm-2 @error('gioitinh') is-invalid @enderror" style="width: 190px;" name="gioitinh">
 					<option value="">-Chọn giới tính-</option>
 					<option value="nam">Nam</option>
 					<option value="nu">Nữ</option>
+					<option value="bede">khác...</option>
 				</select>
 				<div class='canhbao' id='canhbaogioitinh'></div>
+				@error('gioitinh')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
 			</div>
 			<div class="col-md-6">
 				<label for="phanquyen" style="display: grid">Phân quyền  </label>
-                <select class="custom-select mr-sm-2" style="width: 190px;" name="phanquyen">
+                <select class="custom-select mr-sm-2 @error('phanquyen') is-invalid @enderror" style="width: 190px;" name="phanquyen">
 						<option value="">-Chọn phân quyền-</option>
 					    <option value="2">Quản lý</option>
 				    	<option value="1">Người dùng</option>
                 </select>
+				@error('phanquyen')
+					<span class='invalid-feedback'>{{ $message }}</span>
+				@enderror
 				<div class='canhbao' id='canhbaophanquyen'></div>
             </div>
 		</div>
@@ -82,88 +105,4 @@
 		</div>
 	</div>
 </form>
-
-<script language="javascript">
- 	function checkthemnguoidung()
-	{
-		var error=0;
-	    if(frm.tennguoidung.value=="")
-		{
-			document.getElementById('canhbaotennguoidung').innerHTML="Bạn chưa nhập tên. Vui lòng kiểm tra lại";
-			error++;	
-		}
-
-		if(frm.tendangnhap.value=="")
-	 	{
-			document.getElementById('canhbaotendangnhap').innerHTML="Bạn chưa nhập tên đăng nhập . Vui lòng kiểm tra lại";
-			error++;
-		}
-
-		if(frm.tendangnhap.value.length<6)
-	 	{
-			document.getElementById('canhbaotendangnhap').innerHTML="Tên đăng nhập tối thiểu 6 ký tự";
-			error++;
-		}
-
-		if(frm.matkhau.value=="")
-		{
-			document.getElementById('canhbaomatkhau').innerHTML="Bạn chưa nhập mật khẩu";	
-			error++;
-		}
-		if(frm.matkhau.value.length<6 || frm.matkhau.value.length>24)
-		{
-			document.getElementById('canhbaomatkhau').innerHTML="Mật khẩu phải có số kí tự trong khoảng 6-24";	
-			error++;
-		}
-		
-	   dt=/^[0-9]+$/;
-	   dienthoai=frm.dienthoai.value;
-	   dd=frm.dienthoai.value;
-		if(10>dd.length || dd.length>11)
-		{
-			document.getElementById('canhbaodienthoai').innerHTML="Số điện thoại không đủ độ dài. Vui lòng nhập lại";
-			error++;
-		}
-	   if(frm.dienthoai.value=="")
-		{
-			document.getElementById('canhbaodienthoai').innerHTML="Bạn chưa nhập số điện thoại";	
-			error++;
-		}
-	   if(!dt.test(dienthoai))
-	   {
-			document.getElementById('canhbaodienthoai').innerHTML="Số điện thoại không hợp lệ. Vui lòng kiểm tra lại.";
-		    error++;
-	   }
-		if(frm.email.value=="")
-		{
-			document.getElementById('canhbaoemail').innerHTML="Bạn chưa nhập email";	
-			error++;
-		}
-		mail=frm.email.value;
-		m=/^([A-z0-9])+[@][a-z]+[.][a-z]+[.]*([a-z]+)*$/;
-		if(!m.test(mail))
-		{
-			document.getElementById('canhbaoemail').innerHTML="Email sai cú pháp";	
-			error++;
-		}
-		
-		if(frm.matkhau1.value=="")
-		{
-			document.getElementById('canhbaonhaplaimatkhau').innerHTML="Bạn chưa nhập lại mật khẩu";	
-			error++;
-		}
-		mk=frm.matkhau.value;
-		mk1=frm.matkhau1.value;
-		if(mk!=mk1)
-		{
-			document.getElementById('canhbaonhaplaimatkhau').innerHTML="mật khẩu nhập lại chưa đúng";	
-			error++;
-		}
-
-		if(error>0) {
-			alert('Thêm người dùng không thành công');
-			return false;
-		}
-
-	}
- </script>
+@endsection

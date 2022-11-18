@@ -187,7 +187,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
      */
     protected function failedAuthorization()
     {
-        throw new AuthorizationException;
+        throw new AuthorizationException('Bạn không có quyền thực hiện hành động này');
     }
 
     /**

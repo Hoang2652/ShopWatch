@@ -1,42 +1,7 @@
-<link rel="stylesheet" href="css/them_sanpham.css">
+@extends('admin_masterlayout')
+@section('faq')
+<link rel="stylesheet" href="{{ asset('public/backend/css/them_sanpham.css') }}" />
 <?php
-if(isset($_POST['submit_cauhoithuonggap'])) {
-	$noidungcauhoi=$_POST['noidungcauhoi'];
-	$cautraloi=$_POST['cautraloi'];
-
-	//Lay ngay cua he thong
-	$ngayhientai=date("Y").":".date("m").":".date("d");
-	
-	if(isset($_POST['idcauhoi'])){
-		$idcauhoi = $_POST['idcauhoi'];
-		$update=("
-		         UPDATE traloicauhoi SET noidungcauhoi='$noidungcauhoi',
-										 cautraloi='$cautraloi',
-										 ngaytraloi='$ngayhientai'
-									 WHERE idcauhoi='$idcauhoi'");						
-		if(mysqli_query($link,$update)) {
-			redirect("admin.php?admin=cauhoithuonggap", "Bạn đã sửa thành công.",2);
-		} else { 	
-			echo $update;
-			redirect("admin.php?admin=cauhoithuonggap", "Bạn đã sửa thất bại.", 2 );
-		}
-	} else {
-		$insert="INSERT INTO traloicauhoi VALUES('','$noidungcauhoi', '$cautraloi','$ngayhientai')";
-		if(mysqli_query($link,$insert)) {
-			redirect("admin.php?admin=cauhoithuonggap", "Bạn đã thêm thành công.",2 );
-		} else { 	
-			redirect("admin.php?admin=cauhoithuonggap", "Bạn đã thêm thất bại.", 2 );
-		}
-	}
-} else if(isset($_POST['submit_xoacauhoithuonggap'])){
-	$idcauhoi = $_POST['submit_xoacauhoithuonggap'];
-	$delete="DELETE FROM traloicauhoi WHERE idcauhoi='$idcauhoi'";
-	if(mysqli_query($link,$delete)) {
-		redirect("admin.php?admin=cauhoithuonggap", "Bạn đã xóa thành công.", 2);
-	} else { 	
-		redirect("admin.php?admin=cauhoithuonggap", "Bạn đã xóa thất bại.", 2 );
-	}
-}
 
 if(isset($_GET['submit-themdulieuhotro'])){
 $idcauhoi = $_GET['submit-themdulieuhotro'];
@@ -125,3 +90,4 @@ if($row = mysqli_fetch_array($result)){
         return true;
 	}   
 </script>
+@endsection

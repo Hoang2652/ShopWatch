@@ -15,37 +15,59 @@
 				<div class="col-md-6">
 					<label for="tensanpham">Tên sản phẩm: </label>
 					<input class="form-control" type="text" name="tensanpham"/>
+					@error('tensanpham')
+						<span class='text-danger'>{{ $message }}</span>
+					@enderror
 				</div>
 				<div class="col-md-6">
 					<label for="iddanhmuc" style="display: grid">Thương hiệu</label>
 					<select class="custom-select mr-sm-2" style="width: 190px;" name="iddanhmuc">
-						<option value="">Chọn danh mục</option>
-
+						<option value="">**Chọn danh mục**</option>
+						@foreach ($productBrand as $cate2)
+							<option value="{{ $cate2->iddanhmuc }}">{{ $cate2->tendanhmuc }}</option>
+						@endforeach
 					</select>
+					@error('iddanhmuc')
+					<span class='text-danger'>{{ $message }}</span>
+				@enderror
 				</div>
 			</div>
 			<div class="form-row mb-3">
 				<div class="col-md-6">
 					<label for="soluong">Số lượng</label>
 					<input class="form-control col-sm-5" type="text" name="soluong"/>
+					@error('soluong')
+					<span class='text-danger'>{{ $message }}</span>
+				@enderror
 				</div>
 				<div class="col-md-6">
 					<label for="gia" >Giá bán</label>
 					<input class="form-control col-sm-5" type="text" name="gia"/>
+					@error('gia')
+					<span class='text-danger'>{{ $message }}</span>
+				@enderror
 				</div>
 			</div>
 			<div class="form-row mb-3">
 				<div class="col-md-6">
 					<label for="hinhanh">Hình ảnh</label>			
 					<input class="form-control-file" type="file" name="hinhanh"/>
+					@error('hinhanh')
+					<span class='text-danger'>{{ $message }}</span>
+					@enderror
 				</div>
-				<div class="col-md-6">
-					<label for="idkhohang" >Ở kho hàng: </label>
+				<div class='col-md-6'>
+					<label for='loaisanpham'>Loại sản phẩm</label>	
 					<br />
-					<select class="custom-select mr-sm-2" style="width: 190px;" name="idkhohang">
-						<option value="">Chọn kho hàng</option>
-						{{-- write options pick storage here --}}
+					<select class='custom-select mr-sm-2' style='width: 190px;' name='loaisanpham'>
+						<option value="">**Chọn danh mục**</option>
+						@foreach ($productType as $cate)
+							<option value="{{ $cate->iddanhmuc }}">{{ $cate->tendanhmuc }}</option>
+						@endforeach
 					</select>
+					@error('loaisanpham')
+					<span class='text-danger'>{{ $message }}</span>
+					@enderror
 				</div>
 			</div>
 			<div class='form-row mb-3'>
@@ -62,6 +84,9 @@
 			   <div class='col-md-6'>
 					<label for='mota'>Mô tả</label>			
 					<textarea class='form-control' type='text' name='mota'></textarea>
+					@error('mota')
+					<span class='text-danger'>{{ $message }}</span>
+				@enderror
 				</div>
 			</div>
 		</div>

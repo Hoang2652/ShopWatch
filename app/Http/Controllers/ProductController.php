@@ -2,32 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use DB;
-use App\Models\Sanpham;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RatingController;
+use Illuminate\Support\Facades\URL;
+use App\Http\Requests\ProductRequest;
+use App\Models\Sanpham;
+use DB;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    protected $ProductPerPage = 15;
+    protected $ProductPerPage = 25;
 
-    public function index(){
-        return view('admin.product.index')->with('ProductNums',$this->getProductNums())->with('Product',$this->getProductByPage());
+    public function index()
+    {
+        return view('admin.product.index')->with('ProductNums', $this->getProductNums())->with('Product', $this->getProductByPage());
     }
 
-    public function addProductPage(){
-        return view('admin.product.add');
+    public function getProductByPage()
+    {
+        return DB::table('sanpham')->join('danhmuc', 'danhmuc.iddanhmuc', '=', 'sanpham.iddanhmuc')->select('sanpham.*', 'danhmuc.tendanhmuc')->orderBy('idsanpham', 'asc')->paginate($this->ProductPerPage);
     }
 
-    public function addProduct(Request $request){
+    public function getProductByKeySearch($query)
+    {
+        return DB::table('sanpham')->where('idsanpham', 'like', '%' . $query . '%')
+                                   ->orWhere('tensanpham', 'like', '%' . $query . '%')
+                                   ->join('danhmuc', 'danhmuc.iddanhmuc', '=', 'sanpham.iddanhmuc')
+                                   ->select('sanpham.*', 'danhmuc.tendanhmuc')
+                                   ->orderBy('idsanpham', 'asc')->limit(25)->get();
+    }
+
+
+    public function productLiveSreach(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = $request->get('query');
+            $table_row = $this->getProductByKeySearch($query);
+            $total_row = $table_row->count();
+            $data = [
+                'total_row' => $total_row,
+                'table_row' => $table_row
+            ];
+            return $data;
+        }
+    }
+
+    public function addProductPage()
+    {
+        $Category_Controller = new CategoryController;
+        return view('admin.product.add')->with('productType', $Category_Controller->getCategoryByType())
+            ->with('productBrand', $Category_Controller->getCategoryByBrand());
+    }
+
+    public function addProduct(ProductRequest $request)
+    {
         $sanpham = new sanpham;
         $sanpham->tensanpham = $request->tensanpham;
         $sanpham->loaisanpham = $request->loaisanpham;
-        if(isset($request->hinhanh))
-            $sanpham->hinhanh = $request->hinhanh;
-        else
-            $sanpham->hinhanh = "DefaultProductPicture.jpg";
         $sanpham->mota = $request->mota;
         $sanpham->xuatxu = $request->xuatxu;
         $sanpham->baohanh = $request->baohanh;
@@ -35,31 +67,41 @@ class ProductController extends Controller
         $sanpham->soluong = $request->soluong;
         $sanpham->daban = 0;
         $sanpham->gia = $request->gia;
-        $sanpham->iddanhmuc  = $request->iddanhmuc ;
+        $sanpham->iddanhmuc = $request->iddanhmuc;
         $sanpham->giamgia = $request->giamgia;
         $sanpham->quatang = $request->quatang;
         $sanpham->soluongkhuyenmai = $request->soluongkhuyenmai;
         $sanpham->trangthai = 0;
         $sanpham->idhoadonnhapxuatkho = $request->idhoadonnhapxuatkho;
 
-        if($sanpham->save()){
-            toastr()->success('Thêm sản phẩm thành công');
+        if ($request->hasFile('hinhanh')) {
+            $destination = 'public/uploads/products';
+            $get_image = $request->file('hinhanh');
+            $get_name_image = $get_image->getClientOriginalName();
+            $sanpham->hinhanh = $get_name_image;
+            $get_image->move($destination, $get_name_image);
+        } else {
+            $sanpham->hinhanh = "DefaultProductPicture.jpg";
+        }
+
+        if ($sanpham->save()) {
+            toastr()->success('Thêm sản phẩm ' . $sanpham->tensanpham . ' thành công');
             return redirect('/admin/product');
         } else {
-        toastr()->error('Thêm sản phẩm thất bại!');
+            toastr()->error('Thêm sản phẩm thất bại!');
         }
-        // image.png
     }
 
-    public function changeStatusProduct(Request $request){
+    public function changeStatusProduct(Request $request)
+    {
         $data = $request->all();
         $dataStatus = $data['id'];
-        $openSale = array_keys(array_filter($dataStatus, function($bool){return $bool == 1;}));
-        $closedSale = array_keys(array_filter($dataStatus, function($bool){return $bool == 0;}));
+        $openSale = array_keys(array_filter($dataStatus, function ($bool) {return $bool == 1;}));
+        $closedSale = array_keys(array_filter($dataStatus, function ($bool) {return $bool == 0;}));
         $isOpen = sanpham::whereIn('idsanpham', $openSale)->update(['trangthai' => 0]);
         $isClosed = sanpham::whereIn('idsanpham', $closedSale)->update(['trangthai' => 1]);
-        if($isOpen || $isClosed){
-            toastr()->success('Thay đổi trạng thái sản phẩm id '.implode(",", array_merge($openSale,$closedSale)).' thành công');
+        if ($isOpen || $isClosed) {
+            toastr()->success('Thay đổi trạng thái sản phẩm id ' . implode(",", array_merge($openSale, $closedSale)) . ' thành công');
             return redirect('/admin/product');
         } else {
             toastr()->error('Thay đổi trạng thái không thành công');
@@ -67,59 +109,68 @@ class ProductController extends Controller
         }
     }
 
-    public function updateProductPage($ProductID){
+    public function updateProductPage($ProductID)
+    {
         $Category_Controller = new CategoryController;
         $Rating_Controller = new RatingController;
-        return view('admin.product.update')->with('productDetail',$this->getProductById($ProductID))
-                                           ->with('categories',$Category_Controller->getCategory())
-                                           ->with('ratings',$Rating_Controller->getAllRating());
+
+        return view('admin.product.update')->with('productDetail', $this->getProductById($ProductID))
+            ->with('productType', $Category_Controller->getCategoryByType())
+            ->with('productBrand', $Category_Controller->getCategoryByBrand())
+            ->with('ratings', $Rating_Controller->getAllRatingByProductID($ProductID));
     }
 
-    public function  updateProduct(Request $request, $idProduct){
+    public function updateProduct(ProductRequest $request, $idProduct)
+    {
         $sanpham = sanpham::find($idProduct);
         $sanpham->tensanpham = $request->tensanpham;
         $sanpham->loaisanpham = $request->loaisanpham;
-        if(isset($request->hinhanh))
-            $sanpham->hinhanh = $request->hinhanh;
         $sanpham->mota = $request->mota;
         $sanpham->xuatxu = $request->xuatxu;
         $sanpham->baohanh = $request->baohanh;
         $sanpham->chitiet = $request->chitiet;
         $sanpham->soluong = $request->soluong;
-        $sanpham->daban = 0;
+        $sanpham->daban = $request->daban;
         $sanpham->gia = $request->gia;
-        $sanpham->iddanhmuc  = $request->iddanhmuc ;
+        $sanpham->iddanhmuc = $request->iddanhmuc;
         $sanpham->giamgia = $request->giamgia;
         $sanpham->quatang = $request->quatang;
         $sanpham->soluongkhuyenmai = $request->soluongkhuyenmai;
-        $sanpham->idhoadonnhapxuatkho = $request->idhoadonnhapxuatkho;
-        if($sanpham->save()){
-            toastr()->success('Cập nhật sản phẩm thành công!');
+
+        if ($request->hasFile('hinhanh')) {
+            $destination = 'public/uploads/products';
+            $get_image = $request->file('hinhanh');
+            $get_name_image = $get_image->getClientOriginalName();
+            $sanpham->hinhanh = $get_name_image;
+            $get_image->move($destination, $get_name_image);
+        }
+
+        if ($sanpham->save()) {
+            toastr()->success('Cập nhật sản phẩm "' . $sanpham->tensanpham . '" thành công!');
             return redirect('/admin/product');
         } else {
-        toastr()->error('Cập nhật sản phẩm thất bại!');
+            toastr()->error('Cập nhật sản phẩm "' . $sanpham->tensanpham . '" thất bại!');
         }
     }
 
-    public function deleteProduct($idProduct){
-        $flight = sanpham::find($idProduct);
-        if($sanpham->delete()){
-            toastr()->success('Xóa sản phẩm thành công!');
+    public function deleteProduct($idProduct)
+    {
+        $sanpham = sanpham::find($idProduct);
+        if ($sanpham->delete()) {
+            toastr()->success('Xóa sản phẩm"' . $sanpham->tensanpham . '" thành công!');
             return redirect('/admin/product');
         } else {
-            toastr()->error('Xóa sản phẩm thất bại!');
+            toastr()->error('Xóa sản phẩm "' . $sanpham->tensanpham . '" thất bại!');
         }
     }
 
-    public function getProductNums(){
+    public function getProductNums()
+    {
         return DB::table('sanpham')->count();
     }
 
-    public function getProductByPage(){
-        return DB::table('sanpham')->join('danhmuc', 'danhmuc.iddanhmuc', '=', 'sanpham.iddanhmuc')->select('sanpham.*','danhmuc.tendanhmuc')->paginate($this->ProductPerPage);
-    }
-
-    public function getProductById($ProductID){
+    public function getProductById($ProductID)
+    {
         return DB::table('sanpham')->where('idsanpham', $ProductID)->first();
     }
 }

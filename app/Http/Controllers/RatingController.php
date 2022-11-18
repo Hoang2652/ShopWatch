@@ -8,7 +8,11 @@ use App\Models\Danhgia;;
 
 class RatingController extends Controller
 {
-    public function getAllRating(){
-        return danhgia::join('nguoidung', 'nguoidung.idnguoidung', '=', 'danhgia.idnguoidung')->select('danhgia.*','nguoidung.tennguoidung')->orderBy('updated_at')->get();
+    public function getAllRatingByProductID($ProductID){
+        return danhgia::where('idsanpham',$ProductID)
+                        ->join('nguoidung', 'nguoidung.idnguoidung', '=', 'danhgia.idnguoidung')                
+                        ->select('danhgia.*','nguoidung.tennguoidung')
+                        ->orderByDesc('updated_at')
+                        ->get();
     }
 }

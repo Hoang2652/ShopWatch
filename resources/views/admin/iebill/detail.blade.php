@@ -1,3 +1,5 @@
+@extends('admin_masterlayout')
+@section('billdetail')
 <link rel="stylesheet" href="css/hienthi_sp.css" >
 <?php
 	include ('../include/connect.php');
@@ -54,3 +56,4 @@
         <p style="float:right; margin: 1rem 2rem ; padding-right:30px;"><a class="btn btn-primary" href="inhoadonnhapxuat.php?idhoadonnhapxuatkho=<?=$_GET['idhoadonnhapxuatkho']?>" target="_blank">In hoá đơn</a></p>
     </div>
 </div>
+@endsection
