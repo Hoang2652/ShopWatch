@@ -65,6 +65,12 @@ class HomeController extends Controller
             Session::put('admin_id', $result->idnguoidung);
             return Redirect::to('/admin/home');
         }
+        else if($result && $result->phanquyen == 'Quản lý kho'){
+            Session::put('phanquyen', $result->phanquyen);
+            Session::put('Store_manager_name', $result->tennguoidung);
+            Session::put('Store_manager_id', $result->idnguoidung);
+            return Redirect::to('/admin/homeStorage');
+        }
         else if($result && $result->phanquyen == 'Khách hàng'){
             Session::put('phanquyen', $result->phanquyen);
             Session::put('idnguoidung', $result->idnguoidung);

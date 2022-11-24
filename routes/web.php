@@ -133,6 +133,22 @@ Route::get('/admin/bill/print/id={id}/execute', 'BillController@billPrintPage');
 Route::get('/admin/bill/delete/id={id}/execute', 'BillController@deleteBill');
 Route::post('/admin/bill/change-status/execute', 'BillController@changeBillStatusByID');
 
+// Storage 
+Route::get('/admin/homeStorage', 'StorageController@getHomeStorage');
+Route::get('/admin/add-storage', 'StorageController@getViewAddStorage');
+Route::get('/admin/info-storage={id}', 'StorageController@getViewInfoStorage');
+Route::get('/admin/update-storage={id}', 'StorageController@getViewUpdateStorage');
+Route::get('admin/iemanage', 'StorageController@getViewIemanage');
+Route::get('/admin/info-storage/add-location={id}', 'StorageController@getViewAddLocation');
+Route::get('admin/import-Bill', 'StorageController@getViewImport');
+Route::get('admin/export-Bill', 'StorageController@getViewExport');
+Route::get('admin/info-bill={id}', 'StorageController@getViewInfoBill');
+Route::post('/admin/add-str', 'StorageController@addStorage');
+Route::get('/admin/delete-storage={id}', 'StorageController@deleteStorage');
+Route::post('/admin/update-storage={id}/execute', 'StorageController@updateStorage');
+Route::post('/admin/add-location={id}/execute', 'StorageController@addLocation');
+Route::get('/admin/delete-location={id}', 'StorageController@deleteLocation');
+Route::get('/admin/search_product_in_stock', 'StorageController@searchInStock')->name('search_product_in_stock');
 
 /**************************************************************************************************** */
 // below are not touched yet

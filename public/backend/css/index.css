@@ -226,6 +226,7 @@ tr:nth-child(even) {
 }
 
 .quanlykhohang h3{
+  margin-top: 3rem;
   font-size: 30px;
   padding-left: 150px;
   display: block;
@@ -256,6 +257,7 @@ tr:nth-child(even) {
 .formsuakhohang{
   width: 800px;
   margin: auto;
+  margin-top: 3rem;
 }
 
 .container__sptonkho{

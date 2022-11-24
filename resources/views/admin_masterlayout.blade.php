@@ -36,25 +36,30 @@
 		<div id="main-content">
 			@php
 				$admin = Session::get('admin_name');
+				$store = Session::get('Store_manager_id');
 			@endphp
-			@if(isset($admin))
 			<div id="left-content">
 				<div class="danhmucsp">
 					<div class="center" id="change-Class">
 						<ul>
-							<li><a href="{{URL::to('admin/home')}}" class="changec">Trang chủ</a></li>
-							<li><a href="{{URL::to('admin/category')}}" class="changec"> Quản lý danh mục</a></li>
-							<li><a href="{{URL::to('admin/user')}}" class="changec"> Quản lý người dùng</a></li>
-							<li><a href="{{URL::to('admin/statistic')}}" class="changec"> Thống kê doanh thu</a></li>
-							<li><a href="{{URL::to('admin/news')}}" class="changec"> Quản lý tin tức</a></li>
-							<li><a href="{{URL::to('admin/support')}}" class="changec"> Hỗ trợ khách hàng</a></li>
-							<li><a href="{{URL::to('admin/product')}}" class="changec"> Quản lý sản phẩm</a></li>
-							<li><a href="{{URL::to('admin/bill')}}" class="changec"> Quản lý hóa đơn</a></li>						
+							@if(isset($admin))
+								<li><a href="{{URL::to('admin/home')}}" class="changec">Trang chủ</a></li>
+								<li><a href="{{URL::to('admin/category')}}" class="changec"> Quản lý danh mục</a></li>
+								<li><a href="{{URL::to('admin/user')}}" class="changec"> Quản lý người dùng</a></li>
+								<li><a href="{{URL::to('admin/statistic')}}" class="changec"> Thống kê doanh thu</a></li>
+								<li><a href="{{URL::to('admin/news')}}" class="changec"> Quản lý tin tức</a></li>
+								<li><a href="{{URL::to('admin/support')}}" class="changec"> Hỗ trợ khách hàng</a></li>
+								<li><a href="{{URL::to('admin/product')}}" class="changec"> Quản lý sản phẩm</a></li>
+								<li><a href="{{URL::to('admin/bill')}}" class="changec"> Quản lý hóa đơn</a></li>
+							@else
+								<li><a href="{{URL::to('admin/home')}}" class="changec">Trang chủ</a></li>
+								<li><a href="{{URL::to('admin/homeStorage')}}" class="changec">Quản lý kho hàng</a></li>
+								<li><a href="{{URL::to('admin/iemanage')}}" class="changec">Quản lý nhập xuất</a></li>	
+							@endif					
 						</ul>
 					</div><!-- End .center -->
 				</div>	<!-- End .menu-left -->
 			</div><!-- End .left-content -->
-			@endif
 			{{------------- Hiển trị content-admin--------------}}
 			
 			
@@ -98,6 +103,17 @@
 				@yield('quanlysanpham')
 				@yield('quanlyhoadon')
 				@yield('quanlynhapxuatkhohang')
+
+				@yield('storage')
+				@yield('addStorage')
+				@yield('updateStorage')
+				@yield('infoStorage')
+				@yield('addLocation')
+				@yield('updateLocation')
+				@yield('iemanage')
+				@yield('importBill')
+				@yield('exportBill')
+				@yield('infoBill')
 			</div>
 		</div><!-- End .main-content -->
 	</div><!-- End .content -->

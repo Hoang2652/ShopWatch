@@ -25,7 +25,6 @@
                     </td>
                 </tr>
                 `;
-
             }
             return htmlView;
         }
@@ -83,7 +82,7 @@
         <div id="check" class="col-mb mb-3">
             <label>Lọc trạng thái: </label>
             <select id="filter-donhang" class="form-control" >
-                <option selected></option>
+                <option selected>--trạng thái--</option>
                 <option>Đang xử lý</option>
                 <option>Hoàn tất</option>
                 <option>Đã hủy</option>
