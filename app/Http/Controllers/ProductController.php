@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Danhgia;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\URL;
 use App\Http\Requests\ProductRequest;
 use App\Models\Sanpham;
 use DB;
+use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Session;
@@ -290,6 +292,50 @@ class ProductController extends Controller
                     ->with('newsByPage', $newsByPage)
                     ->with('danhgia', $danhgia);
     }
+
+    public function getProductAjax(Request $request){
+        if($request->ajax()){
+
+            // $queryString = "";
+            // if ($request->has('searchKeyword')) {
+            //     $queryString .= "where tensanpham LIKE %".$request->searchKeyword."% ";
+            // }
+            // if ($request->has('productType')) {
+            //     $queryString .= "and loaisanpham = %".$request->productType."% ";
+            // }
+            // if ($request->has('productBrand')) {
+            //     $queryString .= "and iddanhmuc = %".$request->productType."% ";
+            // } 
+
+            $productList = DB::table('sanpham as a')->leftJoin('sanpham as b','a.quatang','=','b.idsanpham')
+                        ->select('a.*','b.tensanpham as tenquatang')
+                        ->where('a.tensanpham', 'LIKE', '%' . $request->searchKeyword . '%')
+                        ->where('a.loaisanpham', 'LIKE', '%' . $request->productType . '%')
+                        ->where('a.iddanhmuc', 'LIKE', '%' . $request->productBrand . '%')
+                        ->get();
+
+            $total_row = $productList->count();
+            
+            $data = [
+                'total_row' => $total_row,
+                'table_row' => $productList
+            ];
+            return $data;
+
+        }
+    }
+
+    public function getProductDetailAjax(Request $request){
+        if($request->ajax()){
+            $ProductID = $request->idsanpham;
+            $data = [
+                'result' => $this->getProductById($ProductID)
+            ];
+            return $data;
+
+        }
+    }
+
 
     public function rating(Request $request){
         $data = new Danhgia;

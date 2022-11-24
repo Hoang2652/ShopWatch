@@ -31,7 +31,7 @@
 			<div class="lg-header">
 				<h1><a href="admin.php"><img src="{{ asset('public/backend/images/logo-header.png') }}" alt="logo" class="lg-header-img"></a></h1>
 			</div>	
-			<p>Chào bạn <a href="../index.php?content=ttcn"><font color="white"><b><i class="fas fa-user"></i> <u>Admin</u></b></font></a><a href="{{ URL::to('/logout') }}" class="bt-logout">  Đăng xuất</a></p>
+			<p>Chào bạn <a href="../index.php?content=ttcn"><font color="white"><b><i class="fas fa-user"></i> <u>Hoàng Ezz</u></b></font></a><a href="{{ URL::to('/logout') }}" class="bt-logout">  Đăng xuất</a></p>
 		</div>
 		<div id="main-content">
 			@php
@@ -60,6 +60,7 @@
 					</div><!-- End .center -->
 				</div>	<!-- End .menu-left -->
 			</div><!-- End .left-content -->
+
 			{{------------- Hiển trị content-admin--------------}}
 			
 			
@@ -95,6 +96,9 @@
 				@yield('updateiebill')
 
 				@yield('statistic')
+
+				{{-- Page for Sale Employee --}}
+				@yield('addBill')
 
 				@yield('quanlynguoidung')
 				@yield('quanlydoanhthu')

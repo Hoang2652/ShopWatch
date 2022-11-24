@@ -5,21 +5,88 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Hoadon;
 use App\Models\Chitiethoadon;
+use App\Models\Sanpham;
+
+use App\Http\Requests\CheckoutRequest;
+use App\Http\Controllers\CategoryController;
 use DB;
 
 class BillController extends Controller
 {
     protected $BillPerPage = 15;
 
+    // Return view functions:
     public function index(){
         return view('admin.bill.index')->with('BillNums',$this->getBillNums())->with('Bill',$this->getBillByPage());
     }
 
     public function addBillPage(){
+        $Category_Controller = new CategoryController;
+        return view('admin.sale.addBill')->with('productType', $Category_Controller->getCategoryByType())
+                                         ->with('productBrand', $Category_Controller->getCategoryByBrand());
     }
 
-    public function addBill(Request $request){
 
+    // Query functions:
+
+
+    public function addBill(Request $request){
+        // dd($request->all());
+        DB::beginTransaction();
+        try {
+            $hoadon = new Hoadon;
+            $hoadon->hoten = $request->hoten;
+            $hoadon->diachi = $request->diachi;
+            $hoadon->dienthoai = $request->dienthoai;
+            $hoadon->email = $request->email;
+            $hoadon->phuongthucthanhtoan = $request->phuongthuc;
+            $hoadon->trangthai = "Đang xử lý";
+            $hoadon->save();
+            $content = $request->product;
+            // dd($content);
+            foreach($content as [$qty,$id,$name,$price,$sale,$gift]){
+
+                // Thao tác thêm chi tiêt hóa đơn
+                $chitiethoadon = new Chitiethoadon;
+                $chitiethoadon->idhoadon = $hoadon->idhoadon;
+                $chitiethoadon->idsanpham = $id;
+                $chitiethoadon->tensanpham = $name;
+                $chitiethoadon->soluong = $qty;
+
+                if($sale != 0 && $sale != null){
+                    $chitiethoadon->giamgia = $sale;
+                    $chitiethoadon->gia = $price * (100 - $sale) / 100;
+                }
+                else {
+                    $chitiethoadon->giamgia = null;
+                    $chitiethoadon->gia = $price;
+                }
+
+                if($gift != 0 && $gift != null)
+                    $chitiethoadon->quatang = $gift;
+                else
+                    $chitiethoadon->quatang = null;
+                $chitiethoadon->save();
+
+                // Thao tác cập nhật số lượng sản phẩm / khuyến mãi
+                $sanpham = Sanpham::find($id);
+                $sanpham->soluong -= $qty;
+
+                if($sale != null || $gift != null){
+                    $sanpham->soluongkhuyenmai -= $qty;
+                } 
+
+                $sanpham->save();
+            }
+
+            DB::commit();
+            toastr()->success("Thanh toán thành công, vui lòng chờ đơn hàng xử lí.");
+            return Redirect('/sale');
+        } catch (\Exception $e) {
+            DB::rollback();
+            toastr()->error('Ôi không có sự cố khi thanh toán, vui lòng thử lại sau !' . $e);
+            return redirect('/sale');
+        }
     }
 
     public function BillDetailPage($BillID){
