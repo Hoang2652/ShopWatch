@@ -122,6 +122,7 @@ Route::get('/admin/support/delete/id={id}/execute', 'SupportController@deleteSup
 // Support manager pages
 Route::get('/admin/statistic', 'StatisticController@index');
 Route::post('/admin/statistic/profit', 'StatisticController@profitByDateRange');
+Route::post('/admin/statistic/product', 'StatisticController@productSaleByDateRange');
 Route::post('/admin/statistic/profit/byDateRange', 'StatisticController@profitArray');
 Route::post('/admin/statistic/profit/byMilestone', 'StatisticController@profitArray');
 
@@ -132,6 +133,13 @@ Route::get('/admin/bill/detail/id={id}', 'BillController@BillDetailPage');
 Route::get('/admin/bill/print/id={id}/execute', 'BillController@billPrintPage');
 Route::get('/admin/bill/delete/id={id}/execute', 'BillController@deleteBill');
 Route::post('/admin/bill/change-status/execute', 'BillController@changeBillStatusByID');
+
+// Bill manager (for sale employee)pages
+Route::get('/sale', 'BillController@addBillPage');
+Route::get('/sale/productSearch', 'ProductController@getProductAjax')->name('product-live-sreach');
+Route::get('/sale/productDetail', 'ProductController@getProductDetailAjax')->name('product-detail-ajax');
+Route::post('/sale/addBill','BillController@addBill');
+
 
 
 /**************************************************************************************************** */
