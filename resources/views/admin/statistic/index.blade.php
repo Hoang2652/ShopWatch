@@ -5,28 +5,51 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
 <div class="quanlysp">
-	<h3>THỐNG KÊ DOANH THU</h3>
     <div class="card col-md-11">
+        <h5>THỐNG KÊ DOANH THU</h5>
         <div class="card-header row">
-            <div class=" row col-sm-5">
+            <div class=" row col-sm-3">
                 <label for="inputCity" class="col-sm-4 col-form-label">Từ:</label>
-                <input type="date" class="form-control col-sm-8" id="inputfromdate">
+                <input type="date" class="form-control col-sm-8" id="profit-inputfromdate">
             </div>
-            <div class=" row col-sm-5">
+            <div class=" row col-sm-3">
                 <label for="inputState" class="col-sm-4 col-form-label">Đến:</label>
-                <input type="date" class="form-control col-sm-8" id="inputtodate" name="khoangthoigian">
+                <input type="date" class="form-control col-sm-8" id="profit-inputtodate" name="khoangthoigian">
             </div>
             <div class=" col-sm-2">
-                <button id="btn-thongke" class="btn btn-primary" style="display: inline-block;">Thống kê</button>
+                <button id="btn-thongke-doanhthu" class="btn btn-primary" style="display: inline-block;">Thống kê</button>
             </div>
         </div>
         <div class="card-body chart-responsive">
             <div id="doanhthuchart" style="height: 250px;"></div>
         </div>
         <div class="card-footer row">
-            Biểu đồ thống kê doanh thu: <span id="tenchart-change" style="margin-left:5px;"> toàn thời gian</span>
+            Biểu đồ thống kê doanh thu: <span id="tenchart-doanhthu-change" style="margin-left:5px;"> toàn thời gian</span>
+        </div>
+    </div>
+    <h5>THỐNG KÊ SẢN PHẨM ĐÃ BÁN</h5>
+    <div class="card col-md-6">
+        <div class="card-header row">
+            <div class=" row col-sm-5">
+                <label for="inputCity" class="col-sm-4 col-form-label">Từ:</label>
+                <input type="date" class="form-control col-sm-8" id="product-inputfromdate">
+            </div>
+            <div class=" row col-sm-5">
+                <label for="inputState" class="col-sm-4 col-form-label">Đến:</label>
+                <input type="date" class="form-control col-sm-8" id="product-inputtodate" name="khoangthoigian">
+            </div>
+            <div class=" col-sm-2">
+                <button id="btn-thongke-sanpham" class="btn btn-primary" style="display: inline-block;">Thống kê</button>
+            </div>
+        </div>
+        <div class="card-body chart-responsive">
+            <div id="productChart" style="height: 250px;"></div>
+        </div>
+        <div class="card-footer row">
+            Biểu đồ thống kê sản phẩm đã bán: <span id="tenchart-sanpham-change" style="margin-left:5px;"> toàn thời gian</span>
         </div>
       </div>
+    
     {{-- <div class="khungbang" style="margin-top: 20px;">
             <div class="form-row">
                 <div class="form-group col-md-2">
@@ -66,7 +89,7 @@ $(document).ready(function(){
                 
             }
 
-            var chart = new Morris.Area({
+            var profitChart = new Morris.Area({
                 element: 'doanhthuchart',
 
                 data:[{date: "Hôm nay chưa có doanh thu", sales: 0}],
@@ -83,6 +106,18 @@ $(document).ready(function(){
                     return ("0" + d.getDate()).slice(-2) + '-' + ("0" + (d.getMonth() + 1)).slice(-2) + '-' + d.getFullYear();
                 }
             });
+
+            var productChart = new Morris.Donut({
+                element: 'productChart',
+
+                data:[{date: "Chưa có sản phẩm thống kê", sales: 13}],
+
+                xkey: 'date',
+
+                ykeys: ['sales'],
+
+                labels: ['Sản phẩm']
+            });
             taixongthongke();
 
             function taixongthongke(){
@@ -92,15 +127,25 @@ $(document).ready(function(){
                     dataType:"JSON",
                     data:{},
                     success:function(data) {
-                        chart.setData(data);
+                        profitChart.setData(data);
+                    }
+                });
+
+                $.ajax({
+                    url:"/phonghap/admin/statistic/product",
+                    method:"POST",
+                    dataType:"JSON",
+                    data:{},
+                    success:function(data) {
+                        productChart.setData(data);
                     }
                 });
             }
 
-            $('#btn-thongke').click(function(){
-                var inputfromdate =  document.getElementById('inputfromdate').value;
-                var inputtodate =  document.getElementById('inputtodate').value;
-                $('#tenchart-change').text(' Từ ngày '+ngaythangnam(inputfromdate)+' đến ngày '+ngaythangnam(inputtodate));
+            $('#btn-thongke-doanhthu').click(function(){
+                var inputfromdate =  document.getElementById('profit-inputfromdate').value;
+                var inputtodate =  document.getElementById('profit-inputtodate').value;
+                $('#tenchart-doanhthu-change').text(' Từ ngày '+ngaythangnam(inputfromdate)+' đến ngày '+ngaythangnam(inputtodate));
                 $.ajax({
                     url:"/phonghap/admin/statistic/profit",
                     method:"POST",
@@ -108,7 +153,23 @@ $(document).ready(function(){
                     data:{fromDate: inputfromdate, toDate: inputtodate},
 
                     success:function(data) {
-                        chart.setData(data);
+                        profitChart.setData(data);
+                    }
+                });
+            });
+
+            $('#btn-thongke-sanpham').click(function(){
+                var inputfromdate =  document.getElementById('product-inputfromdate').value;
+                var inputtodate =  document.getElementById('product-inputtodate').value;
+                $('#tenchart-sanpham-change').text(' Từ ngày '+ngaythangnam(inputfromdate)+' đến ngày '+ngaythangnam(inputtodate));
+                $.ajax({
+                    url:"/phonghap/admin/statistic/product",
+                    method:"POST",
+                    dataType:"JSON",
+                    data:{fromDate: inputfromdate, toDate: inputtodate},
+
+                    success:function(data) {
+                        productChart.setData(data);
                     }
                 });
             });

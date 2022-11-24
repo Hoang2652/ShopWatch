@@ -31,7 +31,7 @@
 			<div class="lg-header">
 				<h1><a href="admin.php"><img src="{{ asset('public/backend/images/logo-header.png') }}" alt="logo" class="lg-header-img"></a></h1>
 			</div>	
-			<p>Chào bạn <a href="../index.php?content=ttcn"><font color="white"><b><i class="fas fa-user"></i> <u>Admin</u></b></font></a><a href="{{ URL::to('/logout') }}" class="bt-logout">  Đăng xuất</a></p>
+			<p>Chào bạn <a href="../index.php?content=ttcn"><font color="white"><b><i class="fas fa-user"></i> <u>Hoàng Ezz</u></b></font></a><a href="{{ URL::to('/logout') }}" class="bt-logout">  Đăng xuất</a></p>
 		</div>
 		<div id="main-content">
 			@php
@@ -60,6 +60,18 @@
 					</div><!-- End .center -->
 				</div>	<!-- End .menu-left -->
 			</div><!-- End .left-content -->
+			@else
+			<div id="left-content">
+				<div class="danhmucsp">
+					<div class="center" id="change-Class">
+						<ul>
+							<li><a href="{{URL::to('admin/home')}}" class="changec">Trang chủ</a></li>
+							<li><a href="{{URL::to('admin/bill')}}" class="changec"> Quản lý hóa đơn</a></li>
+							<li><a href="{{URL::to('/sale')}}" class="changec"> Quản lý bán hàng</a></li>
+						</ul>
+					</div><!-- End .center -->
+				</div>	<!-- End .menu-left -->
+			</div><!-- End .left-content -->							
 			{{------------- Hiển trị content-admin--------------}}
 			
 			
@@ -95,6 +107,9 @@
 				@yield('updateiebill')
 
 				@yield('statistic')
+
+				{{-- Page for Sale Employee --}}
+				@yield('addBill')
 
 				@yield('quanlynguoidung')
 				@yield('quanlydoanhthu')

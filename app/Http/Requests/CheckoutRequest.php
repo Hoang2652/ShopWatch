@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+
+use App\Http\Requests\Redirect;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CheckoutRequest extends FormRequest

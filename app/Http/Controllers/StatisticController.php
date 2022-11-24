@@ -44,4 +44,42 @@ class StatisticController extends Controller
         }
         return json_encode($chart_data);
     }
+
+    public function productSaleByDateRange(Request $request){
+        if ($request->ajax()) {
+            $fromDate = $request->get('fromDate');
+            $toDate = $request->get('toDate');
+        }
+
+        if($fromDate == null)
+        $fromDate = 0;
+        if($toDate == null)
+        $toDate = now();
+
+        $billArray = [];
+        $chart_data = [];
+        $BillList = DB::table('hoadon')->select('idhoadon')
+                                       ->whereDate('created_at', '>=', $fromDate)
+                                       ->whereDate('created_at', '<=', $toDate)
+                                       ->oldest()->distinct()->get()->toArray();
+        foreach($BillList as $row){
+            $billArray[] = $row->idhoadon;
+        }
+        // dd($billArray);
+        $ProductSaleTotal = DB::table('chitiethoadon')
+                            ->select('chitiethoadon.tensanpham',DB::raw('SUM(soluong) as totalProduct'))
+                            ->whereIn('chitiethoadon.idhoadon', $billArray)
+                            ->groupBy('tensanpham')
+                            ->orderBy('totalProduct','desc')
+                            ->get()->toArray();
+            // dd($ProductSaleTotal);
+        foreach($ProductSaleTotal as $row){
+            $chart_data[] = array(
+                'label' => $row->tensanpham,
+                'value' => $row->totalProduct
+            );
+        }
+        return json_encode($chart_data);
+    }
+    
 }

@@ -260,8 +260,7 @@ a button.so {
 
 .bill-detail {
     float: left;
-    width: 720px;
-    height: 500px;
+    width: 770px;
     overflow: auto;
 }
 
@@ -296,4 +295,83 @@ a button.so {
     max-height: 400px;
 }
 
-.custom-table-grid {}
+
+/* CSS for card table in sale manage*/
+
+.custom-sale-product {
+    width: 170px;
+    height: 265px;
+    display: inline-block;
+    border: none;
+    border-radius: 5px;
+    margin: 5px 10px;
+    overflow: hidden;
+    padding: 5px;
+    border: 1px solid hsl(0, 0%, 94%);
+}
+
+.custom-sale-product h4 {
+    color: #fc1a1a;
+    font-size: 11px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.custom-sale-product p {
+    text-align: center;
+    margin: 3px;
+    color: black;
+    font-size: 11px;
+}
+
+.card-tag {
+    position: absolute;
+    background: hsl(206, 85%, 72%);
+    line-height: 30px;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+    margin-left: 108px;
+    width: 50px;
+    height: 30px;
+}
+
+.custom-cart-list {
+    height: 500px;
+}
+
+#display_cartList>td {
+    font-size: 12px;
+}
+
+#display_cartList>tr {
+    margin: 5px 0;
+}
+
+#display_cartList>td {
+    text-align: center;
+    vertical-align: center;
+}
+
+.row-tensanpham {
+    text-align: left;
+    width: 160px;
+}
+
+.row-giatien {
+    width: 130px;
+}
+
+.iconBig {
+    transform: scale(1.5);
+}
+
+.modal-lg {
+    max-width: 1000px;
+}
+
+tr:nth-child(even) {
+    background-color: none;
+}
+
+.sale-container {}
