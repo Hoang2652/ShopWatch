@@ -17,7 +17,7 @@
                     <th>ID hóa đơn</th>
                     <th style="width: 130px;">Tên kho hàng</th>
                     <th style="width: 200px;">Địa chỉ</th>
-					<th style="width: 100px;">Ngày giao hàng</th>
+					<th style="width: 100px;">Ngày thành lập</th>
                     <th style="width: 150px;">Ghi chú</th>
 					<th style="width: 90px;">Thao tác</th>
                 </tr>

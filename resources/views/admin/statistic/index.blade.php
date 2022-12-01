@@ -5,50 +5,54 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
 <div class="quanlysp">
-    <div class="card col-md-11">
+    <div style="margin-top: 15px;">
         <h5>THỐNG KÊ DOANH THU</h5>
-        <div class="card-header row">
-            <div class=" row col-sm-3">
-                <label for="inputCity" class="col-sm-4 col-form-label">Từ:</label>
-                <input type="date" class="form-control col-sm-8" id="profit-inputfromdate">
+        <div class="card col-md-11">
+            <div class="card-header row">
+                <div class=" row col-sm-3">
+                    <label for="inputCity" class="col-sm-4 col-form-label">Từ:</label>
+                    <input type="date" class="form-control col-sm-8" id="profit-inputfromdate">
+                </div>
+                <div class=" row col-sm-3">
+                    <label for="inputState" class="col-sm-4 col-form-label">Đến:</label>
+                    <input type="date" class="form-control col-sm-8" id="profit-inputtodate" name="khoangthoigian">
+                </div>
+                <div class=" col-sm-2">
+                    <button id="btn-thongke-doanhthu" class="btn btn-primary" style="display: inline-block;">Thống kê</button>
+                </div>
             </div>
-            <div class=" row col-sm-3">
-                <label for="inputState" class="col-sm-4 col-form-label">Đến:</label>
-                <input type="date" class="form-control col-sm-8" id="profit-inputtodate" name="khoangthoigian">
+            <div class="card-body chart-responsive">
+                <div id="doanhthuchart" style="height: 250px;"></div>
             </div>
-            <div class=" col-sm-2">
-                <button id="btn-thongke-doanhthu" class="btn btn-primary" style="display: inline-block;">Thống kê</button>
+            <div class="card-footer row">
+                Biểu đồ thống kê doanh thu: <span id="tenchart-doanhthu-change" style="margin-left:5px;"> toàn thời gian</span>
             </div>
-        </div>
-        <div class="card-body chart-responsive">
-            <div id="doanhthuchart" style="height: 250px;"></div>
-        </div>
-        <div class="card-footer row">
-            Biểu đồ thống kê doanh thu: <span id="tenchart-doanhthu-change" style="margin-left:5px;"> toàn thời gian</span>
         </div>
     </div>
-    <h5>THỐNG KÊ SẢN PHẨM ĐÃ BÁN</h5>
-    <div class="card col-md-6">
-        <div class="card-header row">
-            <div class=" row col-sm-5">
-                <label for="inputCity" class="col-sm-4 col-form-label">Từ:</label>
-                <input type="date" class="form-control col-sm-8" id="product-inputfromdate">
+    <div style="margin-top: 15px;">
+        <h5>THỐNG KÊ SẢN PHẨM ĐÃ BÁN</h5>
+        <div class="card col-md-6">
+            <div class="card-header row">
+                <div class=" row col-sm-5">
+                    <label for="inputCity" class="col-sm-4 col-form-label">Từ:</label>
+                    <input type="date" class="form-control col-sm-8" id="product-inputfromdate">
+                </div>
+                <div class=" row col-sm-5">
+                    <label for="inputState" class="col-sm-4 col-form-label">Đến:</label>
+                    <input type="date" class="form-control col-sm-8" id="product-inputtodate" name="khoangthoigian">
+                </div>
+                <div class=" col-sm-2">
+                    <button id="btn-thongke-sanpham" class="btn btn-primary" style="display: inline-block;">Thống kê</button>
+                </div>
             </div>
-            <div class=" row col-sm-5">
-                <label for="inputState" class="col-sm-4 col-form-label">Đến:</label>
-                <input type="date" class="form-control col-sm-8" id="product-inputtodate" name="khoangthoigian">
+            <div class="card-body chart-responsive">
+                <div id="productChart" style="height: 250px;"></div>
             </div>
-            <div class=" col-sm-2">
-                <button id="btn-thongke-sanpham" class="btn btn-primary" style="display: inline-block;">Thống kê</button>
+            <div class="card-footer row">
+                Biểu đồ thống kê sản phẩm đã bán: <span id="tenchart-sanpham-change" style="margin-left:5px;"> toàn thời gian</span>
             </div>
         </div>
-        <div class="card-body chart-responsive">
-            <div id="productChart" style="height: 250px;"></div>
-        </div>
-        <div class="card-footer row">
-            Biểu đồ thống kê sản phẩm đã bán: <span id="tenchart-sanpham-change" style="margin-left:5px;"> toàn thời gian</span>
-        </div>
-      </div>
+    </div>
     
     {{-- <div class="khungbang" style="margin-top: 20px;">
             <div class="form-row">

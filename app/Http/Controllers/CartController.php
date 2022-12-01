@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\HomeController;
 use DB;
 use App\Http\Requests;
 use App\Model\Hoadon;
@@ -74,7 +75,8 @@ class CartController extends Controller
     }
     //get view cart
     public function getViewCart(){
-        return view('pages.cart.cart');
+        $temp = new HomeController;
+        return view('pages.cart.cart')->with('BillNofitication',$temp->getBillNofitication());
     }
 
     public function delete_to_cart($rowId){

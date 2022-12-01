@@ -12,12 +12,12 @@
             </div>
             <div class="form-row col-md-2 mb-3 mr-1 ml-1">
                 <div>
-                    <a href="{{ URL::to('/admin/import-Bill') }}" class="btn btn-primary mg-3">Thêm hóa đơn nhập kho</a>
+                    <a href="{{ URL::to('/admin/import-Bill/add') }}" class="btn btn-primary mg-3">Thêm hóa đơn nhập kho</a>
                 </div>
             </div>
             <div class="form-row col-md-2 mb-3 mr-1">
                 <div>
-                    <a href='{{ URL::to('/admin/export-Bill') }}' class="btn btn-primary mg-3">Thêm hóa đơn xuất kho</a>
+                    <a href='{{ URL::to('/admin/export-Bill/add') }}' class="btn btn-primary mg-3">Thêm hóa đơn xuất kho</a>
                 </div>
             </div>
             <div class="col-md-3 mb-3 form-row">

@@ -165,20 +165,88 @@ class BillController extends Controller
 
     // Function: get all bill detail by given bill ID
     public function getBillDetailById($BillID){
-        return DB::table('chitiethoadon')->where('idhoadon', $BillID)->leftJoin('sanpham','sanpham.idsanpham','=','chitiethoadon.quatang')->select('chitiethoadon.*','sanpham.tensanpham AS tenquatang')->get();
+        return DB::table('chitiethoadon')->where('idhoadon', $BillID)
+                                         ->leftJoin('sanpham','sanpham.idsanpham','=','chitiethoadon.quatang')
+                                         ->select('chitiethoadon.*','sanpham.tensanpham AS tenquatang','sanpham.idsanpham AS idquatang')
+                                         ->get();
+    }
+
+    public function getStorageProductList(Request $request){
+        if ($request->ajax()) {
+            $BillID = $request->get('billID');
+            $ProductList = $request->get('inputProduct');
+        }
+        
+        $table_row = DB::table('chitiethoadon')->where('idhoadon',$BillID)
+                                        ->join('vitrisanpham','vitrisanpham.idsanpham', '=', 'chitiethoadon.idsanpham')
+                                        ->where('vitrisanpham.soluong', '>=', 'chitiethoadon.soluong')
+                                        ->join('vitrikhohang','vitrikhohang.idvitrikhohang', '=' , 'vitrisanpham.idvitrikhohang')
+                                        ->join('khohang','khohang.idkhohang', '=' , 'vitrikhohang.idkhohang')
+                                        ->select('vitrisanpham.idsanpham','chitiethoadon.soluong as soluongyeucau','vitrikhohang.idkhohang','khohang.tenkhohang','vitrisanpham.soluong as soluongconlai','vitrisanpham.idvitrikhohang as idvitrikhohang')
+                                        ->get();
+
+        $addition_data = DB::table('chitiethoadon')->where('idhoadon',$BillID)
+                                        ->join('vitrisanpham','vitrisanpham.idsanpham', '=', 'chitiethoadon.quatang')
+                                        ->where('vitrisanpham.soluong', '>=', 'chitiethoadon.soluong')
+                                        ->join('vitrikhohang','vitrikhohang.idvitrikhohang', '=' , 'vitrisanpham.idvitrikhohang')
+                                        ->join('khohang','khohang.idkhohang', '=' , 'vitrikhohang.idkhohang')
+                                        ->select('vitrisanpham.idsanpham','chitiethoadon.soluong as soluongyeucau','vitrikhohang.idkhohang','khohang.tenkhohang','vitrisanpham.soluong as soluongconlai','vitrisanpham.idvitrikhohang as idvitrikhohang')
+                                        ->get();
+
+        $result = $table_row->merge($addition_data);
+        // dd($result);
+        $data = [
+            'table_row' => $result
+        ];
+        return $data;
+    }
+
+    public function getStorageProductToDeliver(Request $request){
+        if ($request->ajax()) {
+            $BillID = $request->get('billID');
+            $ProductList = $request->get('inputProduct');
+            // dd($request->all());
+        }
+        $message = "";
+
+        //contain 3 procedure (subtract soluong from vitrisanpham, set trangthai hoadon to on delivery and set product location on bill detail)
+        DB::beginTransaction();
+        try {
+            //subtract product from sanphamtrongkho and set location to product on bill detail
+            foreach($ProductList as $row){
+                $idkhohang = DB::table('vitrikhohang')->where('idvitrikhohang','=', $row['idvitrikhohang'])
+                                          ->select('idkhohang')
+                                          ->first();
+                DB::table('chitiethoadon')->where('idhoadon',$BillID)->update(['idkhohang' => $idkhohang->idkhohang ]);
+                DB::table('vitrisanpham')->where('idsanpham', $row['idsanpham'])
+                                         ->where('idvitrikhohang', $row['idvitrikhohang'])
+                                         ->decrement('soluong', $row['soluong']);
+            }
+
+            // set status on bill to on delivery
+            DB::table('hoadon')->where('idhoadon',$BillID)->update(['trangthai' => 'Đang giao hàng']);
+            DB::commit();
+            $message = "Xử lý hóa đơn (Mã hóa đơn: <b>" .$BillID. "</b>) thành công!";
+        } catch (\Exception $e) {
+            DB::rollback();
+            $message = "Xử lý hóa đơn thất bại, Vui lòng kiểm tra thử lại ";
+            // something went wrong
+        }
+
+        return ['message' => $message];
     }
 
     // change bill status by ID
     public function changeBillStatusByID(Request $request)
     {
-        $BillID = $request->id;
+        $BillID = $request->idhoadon;
         $status = $request->status;
         $changeStatus = hoadon::where('idhoadon', $BillID)->update(['trangthai' => $status]);
         if($changeStatus){
             toastr()->success('Đã chuyển hóa đơn sang trạng thái <b>'.$status.'</b> !');
             return redirect('/admin/bill');
         } else {
-            toastr()->success('Chuyển trạng thái <b>'.$status.'</b> thất bại!');
+            toastr()->error('Chuyển trạng thái hóa đơn <b>'.$BillID.'</b> thất bại!');
             return redirect('/admin/bill');
         }
 

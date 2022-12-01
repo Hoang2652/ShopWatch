@@ -27,10 +27,13 @@ class StatisticController extends Controller
         $DateList = DB::table('hoadon')->select('created_at')
                                        ->whereDate('created_at', '>=', $fromDate)
                                        ->whereDate('created_at', '<=', $toDate)
+                                       ->where('trangthai','Hoàn tất')
                                        ->oldest()->distinct()->get();
+
         foreach($DateList as $row){
-            $SaleByDate = DB::table('hoadon')->select('hoadon.idhoadon','chitiethoadon.gia','chitiethoadon.soluong','chitiethoadon.giamgia')
-                                             ->whereDate('hoadon.created_at',$row->created_at)
+            $SaleByDate = DB::table('hoadon')
+                                             ->select('hoadon.idhoadon','chitiethoadon.gia','chitiethoadon.soluong','chitiethoadon.giamgia')
+                                             ->where('hoadon.created_at',$row->created_at)
                                              ->join('chitiethoadon', 'chitiethoadon.idhoadon', '=', 'hoadon.idhoadon')
                                              ->get()->toArray();
             $doanhthu = 0;

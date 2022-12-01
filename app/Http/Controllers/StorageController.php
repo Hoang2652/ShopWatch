@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\IEBillRequest;
 use DB;
 use App\Models\Khohang;
 use App\Models\Vitrikhohang;
+use App\Models\Hoadonnhapxuatkho;
+use App\Models\Chitiethoadonnhapxuatkho;
 
 class StorageController extends Controller
 {
@@ -32,7 +35,10 @@ class StorageController extends Controller
         $kho = DB::table('khohang')
                     ->where('idkhohang',$id)
                     ->get();
-        $info = DB::select('select * from vitrikhohang, vitrisanpham, sanphamtrongkho where vitrisanpham.idsanpham=sanphamtrongkho.idsanpham AND vitrikhohang.idvitrikhohang = vitrisanpham.idvitrikhohang AND vitrikhohang.idkhohang = :id', ['id' => $id]);
+        $info = DB::select('select * from vitrikhohang, vitrisanpham, sanpham 
+                            where vitrisanpham.idsanpham=sanpham.idsanpham 
+                            AND vitrikhohang.idvitrikhohang = vitrisanpham.idvitrikhohang 
+                            AND vitrikhohang.idkhohang = :id', ['id' => $id]);
         
         return view('admin.storage.infoStorage')
                 ->with('kho',$kho)
@@ -45,6 +51,111 @@ class StorageController extends Controller
                     ->get();
         return view('admin.storage.iemanage')
                     ->with('bill',$bill);
+    }
+
+    public function addImportBill(IEBillRequest $request){
+        $content = $request->product;
+        DB::beginTransaction();
+        try {
+            $hoadonnhapxuatkho = new Hoadonnhapxuatkho;
+            $hoadonnhapxuatkho->tendoitac = $request->tendoitac;
+            $hoadonnhapxuatkho->dienthoai = $request->dienthoai;
+            $hoadonnhapxuatkho->email = $request->email;
+            $hoadonnhapxuatkho->created_at = $request->created_at;
+            $hoadonnhapxuatkho->diachixuatkho = $request->diachixuatkho;
+            $hoadonnhapxuatkho->diachinhapkho = $request->diachinhapkho;
+            $hoadonnhapxuatkho->loaihoadon = "nhập";
+            $hoadonnhapxuatkho->trangthai = "Đang xử lý";
+            $hoadonnhapxuatkho->save();
+
+            $count = 1;
+            foreach($content as $row){
+                if(is_null($row['tensanpham']) && is_null($row['idsanpham']) && is_null($row['dongia']) && is_null($row['soluong']) && is_null($row['donvi']))
+                    continue;
+
+                if(is_null($row['tensanpham']) || is_null($row['idsanpham']) || is_null($row['dongia']) || is_null($row['soluong']) || is_null($row['donvi'])){
+                    toastr()->error('Dòng dữ liệu thứ '.(++$count).' chưa đầy đủ ! Vui lòng điền đầy đủ dữ liệu hoặc bỏ trống nguyên 1 dòng');
+                    return redirect('admin/import-Bill/add');
+                }
+
+                // Thao tác thêm chi tiêt hóa đơn
+                $Chitiet = new Chitiethoadonnhapxuatkho;
+                $Chitiet->idhoadonnhapxuatkho = $hoadonnhapxuatkho->idhoadonnhapxuatkho;
+                $Chitiet->tensanpham = $row['tensanpham'];
+                $Chitiet->idsanpham = $row['idsanpham'];
+                $Chitiet->dongia = $row['dongia'];
+                $Chitiet->soluong = $row['soluong'];
+                $Chitiet->donvi = $row['donvi'];
+                $Chitiet->save();
+            }
+            DB::commit();
+            toastr()->success("Thêm hóa đơn nhập kho thành công !");
+            return Redirect('/admin/import-Bill/add');
+        } catch (\Exception $e) {
+            DB::rollback();
+            toastr()->error('Ôi không có sự cố khi thêm hóa đơn nhập kho, vui lòng thử lại sau !'.$e);
+            return redirect('admin/import-Bill/add');
+            // something went wrong
+        }
+    }
+
+    public function addExportBill(Request $request){
+        $content = $request->product;
+        // dd($request->all());
+        if($content == null){
+            toastr()->error('Bạn <b>phải</b> thêm sản phẩm sản phẩm vào hóa đơn');
+            return redirect('admin/export-Bill/add');
+        }
+        DB::beginTransaction();
+        try {
+            $hoadonnhapxuatkho = new Hoadonnhapxuatkho;
+            $hoadonnhapxuatkho->tendoitac = $request->tendoitac;
+            $hoadonnhapxuatkho->dienthoai = $request->dienthoai;
+            $hoadonnhapxuatkho->email = $request->email;
+            $hoadonnhapxuatkho->created_at = $request->created_at;
+            $hoadonnhapxuatkho->diachixuatkho = $request->diachixuatkho;
+            $hoadonnhapxuatkho->diachinhapkho = $request->diachinhapkho;
+            $hoadonnhapxuatkho->loaihoadon = "xuất";
+            $hoadonnhapxuatkho->trangthai = "Đang xử lý";
+            $hoadonnhapxuatkho->save();
+
+            foreach($content as $row){
+
+                // Thao tác thêm chi tiêt hóa đơn
+                $Chitiet = new Chitiethoadonnhapxuatkho;
+                $Chitiet->idhoadonnhapxuatkho = $hoadonnhapxuatkho->idhoadonnhapxuatkho;
+                $Chitiet->tensanpham = $row['tensanpham'];
+                $Chitiet->idsanpham = $row['idsanpham'];
+                $Chitiet->dongia = $row['dongia'];
+                $Chitiet->soluong = $row['soluong'];
+                $Chitiet->donvi = $row['donvi'];
+                $Chitiet->save();
+            }
+            DB::commit();
+            toastr()->success("Thêm hóa đơn xuất kho thành công !");
+            return Redirect('/admin/export-Bill/add');
+        } catch (\Exception $e) {
+            DB::rollback();
+            toastr()->error('Ôi không có sự cố khi thêm hóa đơn xuất kho, vui lòng thử lại sau !');
+            return redirect('admin/export-Bill/add');
+            // something went wrong
+        }
+    }
+
+    public function liveSearchStorage(Request $request){
+        if (!$request->ajax()) {
+            return;
+        }
+
+        $keyword = $request->get('keyword');
+        $result = DB::table('sanpham')->where('tensanpham','like','%'.$keyword.'%')
+                                      ->orWhere('idsanpham','like','%'.$keyword.'%')
+                                      ->select('idsanpham','hinhanh','tensanpham','soluong','gia')
+                                      ->limit(15)
+                                      ->get();
+        // dd($result);
+        $data = ['table_row' => $result];
+        return $data;
     }
 
     public function getViewAddLocation($id){
@@ -80,6 +191,19 @@ class StorageController extends Controller
         return view('admin.storage.infoBill')
                 ->with('info', $info)
                 ->with('id', $id);
+    }
+
+    // go to print UI and select options
+    public function printInfoBill($id){
+        $BillDetail = DB::table('chitiethoadonnhapxuatkho')
+                    ->where('idhoadonnhapxuatkho', $id)
+                    ->get();
+        $BillInfo = DB::table('hoadonnhapxuatkho')
+                    ->where('idhoadonnhapxuatkho', $id)
+                    ->first();
+        return view('admin.storage.printIEBill')
+                ->with('BillDetail', $BillDetail)
+                ->with('BillInfo', $BillInfo);
     }
 
     public function addStorage(Request $request){

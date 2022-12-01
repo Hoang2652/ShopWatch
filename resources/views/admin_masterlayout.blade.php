@@ -25,24 +25,25 @@
 	<title> Quản lý Phong Hấp </title>
 </head>
 <body>
+	@php
+		$admin = Session::get('admin_name');
+		$phanquyen = Session::get('phanquyen');
+	@endphp
 <div id="wapper">
 	<div id="content">
 		<div id="top-content">
 			<div class="lg-header">
 				<h1><a href="admin.php"><img src="{{ asset('public/backend/images/logo-header.png') }}" alt="logo" class="lg-header-img"></a></h1>
 			</div>	
-			<p>Chào bạn <a href="../index.php?content=ttcn"><font color="white"><b><i class="fas fa-user"></i> <u>Hoàng Ezz</u></b></font></a><a href="{{ URL::to('/logout') }}" class="bt-logout">  Đăng xuất</a></p>
+			<p>Chào bạn <a href="../index.php?content=ttcn"><font color="white"><b><i class="fas fa-user"></i> <u>{{ Session::get('tennguoidung'); }}</u></b></font></a><a href="{{ URL::to('/logout') }}" class="bt-logout">  Đăng xuất</a></p>
 		</div>
 		<div id="main-content">
-			@php
-				$admin = Session::get('admin_name');
-				$store = Session::get('Store_manager_id');
-			@endphp
+
 			<div id="left-content">
 				<div class="danhmucsp">
 					<div class="center" id="change-Class">
 						<ul>
-							@if(isset($admin))
+							@if($phanquyen == "Quản trị viên")
 								<li><a href="{{URL::to('admin/home')}}" class="changec">Trang chủ</a></li>
 								<li><a href="{{URL::to('admin/category')}}" class="changec"> Quản lý danh mục</a></li>
 								<li><a href="{{URL::to('admin/user')}}" class="changec"> Quản lý người dùng</a></li>
@@ -51,27 +52,20 @@
 								<li><a href="{{URL::to('admin/support')}}" class="changec"> Hỗ trợ khách hàng</a></li>
 								<li><a href="{{URL::to('admin/product')}}" class="changec"> Quản lý sản phẩm</a></li>
 								<li><a href="{{URL::to('admin/bill')}}" class="changec"> Quản lý hóa đơn</a></li>
-							@else
+							@elseif($phanquyen == "Nhân viên kho hàng")
 								<li><a href="{{URL::to('admin/home')}}" class="changec">Trang chủ</a></li>
 								<li><a href="{{URL::to('admin/homeStorage')}}" class="changec">Quản lý kho hàng</a></li>
-								<li><a href="{{URL::to('admin/iemanage')}}" class="changec">Quản lý nhập xuất</a></li>	
+								<li><a href="{{URL::to('admin/iemanage')}}" class="changec">Nhập xuất kho hàng</a></li>	
+							@elseif($phanquyen == "Nhân viên bán hàng")
+								<li><a href="{{URL::to('admin/home')}}" class="changec">Trang chủ</a></li>
+								<li><a href="{{URL::to('admin/bill')}}" class="changec"> Quản lý hóa đơn</a></li>
+								<li><a href="{{URL::to('/sale')}}" class="changec"> Quản lý bán hàng</a></li>
 							@endif					
 						</ul>
 					</div><!-- End .center -->
 				</div>	<!-- End .menu-left -->
 			</div><!-- End .left-content -->
-			@else
-			<div id="left-content">
-				<div class="danhmucsp">
-					<div class="center" id="change-Class">
-						<ul>
-							<li><a href="{{URL::to('admin/home')}}" class="changec">Trang chủ</a></li>
-							<li><a href="{{URL::to('admin/bill')}}" class="changec"> Quản lý hóa đơn</a></li>
-							<li><a href="{{URL::to('/sale')}}" class="changec"> Quản lý bán hàng</a></li>
-						</ul>
-					</div><!-- End .center -->
-				</div>	<!-- End .menu-left -->
-			</div><!-- End .left-content -->							
+
 			{{------------- Hiển trị content-admin--------------}}
 			
 			

@@ -8,11 +8,25 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\RegisterRequest;
 use DB;
+use Auth;
 use App\Models\Nguoidung;
 session_start();
 
 class HomeController extends Controller
 {
+    protected $billNofiticationInDays = 365;
+    protected $billNofitication;
+
+    public function getBillNofitication(){
+        $idnguoidung = Session::get('idnguoidung');
+        if(isset($idnguoidung)){
+            return DB::table('hoadon')->where('idnguoidung',$idnguoidung)
+                                                   ->whereBetween('created_at', [now()->subDays($this->billNofiticationInDays), now()])
+                                                   ->select('idhoadon','trangthai')
+                                                   ->latest()
+                                                   ->get();
+        }
+    }
     // index show all product by standards
     public function index(){
         $headPageProduct = DB::table('sanpham')->join('sanphamdecu', function ($join) {
@@ -33,13 +47,15 @@ class HomeController extends Controller
             $join->on('sanpham.idsanpham', '=', 'sanphamdecu.idsanpham')->where('sanphamdecu.idsanphamdecu',3);
         })->limit(8)->get();
 
+
         //trả về trang home cùng đống dữ liệu
         return view('pages.home.home')->with('headPageProduct',$headPageProduct)
                                  ->with('bestSaleProuctList',$bestSaleProuctList)
                                  ->with('middlePageProduct',$middlePageProduct)
                                  ->with('NewestProductList',$NewestProductList)
                                  ->with('NewsList',$NewsList)
-                                 ->with('recommendedProductList',$recommendedProductList);
+                                 ->with('recommendedProductList',$recommendedProductList)
+                                 ->with('billNofitication', $this->getBillNofitication());
     }
 
     public function loginPage(){
@@ -55,30 +71,45 @@ class HomeController extends Controller
         $matkhau = MD5($request->matkhau);
 
         $result = DB::table('nguoidung')
-                        ->where('tendangnhap',$tendangnhap)
-                        ->orWhere('email',$tendangnhap)
-                        ->where('matkhau',$matkhau)
+                        ->where(function ($query) use($tendangnhap,$matkhau) {
+                            $query->where('tendangnhap', '=', $tendangnhap)
+                                  ->orWhere('email', '=', $tendangnhap);
+                        })->where('matkhau','=',$matkhau)
                         ->first();
-        if($result && ($result->phanquyen == 'Quản trị viên' || $result->phanquyen == 'Nhân viên')){
+
+        // dd($result);
+
+        if($result && ($result->phanquyen == 'Quản trị viên')){
             Session::put('phanquyen', $result->phanquyen);
-            Session::put('admin_name', $result->tennguoidung);
-            Session::put('admin_id', $result->idnguoidung);
+            Session::put('tennguoidung', $result->tennguoidung);
+            Session::put('idnguoidung', $result->idnguoidung);
+            toastr()->success("Đăng nhập quản trị viên thành công, Xin chào <b>".$result->tennguoidung."</b>.");
             return Redirect::to('/admin/home');
-        }
-        else if($result && $result->phanquyen == 'Quản lý kho'){
+        } else if($result && ($result->phanquyen == 'Nhân viên bán hàng')){
             Session::put('phanquyen', $result->phanquyen);
-            Session::put('Store_manager_name', $result->tennguoidung);
-            Session::put('Store_manager_id', $result->idnguoidung);
+            Session::put('tennguoidung', $result->tennguoidung);
+            Session::put('idnguoidung', $result->idnguoidung);
+            toastr()->success("Đăng nhập thành công, Xin chào <b>".$result->tennguoidung."</b>.");
+            return Redirect::to('/sale');
+        }
+        else if($result && ($result->phanquyen == 'Nhân viên kho hàng')){
+            Session::put('phanquyen', $result->phanquyen);
+            Session::put('tennguoidung', $result->tennguoidung);
+            Session::put('idnguoidung', $result->idnguoidung);
+            toastr()->success("Đăng nhập thành công, Xin chào <b>".$result->tennguoidung."</b>.");
             return Redirect::to('/admin/homeStorage');
         }
         else if($result && $result->phanquyen == 'Khách hàng'){
             Session::put('phanquyen', $result->phanquyen);
-            Session::put('idnguoidung', $result->idnguoidung);
             Session::put('tennguoidung', $result->tennguoidung);
+            Session::put('idnguoidung', $result->idnguoidung);
+            toastr()->success("Đăng nhập thành công, Xin chào <b>".$result->tennguoidung."</b>.");
             return Redirect::to('/');
         }
-        else
+        else{
+            toastr()->error("Đăng nhập thất bại. Vui lòng kiểm tra lại tên đăng nhập hoặc mật khẩu");
             return Redirect::to('/login');
+        }
     }
 
     public function logout(){

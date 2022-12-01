@@ -83,5 +83,4 @@
         <div id='thongbaokhongco'>Chưa có sản phẩm nào được thêm vào giỏ hàng !</div>
     @endif
 </div>
-
 @endsection

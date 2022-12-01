@@ -4,6 +4,14 @@
     margin-bottom: 0;
 }
 
+.btn {
+    font-size: 14px;
+}
+
+.table-padding-disabled {
+    padding: 0;
+}
+
 
 /*--------------- css live sreach ----------*/
 
@@ -260,7 +268,7 @@ a button.so {
 
 .bill-detail {
     float: left;
-    width: 770px;
+    width: 100%;
     overflow: auto;
 }
 
@@ -283,6 +291,14 @@ a button.so {
     float: right;
 }
 
+.storage_select {
+    width: 200px;
+}
+
+.stt_hienthi_sp {
+    min-width: 150px;
+}
+
 
 /* CSS for support manage */
 
@@ -293,6 +309,17 @@ a button.so {
 .custom-list-scroll {
     overflow: auto;
     max-height: 400px;
+}
+
+.row-fluid {
+    text-align: center;
+    margin-top: 10px;
+    border-bottom: 1px solid #d1d1d1;
+    margin-bottom: 10px;
+}
+
+.custom-support-table>tbody>tr>td {
+    padding: 10px 3px;
 }
 
 
@@ -374,4 +401,34 @@ tr:nth-child(even) {
     background-color: none;
 }
 
-.sale-container {}
+
+/* Export live search css */
+
+ul.live-search-list li {
+    margin: 2px;
+}
+
+.row.no-found-result {
+    width: fit-content;
+    margin: auto;
+    height: 50px;
+    align-content: center;
+    font-weight: bold;
+}
+
+ul.live-search-list li div {
+    padding: 0px 3px;
+    font-size: 12px;
+    text-align: center;
+    align-content: center;
+    transition: 0.2s;
+}
+
+ul.live-search-list li:hover {
+    background-color: rgb(220, 220, 220);
+}
+
+ul.live-search-list li div img {
+    width: 45px;
+    height: 45px;
+}

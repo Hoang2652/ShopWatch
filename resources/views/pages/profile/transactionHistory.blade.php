@@ -1,6 +1,65 @@
 @extends('masterlayout')
 @section('transactionHistory')
 
+<script>
+$(document).ready(function () {
+    setNotification();
+    function setNotification(){
+		var billNofitication = <?php if(isset($billNofitication) && $billNofitication != null){echo json_encode($billNofitication->toArray());} ?>;
+		var actionsHtml ="";
+		billNofitication.forEach(function(row) {
+			switch(row.trangthai){
+				case 'Chờ xử lý':
+					actionsHtml +=`
+					<div class="notifications-item"> <img src="{{asset('public/uploads/status/stopwatch.png')}}" alt="img">
+						<a href="{{ URL::to('/thongtincanhan/lichsumuahang') }}">
+							<div class="text">
+								<h4>Đơn hàng (Mã: ` + row.idhoadon + `)</h4>
+								<p>Đơn hàng của bạn đã được tiếp nhận chờ xử lý...</p>
+							</div>
+						</a>
+					</div>`;
+					break;
+				case 'Đang giao hàng':
+					actionsHtml +=`
+					<div class="notifications-item"> <img src="{{asset('public/uploads/status/cargo-truck.png')}}" alt="img">
+						<a href="{{ URL::to('/thongtincanhan/lichsumuahang') }}">
+							<div class="text">
+								<h4>Đơn hàng (Mã: ` + row.idhoadon + `)</h4>
+								<p>Đơn hàng của bạn đang được giao, nếu đã nhận hàng hãy feedback về cho chúng tôi...</p>
+							</div>
+						</a>
+					</div>`;	
+					break;
+				case 'Hoàn tất':
+					actionsHtml +=`
+					<div class="notifications-item"> <img src="{{asset('public/uploads/status/delivery.png')}}" alt="img">
+						<a href="{{ URL::to('/thongtincanhan/lichsumuahang') }}">
+							<div class="text">
+								<h4>Đơn hàng (Mã: ` + row.idhoadon + `)</h4>
+								<p>bạn cảm thấy sản phẩm của bạn như thế nào, xin cho biết cảm nghĩ về sản phẩm của chúng tôi</p>
+							</div>
+						</a>
+					</div>`;	
+					break;
+				case 'Đã hủy':
+					actionsHtml +=`
+					<div class="notifications-item"> <img src="{{asset('public/uploads/status/cancel.png')}}" alt="img">
+						<a href="{{ URL::to('/hotro') }}">
+							<div class="text">
+								<h4>Đơn hàng (Mã: ` + row.idhoadon + `)</h4>
+								<p>Đơn hàng của bạn đã được hủy, mọi thắc mắc hãy gửi về hộp thư hỗ trợ của chúng tôi</p>
+							</div>
+						</a>
+					</div>`;	
+					break;
+        	}
+		});
+        $('#box').html(actionsHtml);
+        $('#nofiticationNumber').html(billNofitication.length);
+	}
+});
+</script>
 @php
     $idnguoidung = session::get('idnguoidung');
 @endphp
@@ -75,16 +134,31 @@
                             @endforeach
                             <tr>
                                 <td colspan=5 style='padding:10px; font-size:16px;' class='tongtienhoadon'>
-                                    <div style='float:left;font-size: 14px;font-weight: bold;padding: 5px;'>Trạng thái đơn hàng:
-                                        @if($viewBill->trangthai == 1)
-                                            Chưa xử lý 
-                                        @elseif($viewBill->trangthai == 2) 
-                                            <font color='blue'>Đã giao hàng</font>
-                                        @else 
-                                            <font color='red'>Đã hủy đơn hàng</font>
-                                        @endif
-                                    </div> 
-                                    <div style='float:right;'>Tổng tiền: <b><font color='red'>{{ number_format($tongtien,0,",",".") }}</font></b> VND</div>
+                                    <div class="row">
+                                        <div class="col-sm-6" style='float:left;font-size: 14px;font-weight: bold;padding: 5px;'>Trạng thái đơn hàng:
+                                            {{ $viewBill->trangthai }}
+                                        </div> 
+                                        <div class="col-sm-6" style='float:right;'>Tổng tiền: <b><font color='red'>{{ number_format($tongtien,0,",",".") }}</font></b> VND</div>
+                                    </div>
+                                    <form action="{{ URL::to('/customerRequire/execute') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <div class="row actionBill">
+                                            <input name="idhoadon" value="{{ $viewBill->idhoadon }}" hidden/>
+                                            @switch($viewBill->trangthai)
+                                                @case("Chờ xử lý")
+                                                    <button name="status" class="btn btn-danger" value="Yêu cầu bồi hoàn">Yêu cầu bồi hoàn</button>
+                                                    @break
+                                                @case("Đang giao hàng")
+                                                    <button name="status" class="btn btn-danger" value="Yêu cầu bồi hoàn">Yêu cầu bồi hoàn</button>
+                                                    @break
+                                                @case("Đã giao hàng")
+                                                    <button name="status" class="btn btn-danger" value="Yêu cầu bồi hoàn">Yêu cầu bồi hoàn</button>
+                                                    <button name="status" class="btn btn-success" value="Hoàn tất">Xác nhận đã lấy hàng</button>
+                                                    @break
+                                                @default
+                                            @endswitch
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         </table>

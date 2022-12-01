@@ -43,7 +43,7 @@
     </table>
     <div id="inhoadon">
         <p style="float:right; margin: 1rem 2rem ; padding-right:30px;">
-            <a class="btn btn-primary" href="inhoadonnhapxuat.php?idhoadonnhapxuatkho=" target="_blank">
+            <a class="btn btn-primary" href="{{ URL::to('/admin/IEBillPrint/id='.$id) }}" target="_blank">
                 In hoá đơn
             </a>
             </p>

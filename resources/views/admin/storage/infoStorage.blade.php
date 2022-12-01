@@ -36,7 +36,7 @@
                         <td class="masp_hienthi_sp">{{ $row->tensanpham }}</td>
                         <td class="masp_hienthi_sp">{{ $row->idsanpham }}</td>
                         <td class="stt_hienthi_sp">{{ $row->soluong }}</td>
-                        <td class="sl_hienthi_sp">{{ $row->dongia }}</td>
+                        <td class="sl_hienthi_sp">{{ $row->gia }}</td>
                         <td class="sl_hienthi_sp">sẵn sàng xuất kho</td>
                         <td class="active_hienthi_sp" style="width:70px;">
                             <a href="admin.php?admin=xulyhangtonkho&submit-formchinhsuasanphamtonkho="><i class="fas fa-info-circle" style='transform: scale(1.5); color: #007bff;'></i></a>                    
