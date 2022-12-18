@@ -15,11 +15,11 @@
 <link rel="stylesheet" style="style/sheet" href="{{asset('public/frontend/css/style1.css')}}">
 <link rel="stylesheet" style="style/sheet" href="{{asset('public/frontend/css/index.css')}}">
 
+<script src="{{asset('public/frontend/js/jquery-1.3.2.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('public/frontend/js/code.js')}}"></script>
 <script language="javascript" type="text/javascript" src="{{asset('public/frontend/js/jquery.easing.js')}}"></script>
 <script language="javascript" type="text/javascript" src="{{asset('public/frontend/js/script.js')}}"></script>
 <script src="https://kit.fontawesome.com/2c8a18bbf3.js" crossorigin="anonymous"></script>
-<script src="{{asset('public/frontend/js/jquery-1.3.2.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('public/frontend/js/code.js')}}"></script>
 
 <!-------------------------------------Tabs-------------------------------->
 <script>
@@ -28,60 +28,83 @@
 
 $(document).ready(function(){
 
-$('ul.tabs').each(function(){
+	// dropdown siêu khủng
+	var down = false;
+	$('#bell').click(function(e){
+		var color = $(this).text();
+		$('#box').css('overflow', 'auto');
+		if(down){
+			$('#box').css('height','0px');
+			$('#box').css('opacity','0');
+			down = false;
+		} else {
+			$('#box').css('height','auto');
+			$('#box').css('max-height','500px');
+			$('#box').css('opacity','1');
+			down = true;
+			$('#main-content').click(function(e){
+				$('#box').css('height','0px');
+				$('#box').css('opacity','0');
+				down = false;
+			});
+		}
+	});
 
-// For each set of tabs, we want to keep track of
-// which tab is active and it's associated content
 
-var $active, $content, $links = $(this).find('a');
+	$('ul.tabs').each(function(){
 
-// If the location.hash matches one of the links, use that as the active tab.
+	// For each set of tabs, we want to keep track of
+	// which tab is active and it's associated content
 
-// If no match is found, use the first link as the initial active tab.
+	var $active, $content, $links = $(this).find('a');
 
-$active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+	// If the location.hash matches one of the links, use that as the active tab.
 
-$active.addClass('active');
+	// If no match is found, use the first link as the initial active tab.
 
-$content = $($active.attr('href'));
+	$active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
 
-// Hide the remaining content
+	$active.addClass('active');
 
-$links.not($active).each(function () {
+	$content = $($active.attr('href'));
 
-$($(this).attr('href')).hide();
+	// Hide the remaining content
 
-});
+	$links.not($active).each(function () {
 
-// Bind the click event handler
+		$($(this).attr('href')).hide();
 
-$(this).on('click', 'a', function(e){
+		});
 
-// Make the old tab inactive.
+		// Bind the click event handler
 
-$active.removeClass('active');
+		$(this).on('click', 'a', function(e){
 
-$content.hide();
+		// Make the old tab inactive.
 
-// Update the variables with the new link and content
+		$active.removeClass('active');
 
-$active = $(this);
+		$content.hide();
 
-$content = $($(this).attr('href'));
+		// Update the variables with the new link and content
 
-// Make the tab active.
+		$active = $(this);
 
-$active.addClass('active');
+		$content = $($(this).attr('href'));
 
-$content.show();
-// Prevent the anchor's default click action
-// Ngăn cản
+		// Make the tab active.
 
-e.preventDefault();
+		$active.addClass('active');
 
-});
+		$content.show();
+		// Prevent the anchor's default click action
+		// Ngăn cản
 
-});
+		e.preventDefault();
+
+		});
+
+	});
 
 });
 
@@ -138,15 +161,14 @@ e.preventDefault();
                         <li class="nav__item">
                             <a href="{{URL::to('/tintuc')}}" class="nav__link">Tin tức</a>
 						</li>
+
 					</ul>
 			</div>
 
 			<div class="nav__acc">
-				<div >
-					<a href="{{URL::to('/giohang')}}">
+					<a href="{{URL::to('/giohang')}}" style="margin-top: 4px; ">
 						<i class="fas fa-shopping-cart nav__cart" style="transform: scale(1.3);"></i>
 					</a>
-				</div>
 				@php 
 					$tennguoidung = Session::get('tennguoidung');
 					$phanquyen = Session::get('phanquyen');
@@ -155,9 +177,19 @@ e.preventDefault();
 					<ul>
 						@if ($phanquyen == 'Quản trị viên' || $phanquyen == 'Nhân viên')
 							<a href="{{asset('public/frontend/admin/admin.php')}}">
-								<li>Quay về trang admin </li>
+								<li>Trang admin </li>
 							</a>
 						@else
+						<a>
+							<li class="nav__item">
+								<div id="display_numNofitication"></div>
+								<div class="icon" id="bell"> <i class="fa-solid fa-bell" style="transform: scale(1.5);color: black;"></i> </div>
+								<div class="notifications fade" id="box">
+									<h2>Thông báo đơn hàng</h2>
+									<div id="box2" style="width: fit-content;margin: auto;color: grey;"><p style="height: 35px;text-align: center;">Hiện chưa có thông báo nào</p></div>
+								</div>
+							</li>
+						</a>
 						<a href="{{URL::to('/thongtincanhan')}}"><li><i class="fas fa-user"></i>  {{ $tennguoidung }} </li></a>
 						<a href="{{URL::to('/logout')}}"><li> Đăng xuất</li></a>
 						@endif
@@ -225,5 +257,89 @@ e.preventDefault();
 	</div><!-- End .footer -->
 </div><!-- End .wapper -->
 
+<script>
+$(document).ready(function () {
+	setNotification();
+	function setNotification(){
+		var billNofitication = <?php if(isset($billNofitication) && $billNofitication != null){echo json_encode($billNofitication->toArray());} ?>;
+		var actionsHtml ="";
+		billNofitication.forEach(function(row) {
+			switch(row.trangthai){
+				case 'Chờ xử lý':
+					actionsHtml +=`
+					<div class="notifications-item"> <img src="{{asset('public/uploads/status/stopwatch.png')}}" alt="img">
+						<a href="{{ URL::to('/thongtincanhan/lichsumuahang') }}">
+							<div class="text">
+								<h4>Đơn hàng (Mã HD: ` + row.idhoadon + `)</h4>
+								<p>Đơn hàng của bạn đã được tiếp nhận chờ xử lý...</p>
+							</div>
+						</a>
+					</div>`;
+					break;
+				case 'Đang giao hàng':
+					actionsHtml +=`
+					<div class="notifications-item"> <img src="{{asset('public/uploads/status/cargo-truck.png')}}" alt="img">
+						<a href="{{ URL::to('/thongtincanhan/lichsumuahang') }}">
+							<div class="text">
+								<h4>Đơn hàng đang giao (Mã HD: ` + row.idhoadon + `)</h4>
+								<p>Đơn hàng của bạn đang được giao, xin hãy kiên nhẫn...</p>
+							</div>
+						</a>
+					</div>`;	
+					break;
+				case 'Đã giao hàng':
+					actionsHtml +=`
+					<div class="notifications-item"> <img src="{{asset('public/uploads/status/delivery.png')}}" alt="img">
+						<a href="{{ URL::to('/thongtincanhan/lichsumuahang') }}">
+							<div class="text">
+								<h4>Sản phẩm đã tới (Mã HD: ` + row.idhoadon + `)</h4>
+								<p>Hàng của ban đã được giao tới, vui lòng xác nhận đã nhận hàng...</p>
+							</div>
+						</a>
+					</div>`;	
+					break;
+				case 'Hoàn tất':
+					actionsHtml +=`
+					<div class="notifications-item"> <img src="{{asset('public/uploads/status/completed.png')}}" alt="img">
+						<a href="{{ URL::to('/thongtincanhan/lichsumuahang') }}">
+							<div class="text">
+								<h4>Đơn hàng hoàn tất (Mã HD: ` + row.idhoadon + `)</h4>
+								<p>Bạn cảm thấy sản phẩm của chúng tôi như thế nào? Hãy đánh giá sản phẩm của chúng tôi nhé</p>
+							</div>
+						</a>
+					</div>`;	
+					break;
+				case 'Yêu cầu bồi hoàn':
+					actionsHtml +=`
+					<div class="notifications-item"> <img src="{{asset('public/uploads/status/on-cancel.png')}}" alt="img">
+						<a href="{{ URL::to('/hotro') }}">
+							<div class="text">
+								<h4>Yêu cầu bồi hoàn (Mã HD: ` + row.idhoadon + `)</h4>
+								<p>Yêu cầu bồi hoàn của bạn đã được ghi nhận, chúng tôi sẽ liên lạc với bạn sau. Mọi thứ mắc vui lòng gửi thư hỗ trợ cho chúng tôi</p>
+							</div>
+						</a>
+					</div>`;	
+					break;
+				case 'Đã hủy':
+					actionsHtml +=`
+					<div class="notifications-item"> <img src="{{asset('public/uploads/status/cancel.png')}}" alt="img">
+						<a href="{{ URL::to('/thongtincanhan/lichsumuahang') }}">
+							<div class="text">
+								<h4>Đã hủy đơn hàng (Mã HD: ` + row.idhoadon + `)</h4>
+								<p>Đơn hàng của bạn đã được hủy, mọi thắc mắc hãy gửi thư hỗ trợ cho chúng tôi</p>
+							</div>
+						</a>
+					</div>`;	
+					break;
+        	}
+		});
+		$('#box2').html(actionsHtml);
+		if(billNofitication.length > 0){
+			$('#nofiticationNumber').html(billNofitication.length);
+			$('#display_numNofitication').html('<div id="num_Nofitication" style="position: fixed;font-size: 12px;background: #ff2b2b;opacity: 0.8;border-radius: 50%;height: 11px;line-height: 10px;width: 11px;z-index: 2;text-align: center;margin-top: -7px;margin-left: 7px;"></div>');
+		}
+	}
+});
+</script>
 </body>
 </html>

@@ -91,8 +91,10 @@
 				<label for="phanquyen" style="display: grid">Phân quyền  </label>
                 <select class="custom-select mr-sm-2 @error('phanquyen') is-invalid @enderror" style="width: 190px;" name="phanquyen">
 						<option value="">-Chọn phân quyền-</option>
-					    <option value="2">Quản lý</option>
-				    	<option value="1">Người dùng</option>
+					    <option value="Quản trị">Quản trị</option>
+				    	<option value="Người dùng">Người dùng</option>
+						<option value="Nhân viên bán hàng">Nhân viên bán hàng</option>
+						<option value="Nhân viên kho hàng">Nhân viên kho hàng</option>
                 </select>
 				@error('phanquyen')
 					<span class='invalid-feedback'>{{ $message }}</span>

@@ -10,6 +10,8 @@ use App\Http\Requests\SupportRequest;
 use DB;
 use Illuminate\Support\Facades\Redirect;
 
+use App\Mail\EmailUI;
+
 class SupportController extends Controller
 {
     protected $SupportPerPage = 15;
@@ -121,14 +123,22 @@ class SupportController extends Controller
         }
     }
 
-    public function deleteSupport($idSupport){
-        $hotro = hotro::find($idSupport);
+    public function deleteSupport(Request $request){
+        $hotro = hotro::find($request->supportID);
         if($hotro->delete()){
-            toastr()->success('Xóa hỗ trợ <b>'. $hotro->tieude. '</b> thành công!');
-            return redirect('/admin/support');
-        } else {
-            toastr()->error('Xóa hỗ trợ thất bại!');
-            return redirect('/admin/support');
+            return ['message' => 'Xóa hỗ trợ <b>'. $hotro->chudde. '</b> của '.$hotro->hoten.' thành công!'];
+        }
+    }
+
+    public function getSupportDetailbyAjax(Request $request){
+        if (($request->ajax())) {
+            $supportID = $request->get('supportID');
+            $result = DB::table('hotro')->where('idhotro',$supportID)->first();
+            $data = [
+                'title' => $result->chude,
+                'problem' => $result->noidung
+            ];
+            return $data;
         }
     }
 

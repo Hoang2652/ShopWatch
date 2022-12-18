@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $tenkhohang
  * @property string $diachikhohang
  * @property string $ghichu
- * @property Date   $ngaycapnhat
+ * @property Date   $created_at
  */
 class Khohang extends Model
 {
@@ -33,7 +33,7 @@ class Khohang extends Model
      * @var array
      */
     protected $fillable = [
-        'tenkhohang', 'diachikhohang', 'ngaycapnhat', 'ghichu'
+        'tenkhohang', 'diachikhohang', 'created_at', 'ghichu'
     ];
 
     /**
@@ -51,7 +51,7 @@ class Khohang extends Model
      * @var array
      */
     protected $casts = [
-        'idkhohang' => 'int', 'tenkhohang' => 'string', 'diachikhohang' => 'string', 'ngaycapnhat' => 'date', 'ghichu' => 'string'
+        'idkhohang' => 'int', 'tenkhohang' => 'string', 'diachikhohang' => 'string', 'created_at' => 'date', 'ghichu' => 'string'
     ];
 
     /**
@@ -60,7 +60,7 @@ class Khohang extends Model
      * @var array
      */
     protected $dates = [
-        'ngaycapnhat'
+        'created_at'
     ];
 
     /**

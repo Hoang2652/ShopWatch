@@ -44,7 +44,7 @@
                 </tr>
   <tr>
                   <td width="562" height="25" valign="top"align="center">  <hr>
-                    <strong><font color="#FF0000" size="+2">HÓA ĐƠN XUẤT HÀNG</font></strong></td>
+                    <strong><font color="#FF0000" size="+2">HÓA ĐƠN MUA HÀNG</font></strong></td>
   </tr>
                 <tr>
                   <td height="54"  >                    
@@ -112,7 +112,7 @@
           <td align="center" align="left" style="border:1px solid green;"> {{ number_format(($row->gia),"0",",",".") }} VNĐ</td>
           <td align="center"  align="left" style="border:1px solid green;">{{ $row->soluong }}</td>
           <td align="center"  align="left" style="border:1px solid green;"> @if($row->giamgia == null) 0 @else {{ $row->giamgia }} @endif %</td>
-          <td align="center" align="left" style="border:1px solid green;"><?php echo number_format($TotalBill = $row->soluong * $row->gia * (100 - $row->giamgia)/100,"0",",",".")?> VNĐ</td>
+          <td align="center" align="left" style="border:1px solid green;"><?php echo number_format($TotalPrice = $row->soluong * $row->gia * (100 - $row->giamgia)/100,"0",",",".")?> VNĐ</td>
         </tr>
         @php $TotalBill += $TotalPrice; @endphp
         @if($row->quatang != null)

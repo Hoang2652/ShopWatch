@@ -15,8 +15,7 @@ function livesreach(str) {
     if (str.length == 0) {
         document.getElementById("livesreach").innerHTML = "";
         return;
-    } 
-    else{
+    } else {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -32,8 +31,7 @@ function livesreachhotro(str) {
     if (str.length == 0) {
         document.getElementById("list-search-hotro").innerHTML = "";
         return;
-    }
-    else{
+    } else {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {

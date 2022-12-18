@@ -3,6 +3,7 @@
 namespace app\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * @property string  $tennguoidung
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int     $updated_at
  * @property boolean $trangthai
  */
-class Nguoidung extends Model
+class Nguoidung extends Authenticatable
 {
     /**
      * The database table used by the model.
@@ -82,5 +83,8 @@ class Nguoidung extends Model
 
     // Functions ...
 
+    public function getAuthPassword(){
+        return $this->matkhau;
+    }
     // Relations ...
 }

@@ -5,11 +5,11 @@
         <div class="preload"><div></div></div>
             <div id="lof-main-outer">
                 <ul class="lof-main-wapper">
-                    <li><img src="{{asset('public/uploads/slide/slide1.png')}}" width="1000" height="350"></li>
-                    <li><img src="{{asset('public/uploads/slide/slide.png')}}" width="1000" height="350"></li>
-                    <li><img src="{{asset('public/uploads/slide/slide2.png')}}" width="1000" height="350"></li>
-                    <li><img src="{{asset('public/uploads/slide/slide3.png')}}" width="1000" height="350"></li>
-                    <li><img src="{{asset('public/uploads/slide/slide4.png')}}" width="1000" height="350"></li>
+                    <li><img src="{{asset('public/uploads/slide/slide1.png')}}" ></li>
+                    <li><img src="{{asset('public/uploads/slide/slide.png')}}" ></li>
+                    <li><img src="{{asset('public/uploads/slide/slide2.png')}}" ></li>
+                    <li><img src="{{asset('public/uploads/slide/slide3.png')}}" ></li>
+                    <li><img src="{{asset('public/uploads/slide/slide4.png')}}" ></li>
                 </ul>
             </div>
             <div class="lof-navigator-wapper">
@@ -17,11 +17,11 @@
             <div onClick="return false" href="" class="lof-next">Next</div>
                 <div class="lof-navigator-outer">
                     <ul class="lof-navigator">
-                        <li><img src="{{asset('public/uploads/slide/slide1.png')}}" width="70" height="25" /></li>       		
-                        <li><img src="{{asset('public/uploads/slide/slide.png')}}" width="70" height="25" /></li>       		
-                        <li><img src="{{asset('public/uploads/slide/slide2.png')}}" width="70" height="25" /></li>       		
-                        <li><img src="{{asset('public/uploads/slide/slide3.png')}}" width="70" height="25" /></li>       		
-                        <li><img src="{{asset('public/uploads/slide/slide4.png')}}" width="70" height="25" /></li>       		
+                        <li><img src="{{asset('public/uploads/slide/slide1.png')}}" width="70" height="32" /></li>       		
+                        <li><img src="{{asset('public/uploads/slide/slide.png')}}" width="70" height="32" /></li>       		
+                        <li><img src="{{asset('public/uploads/slide/slide2.png')}}" width="70" height="32" /></li>       		
+                        <li><img src="{{asset('public/uploads/slide/slide3.png')}}" width="70" height="32" /></li>       		
+                        <li><img src="{{asset('public/uploads/slide/slide4.png')}}" width="70" height="32" /></li>       		
                     </ul>
                 </div>
             <div onClick="return false" href="" class="lof-previous">Previous</div>
@@ -63,7 +63,7 @@
                 @foreach($filterAccessory as $row => $fac)
                 <ul>
                     <li>
-                        <a href="{{ URL::to('/sanpham/iddanhmuc='.$fbr->iddanhmuc) }} ">
+                        <a href="{{ URL::to('/sanpham/iddanhmuc='.$fac->iddanhmuc) }} ">
                             <i class="far fa-hand-point-right"></i> 
                             {{$fac->tendanhmuc}}
                         </a>

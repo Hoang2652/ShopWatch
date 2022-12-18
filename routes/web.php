@@ -61,6 +61,10 @@ Route::get('/clear-cart', 'CartController@clear_cart');
 // checkout
 Route::get('/thanhtoan', 'CheckoutController@getViewCheckout');
 Route::post('/check-out', 'CheckoutController@check_out');
+
+//transaction manage
+Route::post('/customerRequire/execute', 'CheckoutController@changeBillStatus');
+
 //backend
 Route::get('/admin', 'AdminController@index');
 
@@ -116,14 +120,17 @@ Route::post('/admin/faq/update/execute', 'FAQController@updateFAQ');
 Route::post('/admin/faq/delete/execute', 'FAQController@deleteFAQ');
 Route::get('/admin/faq/detail/execute', 'FAQController@getFQADetailbyAjax')->name('faq-detail');
 
-Route::post('/admin/support/update/id={id}/execute', 'SupportController@updateSupport');
-Route::get('/admin/support/delete/id={id}/execute', 'SupportController@deleteSupport');
+Route::post('/admin/support/delete/execute', 'SupportController@deleteSupport');
+Route::get('/admin/support/detail/execute', 'SupportController@getSupportDetailbyAjax')->name('support-detail');
 
-// Support manager pages
+
+// Statistic manager pages
 Route::get('/admin/statistic', 'StatisticController@index');
 Route::post('/admin/statistic/profit', 'StatisticController@profitByDateRange');
+Route::post('/admin/statistic/product', 'StatisticController@productSaleByDateRange');
 Route::post('/admin/statistic/profit/byDateRange', 'StatisticController@profitArray');
 Route::post('/admin/statistic/profit/byMilestone', 'StatisticController@profitArray');
+
 
 
 // Bill manager pages
@@ -132,6 +139,106 @@ Route::get('/admin/bill/detail/id={id}', 'BillController@BillDetailPage');
 Route::get('/admin/bill/print/id={id}/execute', 'BillController@billPrintPage');
 Route::get('/admin/bill/delete/id={id}/execute', 'BillController@deleteBill');
 Route::post('/admin/bill/change-status/execute', 'BillController@changeBillStatusByID');
+
+// Get product storage data to Modal execute bill
+Route::get('admin/bill/StorageProduct', 'BillController@getStorageProductList');
+Route::get('admin/bill/handleBill', 'BillController@getStorageProductToDeliver');
+
+// Storage 
+Route::get('/admin/homeStorage', 'StorageController@getHomeStorage');
+Route::get('/admin/add-storage', 'StorageController@getViewAddStorage');
+Route::get('/admin/info-storage={id}', 'StorageController@getViewInfoStorage');
+Route::get('/admin/update-storage={id}', 'StorageController@getViewUpdateStorage');
+
+
+// import export manage
+Route::get('admin/iemanage', 'StorageController@getViewIemanage');
+Route::get('/admin/info-storage/add-location={id}', 'StorageController@getViewAddLocation');
+Route::get('admin/import-Bill/add', 'StorageController@getViewImport');
+Route::get('admin/export-Bill/add', 'StorageController@getViewExport');
+Route::post('admin/import-Bill/add/execute', 'StorageController@addImportBill');
+Route::post('admin/export-Bill/add/execute', 'StorageController@addExportBill');
+Route::get('/admin/export-Bill/live-search', 'StorageController@liveSearchStorage')->name('search_product_in_stock');
+Route::get('admin/info-bill={id}', 'StorageController@getViewInfoBill');
+
+Route::post('/admin/add-str', 'StorageController@addStorage');
+Route::get('/admin/delete-storage={id}', 'StorageController@deleteStorage');
+Route::post('/admin/update-storage={id}/execute', 'StorageController@updateStorage');
+Route::post('/admin/add-location={id}/execute', 'StorageController@addLocation');
+Route::get('/admin/delete-location={id}', 'StorageController@deleteLocation');
+Route::get('/admin/IEBillPrint/id={id}', 'StorageController@printInfoBill');
+
+
+
+
+// Bill manager (for sale employee)pages
+
+Route::get('/sale', 'BillController@addBillPage');
+Route::get('/sale/productSearch', 'ProductController@getProductAjax')->name('product-live-sreach');
+Route::get('/sale/productDetail', 'ProductController@getProductDetailAjax')->name('product-detail-ajax');
+Route::post('/sale/addBill','BillController@addBill');
+
+
+// // WARNING TEMPORARY DATA AREA: add product location to storage 1
+// Route::get('/SQL27554252', function () {
+//     $link = mysqli_connect("localhost", "root", "", "phonghap");
+//     $sql = "select * from sanpham";
+//     $result = mysqli_query($link,$sql);
+//     while($row = mysqli_fetch_assoc($result)){
+//         mysqli_query($link,"insert into vitrisanpham values(".$row['idsanpham'].",21,floor(rand()*50) + 50)");
+//         if(!mysqli_query($link,$sql))
+//             break;
+//     }
+//     echo "SQL27554252 was called";
+// });
+
+// // WARNING TEMPORARY DATA AREA: add product location to storage 2
+// Route::get('/SQL64784745', function () {
+//     $link = mysqli_connect("localhost", "root", "", "phonghap");
+//     $sql = "select * from sanpham where iddanhmuc NOT IN (1,2)";
+//     $result = mysqli_query($link,$sql);
+//     while($row = mysqli_fetch_assoc($result)){
+//         mysqli_query($link,"insert into vitrisanpham values(".$row['idsanpham'].",22,floor(rand()*30) + 20)");
+//         if(!mysqli_query($link,$sql))
+//             break;
+//     }
+//     echo "SQL64784745 was called ";
+// });
+
+// // WARNING TEMPORARY DATA AREA: add product location to storage 3
+// Route::get('/SQL28428944', function () {
+//     $link = mysqli_connect("localhost", "root", "", "phonghap");
+//     $sql = "select * from sanpham where iddanhmuc NOT IN (1,2,3,6,4)";
+//     $result = mysqli_query($link,$sql);
+//     while($row = mysqli_fetch_assoc($result)){
+//         mysqli_query($link,"insert into vitrisanpham values(".$row['idsanpham'].",23,floor(rand()*50) + 10)");
+//         if(!mysqli_query($link,$sql))
+//             break;
+//     }
+//     echo "SQL28428944 was called ";
+// });
+
+// // WARNING TEMPORARY DATA AREA: add product location to storage 3
+// Route::get('/SQL1281191', function () {
+//     $link = mysqli_connect("localhost", "root", "", "phonghap");
+//     $sql = "select vitrisanpham.idsanpham,sanpham.tensanpham,sanpham.gia,SUM(vitrisanpham.soluong) 
+//             from (vitrisanpham INNER JOIN sanpham ON vitrisanpham.idsanpham=sanpham.idsanpham)
+//             GROUP BY vitrisanpham.idsanpham ";
+//     $result = mysqli_query($link,$sql);
+//     while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
+//         $sql2 = "insert into sanphamtrongkho values(".$row[0].",'".$row[1]."',".$row[2].",".$row[3].",'chiếc')";
+//         $result2 = mysqli_query($link,$sql2);
+//         if(!$result2){
+//             echo $sql2."   ,";
+        
+//             echo "SQL1281191 release error, ";
+//             break;
+//         }
+//     }
+//     echo "SQL1281191 was called ";
+// });
+
+
 
 
 /**************************************************************************************************** */

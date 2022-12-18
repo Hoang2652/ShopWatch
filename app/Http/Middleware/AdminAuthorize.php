@@ -16,6 +16,8 @@ class AdminAuthorize
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if(Auth::check() && Auth::user()->phanquyen == "Quản trị viên") {
+            return $next($request);
+        }
     }
 }

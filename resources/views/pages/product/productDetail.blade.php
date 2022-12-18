@@ -97,7 +97,7 @@
 												<div class="card-body p-4">
 													<div class="d-flex flex-start">
 														<img class="rounded-circle shadow-1-strong me-3"
-														src="" width="60"
+														src="{{asset('public/uploads/assets/coban.png')}}" width="60"
 														height="60" />
 														<div>
 															<h6 class="fw-bold mb-1">{{ $danhgia->tennguoidung }} </h6>

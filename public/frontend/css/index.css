@@ -1,3 +1,102 @@
+/* CSS template Manrope */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+* {
+    padding: 0px;
+    margin: 0px
+}
+
+.icon {
+    cursor: pointer;
+    line-height: 60px;
+    margin-top: 4px;
+}
+
+.icon span {
+    background: #f00;
+    padding: 7px;
+    border-radius: 50%;
+    color: #fff;
+    vertical-align: top;
+    margin-left: -25px
+}
+
+.icon img {
+    display: inline-block;
+    width: 26px;
+    margin-top: 4px
+}
+
+.icon:hover {
+    opacity: .7
+}
+
+.logo {
+    flex: 1;
+    margin-left: 50px;
+    color: #eee;
+    font-size: 20px;
+    font-family: monospace
+}
+
+.notifications {
+    width: 300px;
+    height: 0px;
+    opacity: 0;
+    position: absolute;
+    top: 63px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+.notifications h2 {
+    font-size: 14px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    color: #999
+}
+
+.notifications h2 span {
+    color: #f00
+}
+
+.notifications-item {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding: 6px 9px;
+    margin-bottom: 0px;
+    cursor: pointer
+}
+
+.notifications-item:hover {
+    background-color: #eee
+}
+
+.notifications-item img {
+    display: block;
+    width: 45px;
+    height: 45px;
+    margin-right: 9px;
+    margin-top: 2px
+}
+
+.notifications-item .text h4 {
+    color: #777;
+    font-size: 14px;
+    margin-top: 3px;
+    font-weight: bold;
+}
+
+.notifications-item .text p {
+    color: #989797;
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+
+/* --------------end ----------- */
+
 * {
     margin: 0;
     padding: 0;
@@ -392,7 +491,7 @@ h1 {
     margin: 10px auto;
 }
 
-.motadanhmuc{
+.motadanhmuc {
     max-width: 900px;
     width: fit-content;
     height: fit-content;
@@ -1348,12 +1447,12 @@ h1 {
     font-size: 15px;
 }
 
-.binhluan-1__wrap{
+.binhluan-1__wrap {
     display: grid;
     grid-template-columns: 6fr 1fr;
 }
 
-.binhluan-xoadanhgia{
+.binhluan-xoadanhgia {
     font-size: 24px;
     color: red;
     cursor: pointer;
@@ -1669,7 +1768,7 @@ h1 {
     background-color: hsl(0, 0%, 20%);
 }
 
-.cart tr td a.xoa{
+.cart tr td a.xoa {
     cursor: pointer;
     height: 25px;
     width: fit-content;
@@ -2010,13 +2109,15 @@ h1 {
     flex-grow: 3;
 }
 
-.link-muted { 
-    color: #aaa; 
+.link-muted {
+    color: #aaa;
 }
- .link-muted:hover { 
-    color: #1266f1; 
+
+.link-muted:hover {
+    color: #1266f1;
 }
-.badge{
+
+.badge {
     color: white;
 }
 
@@ -2129,14 +2230,19 @@ h1 {
 
 #lichsumuahang {
     width: 900px;
-    height: auto;
+    height: 575px;
     margin: auto;
-    margin-top: 4rem;
 }
 
 #sub-lichsumuahang {
-    height: 500px;
+    height: 100%;
     overflow: auto;
+}
+
+.row.actionBill>button {
+    font-size: 14px;
+    color: white;
+    margin: auto;
 }
 
 .hoadon {
@@ -2168,7 +2274,7 @@ h1 {
     font-size: 14px;
 }
 
-.tieude-hienthi-hoadon th:nth-child(4){
+.tieude-hienthi-hoadon th:nth-child(4) {
     width: 70px;
 }
 

@@ -4,6 +4,14 @@
     margin-bottom: 0;
 }
 
+.btn {
+    font-size: 14px;
+}
+
+.table-padding-disabled {
+    padding: 0;
+}
+
 
 /*--------------- css live sreach ----------*/
 
@@ -260,8 +268,7 @@ a button.so {
 
 .bill-detail {
     float: left;
-    width: 720px;
-    height: 500px;
+    width: 100%;
     overflow: auto;
 }
 
@@ -284,6 +291,14 @@ a button.so {
     float: right;
 }
 
+.storage_select {
+    width: 200px;
+}
+
+.stt_hienthi_sp {
+    min-width: 150px;
+}
+
 
 /* CSS for support manage */
 
@@ -296,4 +311,124 @@ a button.so {
     max-height: 400px;
 }
 
-.custom-table-grid {}
+.row-fluid {
+    text-align: center;
+    margin-top: 10px;
+    border-bottom: 1px solid #d1d1d1;
+    margin-bottom: 10px;
+}
+
+.custom-support-table>tbody>tr>td {
+    padding: 10px 3px;
+}
+
+
+/* CSS for card table in sale manage*/
+
+.custom-sale-product {
+    width: 170px;
+    height: 265px;
+    display: inline-block;
+    border: none;
+    border-radius: 5px;
+    margin: 5px 10px;
+    overflow: hidden;
+    padding: 5px;
+    border: 1px solid hsl(0, 0%, 94%);
+}
+
+.custom-sale-product h4 {
+    color: #fc1a1a;
+    font-size: 11px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.custom-sale-product p {
+    text-align: center;
+    margin: 3px;
+    color: black;
+    font-size: 11px;
+}
+
+.card-tag {
+    position: absolute;
+    background: hsl(206, 85%, 72%);
+    line-height: 30px;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+    margin-left: 108px;
+    width: 50px;
+    height: 30px;
+}
+
+.custom-cart-list {
+    height: 500px;
+}
+
+#display_cartList>td {
+    font-size: 12px;
+}
+
+#display_cartList>tr {
+    margin: 5px 0;
+}
+
+#display_cartList>td {
+    text-align: center;
+    vertical-align: center;
+}
+
+.row-tensanpham {
+    text-align: left;
+    width: 160px;
+}
+
+.row-giatien {
+    width: 130px;
+}
+
+.iconBig {
+    transform: scale(1.5);
+}
+
+.modal-lg {
+    max-width: 1000px;
+}
+
+tr:nth-child(even) {
+    background-color: none;
+}
+
+
+/* Export live search css */
+
+ul.live-search-list li {
+    margin: 2px;
+}
+
+.row.no-found-result {
+    width: fit-content;
+    margin: auto;
+    height: 50px;
+    align-content: center;
+    font-weight: bold;
+}
+
+ul.live-search-list li div {
+    padding: 0px 3px;
+    font-size: 12px;
+    text-align: center;
+    align-content: center;
+    transition: 0.2s;
+}
+
+ul.live-search-list li:hover {
+    background-color: rgb(220, 220, 220);
+}
+
+ul.live-search-list li div img {
+    width: 45px;
+    height: 45px;
+}

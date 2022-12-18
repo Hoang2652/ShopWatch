@@ -38,7 +38,7 @@ class CheckoutController extends Controller
             $hoadon->dienthoai = $request->dienthoai;
             $hoadon->email = $request->email;
             $hoadon->phuongthucthanhtoan = $request->phuongthuc;
-            $hoadon->trangthai = 1;
+            $hoadon->trangthai = "Đang xử lý";
             $hoadon->save();
 
             foreach($content as $row){
@@ -86,5 +86,24 @@ class CheckoutController extends Controller
             return redirect('/sanpham/dongho');
             // something went wrong
         }
+    }
+
+    public function changeBillStatus(Request $request){
+        $BillID = $request->idhoadon;
+        $status = $request->status;
+        $changeStatus = hoadon::where('idhoadon', $BillID)->update(['trangthai' => $status]);
+        if($changeStatus){
+            if($status == "Hoàn tất"){
+                toastr()->success('Xác nhận thành công, cảm ơn bạn đã tin dùng sản phẩm của Phong Hấp !');
+                return redirect('/thongtincanhan/lichsumuahang');
+            } else {
+                toastr()->info('Đã ghi nhận yêu cầu bồi hoàn, chúng tôi sẽ liên lạc với bạn sớm nhất!');
+                return redirect('/thongtincanhan/lichsumuahang');
+            }
+        } else {
+            toastr()->error('Ghi nhận thất bại, vui lòng thử lại sau');
+            return redirect('/thongtincanhan/lichsumuahang');
+        }
+
     }
 }
