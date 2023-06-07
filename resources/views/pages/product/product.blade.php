@@ -75,7 +75,8 @@
         <div id="locsanpham">
             <div class="center">
                 <h4><i class="fas fa-funnel-dollar"></i> GÍA THÀNH</h4>
-                <form style="margin: 5px auto;width: 250px;" action="{{ URL::to('/timkiem') }}" method="GET">
+                <form style="margin: 5px auto;width: 250px;" action="{{ URL::to('/timkiem') }}" method="Post">
+                    {{ csrf_field() }}
                 <input type="hidden" name="content" value="timkiem">
                     <div class="form__row">
                         <div class="input__price">

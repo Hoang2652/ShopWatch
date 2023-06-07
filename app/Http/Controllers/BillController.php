@@ -10,6 +10,7 @@ use App\Models\Sanpham;
 use App\Http\Requests\CheckoutRequest;
 use App\Http\Controllers\CategoryController;
 use DB;
+use Session;
 
 class BillController extends Controller
 {
@@ -35,12 +36,13 @@ class BillController extends Controller
         DB::beginTransaction();
         try {
             $hoadon = new Hoadon;
+            $hoadon->idnguoidung = Session::get('idnguoidung');
             $hoadon->hoten = $request->hoten;
             $hoadon->diachi = $request->diachi;
             $hoadon->dienthoai = $request->dienthoai;
             $hoadon->email = $request->email;
             $hoadon->phuongthucthanhtoan = $request->phuongthuc;
-            $hoadon->trangthai = "Đang xử lý";
+            $hoadon->trangthai = "Chờ xử lý";
             $hoadon->save();
             $content = $request->product;
             // dd($content);

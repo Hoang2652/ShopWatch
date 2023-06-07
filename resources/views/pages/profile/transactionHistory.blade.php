@@ -146,7 +146,7 @@ $(document).ready(function () {
                                             <input name="idhoadon" value="{{ $viewBill->idhoadon }}" hidden/>
                                             @switch($viewBill->trangthai)
                                                 @case("Chờ xử lý")
-                                                    <button name="status" class="btn btn-danger" value="Yêu cầu bồi hoàn">Yêu cầu bồi hoàn</button>
+                                                    <button name="status" class="btn btn-danger" value="Yêu cầu bồi hoàn">Hủy đơn hàng</button>
                                                     @break
                                                 @case("Đang giao hàng")
                                                     <button name="status" class="btn btn-danger" value="Yêu cầu bồi hoàn">Yêu cầu bồi hoàn</button>

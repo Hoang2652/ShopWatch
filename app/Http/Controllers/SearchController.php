@@ -71,7 +71,7 @@ class SearchController extends Controller
                     ';
                     foreach($data as $row){
                         $output .='
-                            <a href="hotro/id="'.$row->idcauhoi.'">
+                            <a href="hotro/id='.$row->idcauhoi.'">
                                 <li class="list-question">"'.$row->noidungcauhoi.'"</li>
                             </a>
                         ';

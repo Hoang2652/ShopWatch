@@ -38,7 +38,7 @@ class CheckoutController extends Controller
             $hoadon->dienthoai = $request->dienthoai;
             $hoadon->email = $request->email;
             $hoadon->phuongthucthanhtoan = $request->phuongthuc;
-            $hoadon->trangthai = "Đang xử lý";
+            $hoadon->trangthai = "Chờ xử lý";
             $hoadon->save();
 
             foreach($content as $row){

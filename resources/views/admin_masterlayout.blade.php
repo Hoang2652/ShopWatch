@@ -1,5 +1,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
+	{{-- This link is for the modal, don't delete it --}}
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	
 	<script type="text/javascript" src="{{asset('public/backend/js/jquery-3.6.1.min.js')}}"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="csrf-token" content="{{ csrf_token() }}">
@@ -9,8 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('public/backend/css/index.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('public/backend/css/bootstrap.css')}}">
 	
-	{{-- This link is for the modal, don't delete it --}}
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	
 
 	{{-- This link will get ya sum o' dem icon  --}}
 	<script src="https://kit.fontawesome.com/2c8a18bbf3.js" crossorigin="anonymous"></script>

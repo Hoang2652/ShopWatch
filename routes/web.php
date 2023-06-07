@@ -38,7 +38,7 @@ Route::post('/rating', 'ProductController@rating');
 // search
 Route::get("/search",'SearchController@live_search')->name("search_product");
 Route::get("/search-support",'SearchController@live_search_sp')->name("search_support");
-Route::get('/timkiem', 'SearchController@search');
+Route::post('/timkiem', 'SearchController@search');
 // news
 Route::get('/tintuc', 'NewsController@showHomeNews');
 Route::get('/tintuc/id={id}', 'NewsController@getNewsDetail');
