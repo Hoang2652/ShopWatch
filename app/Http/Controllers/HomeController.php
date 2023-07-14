@@ -131,7 +131,7 @@ class HomeController extends Controller
         $data->dienthoai = $request->dienthoai;
         $data->diachi = $request->diachi;
         $data->gioitinh = $request->gioitinh;
-        $data->phanquyen = 1;
+        $data->phanquyen = "Khách hàng";
         $data->trangthai = 1;
 
         if($data->save()){
